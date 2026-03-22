@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belle Sucré Café - Carrinho</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./Images/logobranca.png" type="image/x-icon">
+    <script src="index.js"></script>
+</head>
+<body>
+    <nav class="menu">
+        <a href="inicio-user.html">
+        <div class="logo">
+            <img src="./Images/logo.png" alt="" id="logo">
+        </div>
+        </a>
+        <div class="itens">
+            <a href="historia-user.html"><ion-icon name="book-outline"></ion-icon> História</a>
+            <a href="cardapio-user.html"><ion-icon name="reader-outline"></ion-icon> Cardápio </a>
+            <a href="carrinho-user.html"><ion-icon name="cart-outline"></ion-icon> Carrinho</a>
+            <a href="jornal-user.html" id="select"><ion-icon name="newspaper-outline"></ion-icon> Jornal</a>
+            <div class="user">
+                <div class="foto-user" id="user-photo"></div>
+                <div class="user" id="user-name">Olá, Visitante!</div>
+                
+            </div>
+            <div class="useri"><ion-icon name="chevron-down-outline"></ion-icon></div>
+            
+            
+        </div>
+        
+        
+    </nav>
+    <div class="user-infs">
+                <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
+                <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
+                <a href="login.html">Sair <ion-icon name="exit-outline"></ion-icon></a>
+            </div>
+    <div class="slideshow-container">
+
+    <h1 class="titulo-principal">Jornal</h1>
+    <div class="mySlides fade">
+    <img src="./Images/JornalMensal.png" style="width:100%">
+    <div class="text">Jornal Mensal</div>
+    <a href="jornal.html">Jornal mensal</a>
+  </div>
+
+  <div class="mySlides fade">
+    <img src="./Images/JaneiroBranco.png" style="width:100%">
+    <div class="text">Janeiro branco</div>
+    <a href="jornal.html">Jornal mensal</a>
+  </div>
+
+  <div class="mySlides fade">
+    <img src="./Images/apresentaçãofinal.png" style="width:100%">
+    <div class="text">Apresentação final da Belle Sucré Café</div>
+    <a href="jornal.html">Jornal mensal</a>
+  </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+    <footer>
+        
+        <div class="footer-container">
+            <div class="logo-footer">
+                <img src="Images/logobranca.png" alt="" srcset="">
+            </div>
+            <div class="footer-col">
+                <h3>Belle Sucré Café</h3>
+                <p>Experiência única em cafés e doces artesanais brasileiros com o toque clássico francês.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Links</h3>
+                <a href="cardapio-user.html">Cardápio</a>
+                <a href="historia-user.html">Sobre nós</a>
+                <a href="jornal-user.html">Jornal</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <a href="#">Instagram</a>
+                <a href="#">WhatsApp</a>
+                <a href="#">Email</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Belle Sucré Café - Empresa Fictícia<br>
+            Criado por Vinicius Ribeiro.
+        </div>
+    </footer>
+
+        
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch("/usuario-logado")
+            .then(res => res.json())
+            .then(usuario => {
+                if (usuario) {
+                    // Atualiza o texto "Olá nome user!"
+                    document.querySelector(".user div:last-child").innerText = `Olá, ${usuario.nome}!`;
+                    
+                    // Atualiza a foto no círculo do menu
+                    if (usuario.foto) {
+                        const fotoDiv = document.querySelector(".foto-user");
+                        fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
+                        fotoDiv.style.backgroundSize = "cover";
+                        fotoDiv.style.backgroundPosition = "center";
+                    }
+                }
+            });
+    });
+</script>
+<script  type = "module"  src = " https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js " > </script> 
+<script nomodule src = " https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js " >   </script>
+</html>

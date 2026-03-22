@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belle Sucré Café - Carrinho</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./Images/logobranca.png" type="image/x-icon">
+</head>
+<body>
+    <nav class="menu">
+        <a href="inicio-user.html">
+            <div class="logo"><img src="./Images/logo.png" alt="" id="logo"></div>
+        </a>
+        <div class="itens">
+            <a href="historia-user.html"><ion-icon name="book-outline"></ion-icon> História</a>
+            <a href="cardapio-user.html"><ion-icon name="reader-outline"></ion-icon> Cardápio </a>
+            <a href="carrinho-user.html" id="select"><ion-icon name="cart-outline"></ion-icon> Carrinho</a>
+            <a href="jornal-user.html"><ion-icon name="newspaper-outline"></ion-icon> Jornal</a>
+            <div class="user">
+                <div class="foto-user" id="user-photo"></div>
+                <div id="user-name">Olá, Visitante!</div>
+            </div>
+            <div class="useri"><ion-icon name="chevron-down-outline"></ion-icon></div>
+        </div>
+    </nav>
+
+    <div class="user-infs">
+        <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
+        <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
+        <a href="/logout">Sair <ion-icon name="exit-outline"></ion-icon></a>
+    </div>
+
+    <h1 class="titulo-principal">Meu carrinho:</h1>
+    <div class="carrinho" style="margin: auto;">
+        <div id="itens-carrinho" class="container-carrinho-cards">
+            <p>Carregando produtos... ☕</p>
+        </div>
+        <div class="resumo-carrinho">
+            <h3 id="total-carrinho">Total: R$ 0,00</h3>
+            <hr>
+            <div class="entrega">
+                <h3>Endereço para entrega:</h3>
+                <input type="text" id="endereco" placeholder="Rua, Número, Bairro, Cidade">
+                <p>Taxa de entrega: <strong>R$ 5,00</strong></p>
+            </div>
+            <button class="btn-finalizar" onclick="finalizarPedido()">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="logo-footer"><img src="Images/logobranca.png" alt=""></div>
+            <div class="footer-col">
+                <h3>Belle Sucré Café</h3>
+                <p>Experiência única em cafés e doces artesanais brasileiros com o toque clássico francês.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Links</h3>
+                <a href="cardapio-user.html">Cardápio</a>
+                <a href="historia-user.html">Sobre nós</a>
+                <a href="jornal-user.html">Jornal</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <a href="#">Instagram</a>
+                <a href="#">WhatsApp</a>
+                <a href="#">Email</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Belle Sucré Café - Empresa Fictícia<br>
+            Criado por Vinicius Ribeiro.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Carregar Usuário
+            fetch("/usuario-logado")
+                .then(res => res.json())
+                .then(usuario => {
+                    if (usuario && usuario.nome) {
+                        document.getElementById("user-name").innerText = `Olá, ${usuario.nome}!`;
+                        if (usuario.foto) {
+                            const fotoDiv = document.getElementById("user-photo");
+                            fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
+                            fotoDiv.style.backgroundSize = "cover";
+                        }
+                    }
+                });
+
+            carregarCarrinho();
+
+            const seta = document.querySelector(".useri");
+            const menu = document.querySelector(".user-infs");
+            seta.onclick = (e) => {
+                e.stopPropagation();
+                menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+            };
+        });
+
+        function carregarCarrinho() {
+            fetch("/meu-carrinho")
+                .then(res => res.json())
+                .then(produtos => {
+                    const container = document.getElementById("itens-carrinho");
+                    const totalTxt = document.getElementById("total-carrinho");
+                    let html = "";
+                    let total = 0;
+
+                    if (!produtos || produtos.length === 0) {
+                        container.innerHTML = "<h3>Seu carrinho está vazio! 🍰</h3>";
+                        totalTxt.innerText = "Total: R$ 0,00";
+                        return;
+                    }
+
+                    produtos.forEach(item => {
+                        html += `
+                            <div class="card-produto-carrinho">
+                                <img src="./Images/${item.nome.toLowerCase()}.jpg" class="img-card-carrinho" onerror="this.src='./Images/logo.png'">
+                                <div class="infos-card-carrinho">
+                                    <h3>${item.nome}</h3>
+                                    <p class="preco-card-carrinho">R$ ${parseFloat(item.preco).toFixed(2)}</p>
+                                    <button class="btn-remover-carrinho" onclick="removerItem(${item.id})">
+                                        <ion-icon name="trash-outline"></ion-icon> Remover
+                                    </button>
+                                </div>
+                            </div>`;
+                        total += parseFloat(item.preco);
+                    });
+                    container.innerHTML = html;
+                    totalTxt.innerText = `Total: R$ ${(total + 5).toFixed(2)} (com taxa)`;
+                });
+        }
+        // ... (resto das suas funções de remover e finalizar permanecem iguais)
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

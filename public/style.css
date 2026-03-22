@@ -1,0 +1,1657 @@
+@font-face {
+    font-family: 'Catchy Mager';
+    src: url('fontes/CatchyMager-Regular.woff2') format('woff2'),
+         url('fontes/CatchyMager-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+
+body {
+    font-family: 'Catchy Mager', serif;
+    color: #4c2b08;
+    min-height: 100vh;
+    background-color: #a8896f;
+}
+body a {
+    color: #4c2b08;
+    font-size: 20px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    width: 100%;
+    height: 80px;
+    background-color: #a8896f;
+}
+
+.itens {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.itens a {
+    font-size: 22px;
+    text-decoration: none;
+    color: #4c2b08;
+    position: relative;
+    padding: 10px 10px; 
+    transition: color 0.3s ease;
+}
+
+.itens a {
+    font-size: 22px;
+    text-decoration: none;
+    color: #4c2b08;
+    position: relative;
+    padding: 10px 10px;
+    transition: color 0.3s ease;
+}
+
+.itens a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #4c2b08;
+    transition: all 0.2s ease-in-out;
+    transform: translateX(-50%);
+}
+
+.itens a:not(#select):hover::after {
+    width: 100%;
+}
+
+#select::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100%; 
+    height: 2px;
+    background-color: #4c2b08;
+    transform: translateX(-50%);
+}
+
+.itens a:has(button)::after {
+    display: none;
+}
+
+nav .itens button {
+    width: 130px;
+    height: 38px;
+    background-color: #6D3914;
+    border: 2px solid #4c2b08;
+    border-radius: 25px;
+    color: #4c2b08;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+nav .itens button:hover {
+    background-color: #4c2b08;
+    color: #ffffff;
+}
+
+nav button {
+    width: 130px;
+    height: 38px;
+    background-color: #a8896f;
+    border: 2px solid #4c2b08;
+    border-radius: 25px;
+    color: #4c2b08;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    transition: 0.2s ease;
+}
+.itens a:has(button)::after {
+    display: none;
+}
+
+nav .itens button {
+    width: 130px;
+    height: 38px;
+    background-color: #a8896f;
+    border: 2px solid #4c2b08;
+    border-radius: 25px;
+    color: #4c2b08;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav .itens button:hover {
+    background-color: #4c2b08;
+    color: #ffffff;
+}
+
+nav button:hover {
+    background-color: #4c2b08;
+    color: #ffffff;
+}
+
+img#logo {
+    width: 100px;
+}
+
+.slideshow-container {
+    width: 100%;
+    position: relative;
+    margin: auto;
+}
+
+.mySlides img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+}
+
+.mySlides {
+    display: none;
+    position: relative;
+}
+
+.text {
+    color: #4c2b08;
+    font-size: 20px;
+    padding: 12px;
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 16px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 22px;
+    transition: 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.next {
+    right: 20px;
+}
+
+.prev {
+    left: 20px;
+}
+
+.prev:hover, .next:hover {
+    background-color: #8B5E3C;
+    color: white;
+}
+
+/* DOTS CENTRALIZADOS DENTRO DA IMAGEM */
+.dots-container {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #4c2b08;
+    border-radius: 50%;
+    display: inline-block;
+    transition: 0.3s ease;
+}
+
+.active, .dot:hover {
+    background-color: white;
+    border: 2px solid #4A403A;
+}
+
+/* ANIMAÇÃO */
+.fade {
+    animation: fade 1.5s;
+}
+
+
+footer{
+    background-color: #4C2B08;
+    color: #ffffff;
+    padding: 60px 20px 20px;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 50px;
+    box-sizing: border-box;
+    width: 100%;
+    position: sticky;
+    top: 100vh;
+    margin-top: 50px;
+}
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-col h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #D7BDA6;
+        }
+
+        .footer-col p {
+            line-height: 1.6;
+            font-size: 0.95rem;
+            color: #f5f5f5;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #f5f5f5;
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: #AB7743;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(215, 189, 166, 0.2);
+            text-align: center;
+            font-size: 0.85rem;
+            color: #D7BDA6;
+        }
+.footer-container {
+    display: flex !important; 
+    flex-direction: row !important; 
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-footer img {
+    width: 100px !important;
+    height: auto;
+}
+
+.footer-col {
+    flex: 1; 
+    min-width: 150px;
+    text-align: left;
+}
+.sobre {
+    text-align: center;
+}
+.cardapio {
+    text-align: center;
+}
+.jornal {
+    text-align: center;
+}
+#select-btn {
+    background-color: #4c2b08;
+    color: #ffffff;
+}
+/* Centralização da caixa de login na página */
+.login {
+    display: flex;
+    margin: 80px auto;
+    flex-direction: column;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #4A403A;
+    width: 600px;
+    padding: 60px;
+    background-color: #a8896f;
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.1);
+    
+}
+
+.container-login {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    text-align: left;
+}
+
+.login h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 40px; /* Mais espaço abaixo do título */
+    border-bottom: 2px solid #4A403A; 
+    padding-bottom: 10px; 
+    width: fit-content; 
+    width: 300px;
+    text-align: center;
+}
+
+.container-login {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.container-login h4 {
+    margin-bottom: 12px; 
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+.input-box, .senha-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px; 
+    display: flex; 
+    align-items: center;
+    background-color: #a8896f;
+}
+
+.container-login input {
+    width: 100%;
+    height: 50px; 
+    border: 1px solid #6D3914;
+    border-radius: 10px; 
+    padding: 0 45px 0 18px; 
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    outline: none;
+    transition: 0.3s;
+    background-color: #a8896f;
+}
+
+.container-login input:focus {
+    border-color: #6D3914;
+    box-shadow: 0 0 5px rgba(74, 64, 58, 0.2);
+}
+
+.input-box .icon, 
+#btn-revelar {
+    position: absolute;
+    right: 15px; 
+    font-size: 22px;
+    color: #492d1a;
+    cursor: pointer;
+    display: flex; /* Garante que o ícone em si seja flex */
+    align-items: center; /* Centraliza internamente se necessário */
+}
+
+/* Link Esqueceu a senha com mais margem */
+.esqueceu-senha {
+    display: block;
+    margin-bottom: 35px; /* Mais espaço antes do botão */
+    font-size: 16px;
+    text-decoration: underline;
+    color: #492d1a;
+}
+
+.btn-entrar {
+    width: 100%;
+    height: 55px; 
+    background-color: #6D3914;
+    color: #ffffff;
+    border: 2px solid #6D3914;
+    border-radius: 30px; 
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-entrar:hover {
+    background-color: #a8896f;
+    color: #ffffff;
+    box-shadow: 0 5px 15px rgba(74, 64, 58, 0.2);
+}
+.esqueceu-senha {
+    display: block;
+    margin-bottom: 45px; 
+    font-size: 16px;
+    text-decoration: underline;
+    color: #4A403A;
+}
+.modal {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;
+}
+.modal-content {
+    background: #a8896f; padding: 30px; border-radius: 20px; width: 400px; text-align: center;
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.crop-container {
+    width: 250px; height: 250px; margin: 0 auto; border-radius: 50%;
+    overflow: hidden; position: relative; border: 2px solid #4A403A;
+}
+.crop-container img { width: 100%; }
+.modal-controls { margin: 20px 0; }
+.btn-salvar {
+    width: 100%; height: 45px; background: #4A403A; color: white;
+    border: none; border-radius: 20px; cursor: pointer; font-size: 18px;
+}
+.profile-upload {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.photo-circle {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #492d1a; /* Borda sólida para combinar com o layout */
+    border-radius: 50%;
+    margin: 15px auto; /* Centraliza o círculo no container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    position: relative;
+}
+
+#camera-icon {
+    font-size: 35px;
+    color: #4A403A;
+    /* O flexbox do pai já garante a centralização perfeita */
+}
+.foto-user {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc; /* Cor padrão caso não tenha foto */
+    border: 1px solid #4A403A;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.itens {
+    position: relative;
+}
+
+.user-infs {
+    display: none; /* Começa escondido */
+    flex-direction: column;
+    width: 200px; /* Reduzi um pouco, 500px é quase a tela toda */
+    background-color: #ffffff;
+    border: solid 2px #4A403A;
+    padding: 10px;
+    position: absolute; /* Para flutuar sobre o conteúdo */
+    top: 60px; /* Ajuste conforme a altura do seu menu */
+    right: 0;  /* Alinha à direita dos itens, ou use left: 0 se preferir */
+    z-index: 1000;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.user-infs.active {
+    display: flex; /* Classe que o JS vai adicionar para mostrar */
+}
+
+.user-infs a {
+    text-decoration: none;
+    color: #4A403A;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.user-infs a:hover {
+    background-color: #f4f4f4;
+    border-radius: 5px;
+}
+
+.useri {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Girar a setinha quando estiver aberto */
+.useri.rotate {
+    transform: rotate(180deg);
+}
+.cardapio {
+    text-align: center;
+}
+.carrinho {
+    text-align: center;
+    width: 1800px;
+}
+.container-carrinho-cards {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.card-produto-carrinho {
+    background: #D7BDA6;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: 0.3s;
+    position: relative;
+    border: 1px solid #492d1a;
+    cursor: pointer;
+    animation: fade;
+    
+}
+.card-produto-carrinho img {
+    border-radius: 20px;
+}
+
+.card-produto-carrinho:hover {
+    background: #D7BDA6;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    position: relative;
+    border: 1px solid #492d1a;
+    cursor: pointer;
+    animation: fade;
+}
+
+.img-card-carrinho {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.infos-card-carrinho {
+    padding: 15px;
+    text-align: center;
+}
+
+.infos-card-carrinho h3 {
+    font-size: 1.2rem;
+    color: #5a3e2b;
+    margin-bottom: 5px;
+}
+
+.preco-card-carrinho {
+    color: #8b5e3c;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+        /* BOTÃO DE LIXEIRA */
+.btn-remover-carrinho {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin: 0 auto;
+    transition: 0.3s;
+}
+
+.btn-remover-carrinho:hover {
+    background: #c9302c;
+    transform: scale(1.05);
+}
+
+    /* RESUMO DO PEDIDO */
+.resumo-carrinho {
+    background: #fdfaf8;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #d3b8a4;
+}
+
+.btn-finalizar {
+    width: 100%;
+    background: #5a3e2b;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+.container-prod {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    order: 5;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin: 10px;
+}
+.produtos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #D7BDA6;
+    border: #AB7743 solid 1px;
+    border-radius: 25px;
+    padding: 20px;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+
+.produtos:hover {
+    box-shadow: 20px 20px 20px rgba(74, 64, 58, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: translateY(-10px);
+}
+
+.img-container {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 15px;
+    background-color: #D7BDA6; 
+}
+
+.produtos img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.5s ease;
+}
+
+
+
+.infos-produto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.produtos h1 {
+    font-family: 'Playfair Display', serif; 
+    color: #AB7743;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #AB7743; 
+    padding-bottom: 5px;
+}
+
+.preco {
+    font-weight: 600;
+    color: #8B5E3C; 
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.btn-comprar {
+    background-color: #AB7743;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    width: 250px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+    border: solid 2px #AB7743;
+}
+
+.btn-comprar:hover {
+    background-color: #D7BDA6;
+    border: solid 2px #4A403A;
+    color: #4A403A;
+    transition: background 0.4s;
+}
+.cardapio h2 {
+    text-align: start;
+    margin: 10px;
+}
+.user-infs {
+    display: none; 
+    position: absolute;
+    right: 20px;
+    top: 70px;
+    background: #a8896f;
+    border: 1px solid #ddd;
+    padding: 10px;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.user-infs.active {
+    display: flex; 
+}
+.user-infs {
+    display: none; 
+  
+}
+
+.user-infs.active {
+    display: flex !important; 
+}
+.user-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.banner {
+    width: 100%;
+    height: 200px;
+    background: #a8896f; 
+    position: relative;
+    margin-bottom: 70px;
+    border-radius: 10px;
+}
+
+.perfil {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 5px solid #a8896f;
+    position: absolute;
+    bottom: -65px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    background: #a8896f;
+}
+
+.perfil img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn-edit {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #492d1a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-edit:hover {
+    background-color: #AB7743;
+}
+ion-icon {
+    background-color: transparent;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+}
+
+/* Caixa do Modal */
+.modal-content {
+    background-color: #a8896f;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+#form-editar-perfil {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#form-editar-perfil input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.btn-salvar {
+    background-color: #492d1a;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+/* Container do Banner */
+.banner {
+    width: 100%;
+    height: 250px; /* Formato retangular */
+    background-color: #a8896f;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    border-radius: 0 0 10px 10px;
+}
+
+.perfil {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 5px solid #a8896f;
+    position: absolute;
+    bottom: -65px; /* Metade para fora do banner */
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    background: #a8896f;
+}
+
+.perfil img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Ajuste do Modal para não ficar muito longo */
+.modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+/* Ajuste do Container do Perfil */
+.banner {
+    width: 100%;
+    height: 250px; /* Altura do retângulo do banner */
+    background-color: #a8896f;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 10px;
+}
+
+.perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid white;
+    position: absolute;
+    bottom: -75px; /* Metade para dentro, metade para fora */
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden; /* Garante que a foto fique redonda */
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.perfil img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Não deixa a foto esticar */
+}
+
+.user-details {
+    margin-top: 85px; /* Espaço para não bater na foto que subiu */
+    text-align: center;
+}
+
+/* Modal Ajustado */
+.modal-content {
+    max-width: 500px;
+    width: 90%;
+}
+/* Foto do Menu Lateral */
+.foto-user {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-color: #ddd; /* Cor de fundo caso não tenha foto */
+    display: inline-block;
+}
+
+/* Banner e Perfil Central */
+.banner {
+    width: 100%;
+    height: 250px; /* Essencial para o banner aparecer */
+    background-color: #f0f0f0;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 15px;
+}
+
+.perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid white;
+    position: absolute;
+    bottom: -75px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden; /* Garante o formato circular */
+    background: #a8896f;
+}
+
+.perfil img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-details {
+    margin-top: 85px;
+    text-align: center;
+}
+.apresentação {
+    max-width: 1800px;
+    width: 98%; /* Ocupa quase a tela toda */
+    margin: 40px auto;
+    background-color: #a8896f;
+    overflow: hidden; /* Corta a imagem da loja nas bordas arredondadas */
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.conteudo-principal {
+    display: flex;
+    width: 100%;
+    justify-content: space-between; /* Empurra a imagem para o extremo */
+    align-items: stretch;
+}
+
+.coluna-texto {
+    flex: 1; /* Ocupa metade do espaço */
+    padding: 60px; /* Padding apenas no texto */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.titulo-principal {
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto 30px auto;
+    text-align: center;
+    border-bottom: #492d1a solid 2px;
+    font-size: clamp(24px, 5vw, 50px);
+    padding: 10px;
+    display: block;
+}
+
+.paragrafo-apresentacao {
+    font-size: 1.4rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: #4C2B08;
+    max-width: 800px; /* Evita que o texto fique largo demais para ler */
+}
+
+.sub-titulo-secao {
+    font-family: 'Catchy Mager', serif;
+    font-size: 2.5rem;
+    color: #4C2B08;
+    margin: 40px 0 20px 0;
+    align-self: flex-start;
+}
+
+/* Vitrine de Slides */
+.slideshow-container {
+    position: relative;
+    max-width: 450px;
+    margin-top: 20px;
+    padding: 0 60px; /* Garante que as setas fiquem "dentro" do respiro */
+}
+
+.meu-slide { display: none; }
+.meu-slide.ativo { display: block; animation: fade 0.5s; }
+
+@keyframes fade { from {opacity: 0;} to {opacity: 1;} }
+
+/* Setas - Garantindo que fiquem dentro da .apresentacao */
+/* Setas - Centralização do ícone e ajuste de posição */
+.seta {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #4C2B08; /* Espresso */
+    color: #D7BDA6; /* Vanilla */
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px; 
+    line-height: 0;  
+    padding: 0; 
+    width: 100%;
+    max-width: 50px;  
+    font-size: 100px;   
+    /* --------------------------------------- */
+
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.seta:hover {
+    background-color: #AB7743; /* Caramel */
+    transform: translateY(-50%) scale(1.1); /* Efeito de destaque */
+}
+
+/* Ajuste fino para as setas não ficarem coladas no card */
+.anterior { 
+    left: -10px; 
+}
+
+.proximo { 
+    right: -10px; 
+}
+.anterior { left: 0; }
+.proximo { right: 0; }
+
+/* Imagem da Loja - Colada na Direita */
+.coluna-imagem-loja {
+    flex: 1; /* Ocupa a outra metade */
+    min-height: 100%;
+}
+
+.coluna-imagem-loja img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz a imagem preencher toda a lateral */
+    display: block;
+}
+
+@keyframes fade {
+    from { opacity: 0.4; } 
+    to { opacity: 1; }
+}
+
+.card-produto {
+    background: #fff;
+    border: 2px solid #D7BDA6;
+    border-radius: 25px;
+    padding: 25px;
+    text-align: center;
+}
+
+.img-container {
+    width: 100%;
+    height: 300px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+/* SETAS DE NAVEGAÇÃO */
+.seta {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: #4C2B08;
+    font-weight: bold;
+    font-size: 25px;
+    transition: 0.6s ease;
+    border-radius: 50%;
+    user-select: none;
+    background-color: rgba(215, 189, 166, 0.3);
+}
+
+.seta:hover {
+    background-color: #4C2B08;
+    color: #D7BDA6;
+}
+
+.anterior { left: -70px; } /* Posicionadas fora do card */
+.proximo { right: -70px; }
+
+/* Efeito do cursor piscando */
+.digitando {
+    border-right: 3px solid #4C2B08; /* A linha que pisca */
+    padding-right: 5px;             /* Espaço entre a última letra e a barra */
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;         /* Alinha a barra com o texto */
+    animation: cursor-pisca 0.7s step-end infinite;
+}
+
+/* Removemos qualquer borda lateral antiga */
+.digitando {
+    border-right: none !important;
+}
+
+/* Criamos o cursor único e infinito */
+.typewriter::after {
+    content: '|'; /* O caractere único */
+    margin-left: 2px;
+    color: #4C2B08;
+    animation: cursor-pisca 0.8s infinite;
+    font-weight: normal;
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+@keyframes cursor-pisca {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Botão de Adicionar - Premium */
+.btn-adicionar {
+    background-color: #4C2B08;
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    border-radius: 50px; /* Estilo pílula */
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-adicionar:hover {
+    background-color: #AB7743;
+    transform: scale(1.02);
+}
+
+/* Imagem da Loja */
+.coluna-imagem-loja {
+    flex: 1.5;
+}
+
+.coluna-imagem-loja img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 25px;
+}
+.paleta {
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(2, 250px);
+    grid-template-rows: repeat(3, 250px);
+    justify-content: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.cor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: center; 
+    text-align: center;
+    gap: 10px; /* Controla o espaço entre o nome e o código */
+}
+
+.cor h1, .cor p {
+    margin: 0;
+    padding: 0;
+}
+.cor1 { background-color: #D7BDA6; }
+.cor2 { background-color: #AB7743; }
+.cor3 { background-color: #B7957F; }
+.cor4 { background-color: #6D3914; }
+.cor5 { background-color: #84593D; }
+.cor6 { background-color: #4C2B08; }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.Container-Valores {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 40px;
+    flex-wrap: wrap;
+}
+.valor {
+    width: 350px;
+    height: 450px;
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 1s ease-in-out;
+    gap: 10px;
+    text-align: start;
+}
+
+.missao {
+    width: 350px;
+    height: 450px;
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 1s ease-in-out;
+    text-align: start;
+}
+
+
+.visao {
+    width: 350px;
+    height: 450px;
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 1s ease-in-out;
+    gap: 10px;
+    text-align: start;
+}
+.visao h1 {
+    border-bottom: white 2px solid;
+    width: 100%;
+    text-align: center;
+}
+.missao h1 {
+    border-bottom: white 2px solid;
+    width: 100%;
+    text-align: center;
+}
+.valor h1 {
+    border-bottom: white 2px solid;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+}
+.valor { background-color: #AB7743; }
+.missao { background-color: #6D3914; }
+.visao { background-color: #4C2B08; }
+
+.visao:hover {
+    transform: translateY(-10px);
+    box-shadow: 20px 20px 40px #4C2B08;
+    cursor: pointer;
+}
+.missao:hover {
+    transform: translateY(-10px);
+    box-shadow: 20px 20px 40px #6D3914;
+    cursor: pointer;
+}
+.valor:hover {
+    transform: translateY(-10px);
+    box-shadow: 20px 20px 40px #AB7743;
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 600px) {
+    .typewriter {
+        white-space: normal; /* Permite quebra de linha em telas pequenas */
+        border-right: none;   /* Remove o cursor se o texto quebrar */
+    }
+}
+/* --- Novas Animações --- */
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Aplicando animação aos textos */
+.titulo-principal, .sub-titulo-secao, .paragrafo-apresentacao, .link-historia {
+    animation: slideUpFade 0.8s ease forwards;
+}
+
+/* Delays para as letras aparecerem em ordem */
+.sub-titulo-secao { animation-delay: 0.2s; opacity: 0; }
+.paragrafo-apresentacao { animation-delay: 0.4s; opacity: 0; }
+
+/* --- Ajuste dos Slides --- */
+.meu-slide {
+    display: none;
+    width: 100%;
+}
+
+.meu-slide.ativo {
+    display: block;
+    animation: fade 0.8s ease-in-out;
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Correção das Setas --- */
+.seta {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #4C2B08;
+    color: #D7BDA6;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.seta:hover {
+    background-color: #AB7743;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.anterior { left: 5px; }
+.proximo { right: 5px; }
+
+
+
+@media (max-width: 1024px) {
+    .conteudo-principal {
+        flex-direction: column;
+    }
+    
+    .coluna-imagem-loja {
+        width: 100%;
+        height: 300px;
+        order: -1;
+    }
+
+    .coluna-imagem-loja img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .coluna-texto {
+        align-items: center;
+        text-align: center;
+    }
+    
+    .sub-titulo-secao {
+        align-self: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .apresentação {
+        width: 100%;
+        margin: 10px 0;
+        border-radius: 0;
+    }
+    
+    .slideshow-container {
+        padding: 0 40px;
+    }
+}
+@media (max-width: 992px) {
+    nav {
+        padding: 5px 20px;
+    }
+    
+    .itens {
+        gap: 15px;
+    }
+
+    .itens a {
+        font-size: 18px;
+    }
+
+    .mySlides img {
+        height: 450px; 
+    }
+
+    .login {
+        width: 90%; 
+        padding: 40px 20px;
+    }
+}
+.user-main-display h1 {
+    text-align: center;
+    color: #333; 
+    margin-top: 50px;
+}
+
+
+@media (max-width: 768px) {
+    nav {
+        height: auto;
+        flex-direction: column; 
+        padding: 15px;
+    }
+
+    .itens {
+        flex-wrap: wrap; /* Permite que os itens quebrem linha */
+        justify-content: center;
+        margin-top: 15px;
+        gap: 10px;
+    }
+
+    .itens a {
+        font-size: 16px;
+        padding: 5px;
+    }
+
+    #user-name {
+        display: none; 
+    }
+
+    .mySlides img {
+        height: 300px;
+    }
+
+    .text {
+        font-size: 16px;
+        bottom: 40px;
+    }
+
+    .container-carrinho-cards, 
+    .cardapio-grid { 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .produtos {
+        width: 95%; 
+        margin: 10px 0;
+    }
+
+    .login {
+        width: 95%;
+        margin: 40px auto;
+        padding: 30px 15px;
+    }
+
+    .login h1 {
+        font-size: 26px;
+        width: 100%;
+    }
+
+    footer {
+        padding: 40px 20px;
+        margin-top: 100px; 
+        position: sticky;
+        top: 100vh;
+        margin-top: 50px;
+    }
+
+.footer-container {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-around; 
+    align-items: flex-start;
+    flex-wrap: wrap; 
+    gap: 30px;
+}
+
+.logo-footer img {
+    width: 100px;
+    height: auto;
+    display: block;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    text-align: left; 
+}
+
+
+/* Ajustes para Celulares Pequenos (Telas menores que 480px) */
+@media (max-width: 480px) {
+    .mySlides img {
+        height: 200px;
+    }
+
+    .btn-entrar {
+        font-size: 18px;
+        height: 50px;
+    }
+
+    /* Ajuste da lixeira e botões no carrinho */
+    .btn-remover-carrinho {
+        width: 100%;
+        padding: 12px;
+    }
+}
+@media (max-width: 1200px) {
+    .apresentação { flex-direction: column; }
+    .coluna-imagem-loja { height: 400px; order: -1; }
+    .coluna-texto { padding: 40px; align-items: center; text-align: center; }
+    .paragrafo-apresentacao { max-width: 100%; }
+    .sub-titulo-secao { align-self: center; }
+}
+
+@media (max-width: 992px) {
+    nav { padding: 5px 20px; }
+    .itens { gap: 15px; }
+    .itens a { font-size: 18px; }
+    .mySlides img { height: 450px; }
+    .login { width: 90%; padding: 40px 20px; }
+    .produtos { width: 300px; height: auto; }
+}
+
+@media (max-width: 768px) {
+    nav { height: auto; flex-direction: column; padding: 15px; }
+    .itens { flex-wrap: wrap; justify-content: center; margin-top: 15px; }
+    .mySlides img { height: 350px; }
+    .titulo-principal { font-size: 32px; }
+    .sub-titulo-secao { font-size: 1.8rem; }
+    .slideshow-container-apresentacao { padding: 0 50px; }
+    .footer-container { flex-direction: column; text-align: center; }
+    .footer-col { align-items: center; }
+    footer { padding: 40px 20px; }
+}
+
+@media (max-width: 480px) {
+    .mySlides img { height: 250px; }
+    .login h1 { font-size: 24px; width: 100%; }
+    .btn-entrar { font-size: 18px; }
+    .seta { width: 35px; height: 35px; font-size: 16px; }
+    .coluna-texto { padding: 20px; }
+}
+
+@keyframes fade {
+    from { opacity: 0.4; } 
+    to { opacity: 1; }
+}
+}

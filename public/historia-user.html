@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belle Sucré Café - História</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./Images/logobranca.png" type="image/x-icon">
+    <script src="index.js"></script>
+    <style>
+        
+
+        @keyframes fadeInSurgir {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes linhaPulsa {
+            0% { width: 0; opacity: 0; }
+            100% { width: 70px; opacity: 1; }
+        }
+
+        .item-logo-animado {
+            opacity: 0;
+            animation: fadeInSurgir 0.8s ease-out forwards;
+        }
+
+        .linha-conexo {
+            height: 2px;
+            background: #AB7743;
+            position: absolute;
+            animation: linhaPulsa 1s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+
+        .linha-conexo::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid #AB7743;
+            border-right: 2px solid #AB7743;
+            top: -4px;
+        }
+
+        .seta-esq::after { right: 0; transform: rotate(45deg); }
+        .seta-dir::after { left: 0; transform: rotate(-135deg); }
+
+        .logo-central-float {
+            animation: flutuarLogo 4s ease-in-out infinite;
+        }
+
+        @keyframes flutuarLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="menu">
+        <a href="inicio-user.html">
+            <div class="logo">
+                <img src="./Images/logo.png" alt="Logo" id="logo">
+            </div>
+        </a>
+        <div class="itens">
+            <a href="historia-user.html" id="select"><ion-icon name="book-outline"></ion-icon> História</a>
+            <a href="cardapio-user.html"><ion-icon name="reader-outline"></ion-icon> Cardápio </a>
+            <a href="carrinho-user.html"><ion-icon name="cart-outline"></ion-icon> Carrinho</a>
+            <a href="jornal-user.html"><ion-icon name="newspaper-outline"></ion-icon> Jornal</a>
+            <div class="user">
+                <div class="foto-user" id="user-photo"></div>
+                <div class="user" id="user-name">Olá, Visitante!</div>
+            </div>
+            <div class="useri"><ion-icon name="chevron-down-outline"></ion-icon></div>
+        </div>
+    </nav>
+
+    <div class="user-infs">
+        <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
+        <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
+        <a href="login.html">Sair <ion-icon name="exit-outline"></ion-icon></a>
+    </div>
+
+    <h1 class="titulo-principal">História da Belle Sucré Café</h1>
+    
+    <div class="apresentação">
+        <h2 class="sub-titulo-secao typewriter">Quem somos?</h2>
+        <p class="paragrafo-apresentacao">A Belle Sucré surgiu inspirada nas tradicionais confeitarias francesas, trazendo para nossa cidade o encanto de receitas artesanais e o prazer de um bom café. Começamos com uma pequena vitrine de doces e alguns lugares para sentar, mas logo o aroma e o sabor conquistaram os clientes. Hoje, unimos técnicas clássicas e ingredientes frescos para criar cafés e sobremesas que encantam os olhos e o paladar.</p>
+        
+        <h2 class="sub-titulo-secao typewriter">História da empresa</h2>
+        <p class="paragrafo-apresentacao">A ideia surgiu da paixão por doces finos e cafés especiais. Começamos com uma vitrine simples e poucos lugares, mas rapidamente conquistamos clientes pela qualidade e pelo cuidado. Hoje, somos uma cafeteria que une sabor, elegância e acolhimento.</p>
+            
+        <h2 class="sub-titulo-secao typewriter">Significado da logo</h2>
+        <div class="container-logo-premium" style="background-color: #a8896f; padding: 80px 20px; border-radius: 40px; max-width: 1100px; margin: 40px auto; font-family: 'Poppins', sans-serif; overflow: hidden;">
+            <div style="display: grid; grid-template-columns: 1fr 1.5fr 1fr; align-items: center; gap: 20px; position: relative;">
+                
+                <div style="display: flex; flex-direction: column; gap: 120px; text-align: right; padding-right: 20px;">
+                    <div class="item-logo-animado" style="position: relative; animation-delay: 0.2s;">
+                        <p style="margin: 0; color: #4C2B08;"><strong>Xícara</strong><br><span style="font-size: 0.9rem; color: #8d6e63;">Momento Especial</span></p>
+                        <div class="linha-conexo seta-esq" style="right: -85px; top: 60%; transform: rotate(10deg);"></div>
+                    </div>
+                    <div class="item-logo-animado" style="position: relative; animation-delay: 0.4s;">
+                        <p style="margin: 0; color: #4C2B08;"><strong>Estilo Elegante</strong><br><span style="font-size: 0.9rem; color: #8d6e63;">Delicadeza e elegância</span></p>
+                        <div class="linha-conexo seta-esq" style="right: -85px; top: 20%; transform: rotate(-15deg);"></div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; position: relative;">
+                    <div class="item-logo-animado" style="margin-bottom: 30px; animation-delay: 0.1s;">
+                        <p style="margin: 0; color: #4C2B08;"><strong>Vapor</strong><br><span style="font-size: 0.9rem; color: #8d6e63;">Aroma e conforto</span></p>
+                        <div style="width: 2px; height: 50px; background: #AB7743; margin: 10px auto 0; position: relative;">
+                             <div style="position: absolute; bottom: 0; left: -4px; width: 8px; height: 8px; border-bottom: 2px solid #AB7743; border-right: 2px solid #AB7743; transform: rotate(45deg);"></div>
+                        </div>
+                    </div>
+                    <img src="Images/logo.png" class="logo-central-float" alt="Belle Sucré" style="width: 100%; max-width: 280px; filter: drop-shadow(0 10px 20px rgba(171, 119, 67, 0.15));">
+                    <div class="item-logo-animado" style="margin-top: 30px; animation-delay: 0.8s;">
+                        <div style="width: 120px; height: 1px; background: #D7BDA6; margin: 0 auto 15px;"></div>
+                        <p style="margin: 0; color: #4C2B08;"><strong>Belle Sucré</strong><br><span style="font-size: 0.9rem; color: #8d6e63;">Charme e tradição</span></p>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 120px; text-align: left; padding-left: 20px;">
+                    <div class="item-logo-animado" style="position: relative; animation-delay: 0.3s;">
+                        <div class="linha-conexo seta-dir" style="left: -85px; top: 60%; transform: rotate(-10deg);"></div>
+                        <p style="margin: 0; color: #4C2B08;"><strong>Raminho</strong><br><span style="font-size: 0.9rem; color: #8d6e63;">Frescor e suavidade</span></p>
+                    </div>
+                    <div class="item-logo-animado" style="position: relative; animation-delay: 0.5s;">
+                        <div class="linha-conexo seta-dir" style="left: -85px; top: 20%; transform: rotate(15deg);"></div>
+                        <p style="margin: 0; color: #4C2B08;"><strong>Biscoitos</strong><br><span style="font-size: 0.9rem; color: #8d6e63;">Receitas artesanais</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="sub-titulo-secao typewriter">Nossa paleta de cores:</h2>
+        <p class="paragrafo-apresentacao"> Nossa paleta de cores foi cuidadosamente selecionada para representar a essência e o posicionamento da Belle Sucre Café:
+        ​Tons de Confeitaria: As variações de Vanilla e Almond remetem à base de nossos doces: açúcar, farinha, e a leveza das texturas.
+            <br>
+        </p>
+        <p class="paragrafo-apresentacao">​Aroma de Café: Os tons terrosos e profundos de Mocca, Coffee, e Espresso trazem a referência imediata ao café, elemento central de nossa experiência.
+            ​Sofisticação e Aconchego: A combinação equilibrada destes marrons e beges transmite, simultaneamente, o requinte de doces finos e o aconchego de uma cafeteria artesanal.</p>
+        <div class="paleta">
+            <div class="cor cor1">
+                <h1>VANILLA</h1>
+                <p>#D7BDA6</p>
+            </div>
+
+            <div class="cor cor2">
+                <h1>CARAMEl</h1>
+                <p>#AB7743</p>
+            </div>
+            <div class="cor cor3">
+                <h1>ALMOND</h1>
+                <p>#B7957F</p>
+            </div>
+            <div class="cor cor4">
+                <h1>COFFE</h1>
+                <p>#6D3914</p>
+            </div>
+            <div class="cor cor5">
+                <h1>MOCCA</h1>
+                <p>#84593D</p>
+            </div>
+            <div class="cor cor6">
+                <h1>ESPRESSO</h1>
+                <p>#4C2B08</p>
+            </div>
+            
+        </div>
+        <div >
+        <h2 class="sub-titulo-secao typewriter">Nossos Valores:</h2>
+
+        <div class="Container-Valores">
+            <div class="valor">
+                <h1></ion-icon>Nossos Valores</h1>
+                <p>Qualidade Aconchego Carinho no atendimento Paixão pelo que fazemos Sustentabilidade
+                </p>
+
+            </div>
+            <div class="missao">
+                <h1>Nossa Misão</h1>
+                <p>Encantar as pessoas com cafés e doces finos, criando um espaço acolhedor onde cada cliente viva momentos especiais </p>
+            </div>
+            <div class="visao">
+                <h1>Nossa Visão</h1>
+                <p>Ser reconhecida como a cafeteria é doceria mais querida da região, referência e, sabor, qualidade, excelência no atendimento e opções inclusivas </p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer>
+        
+        <div class="footer-container">
+            <div class="logo-footer">
+                <img src="Images/logobranca.png" alt="" srcset="">
+            </div>
+            <div class="footer-col">
+                <h3>Belle Sucré Café</h3>
+                <p>Experiência única em cafés e doces artesanais brasileiros com o toque clássico francês.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Links</h3>
+                <a href="cardapio-user.html">Cardápio</a>
+                <a href="historia-user.html">Sobre nós</a>
+                <a href="jornal-user.html">Jornal</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <a href="#">Instagram</a>
+                <a href="#">WhatsApp</a>
+                <a href="#">Email</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Belle Sucré Café - Empresa Fictícia<br>
+            Criado por Vinicius Ribeiro.
+        </div>
+    </footer>
+
+    <script>
+        function typeWriter(elemento) {
+        const textoArray = elemento.innerHTML.split('');
+        elemento.innerHTML = '';
+        elemento.classList.add('digitando'); // O cursor entra aqui e não sai mais
+
+        textoArray.forEach((letra, i) => {
+            setTimeout(() => {
+                elemento.innerHTML += letra;
+            }, 75 * i); 
+        });
+}
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const titulos = document.querySelectorAll('.typewriter');
+        titulos.forEach(titulo => typeWriter(titulo));
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Seleciona todos os elementos que você quer que "escrevam"
+        const titulos = document.querySelectorAll('.typewriter');
+        titulos.forEach(titulo => typeWriter(titulo));
+    });
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("/usuario-logado")
+                .then(res => res.json())
+                .then(usuario => {
+                    if (usuario) {
+                        document.querySelector("#user-name").innerText = `Olá, ${usuario.nome}!`;
+                        if (usuario.foto) {
+                            const fotoDiv = document.querySelector("#user-photo");
+                            fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
+                            fotoDiv.style.backgroundSize = "cover";
+                            fotoDiv.style.backgroundPosition = "center";
+                        }
+                    }
+                });
+        });
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> 
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

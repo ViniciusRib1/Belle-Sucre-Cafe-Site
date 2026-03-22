@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./Images/logobranca.png" type="image/x-icon">
+    <title>Belle Sucré Café - Registro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="menu">
+        <a href="index.html">
+            <div class="logo">
+                <img src="./Images/logo.png" alt="Logo" id="logo">
+            </div>
+        </a>
+        <div class="itens">
+            <a href="historia.html"><ion-icon name="book-outline"></ion-icon> História</a>
+            <a href="cardapio.html"><ion-icon name="reader-outline"></ion-icon> Cardápio </a>
+            <a href="carrinho.html"><ion-icon name="cart-outline"></ion-icon> Carrinho</a>
+            <a href="jornal.html"><ion-icon name="newspaper-outline"></ion-icon> Jornal</a>
+            <a href="login.html">
+                <button><ion-icon name="person-outline"></ion-icon> Login</button>
+            </a>  
+            <a href="registro.html">
+                <button id="select-btn"><ion-icon name="key-outline"></ion-icon> Registrar</button>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-principal">
+        <form action="/api/registrar" method="POST" enctype="multipart/form-data" id="formRegistro">
+            <div class="login">
+                <h1>Registrar</h1>
+                <div class="container-login">
+                    <div class="profile-upload">
+                        <h4>Sua Foto</h4>
+                        <div class="photo-circle" id="photo-preview" onclick="document.getElementById('foto-input').click()">
+                            <ion-icon name="camera-outline" id="camera-icon"></ion-icon>
+                        </div>
+                        <input type="file" name="foto" id="foto-input" accept="image/*" style="display: none;">
+                    </div>
+
+                    <h4>Nome completo</h4>
+                    <div class="input-box">
+                        <input type="text" name="nome" placeholder="Seu nome" required>
+                        <ion-icon name="person-outline" class="icon"></ion-icon>
+                    </div>
+
+                    <h4>E-mail</h4>
+                    <div class="input-box">
+                        <input type="email" name="email" placeholder="seuemail@gmail.com" required>
+                        <ion-icon name="mail-outline" class="icon"></ion-icon>
+                    </div>
+
+                    <h4>Senha</h4>
+                    <div class="input-box">
+                        <input type="password" name="senha" id="input-senha" placeholder="Sua senha" required>
+                        <div id="btn-revelar" onclick="toggleSenha()">
+                            <ion-icon name="eye-outline" id="icon-aberto"></ion-icon>
+                            <ion-icon name="eye-off-outline" id="icon-fechado" style="display: none;"></ion-icon>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-entrar" id="btnFinalizar">Finalizar Registro</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="modal-edit" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ajuste sua foto</h3>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="crop-container" id="crop-area">
+                <img id="img-to-edit" src="" style="cursor: grab; user-select: none;">
+                <div class="overlay-circle"></div>
+            </div>
+            <div class="modal-controls">
+                <label>Zoom:</label>
+                <input type="range" id="zoom-slider" min="1" max="3" step="0.01" value="1">
+            </div>
+            <button type="button" class="btn-salvar" onclick="savePhoto()">Salvar Foto</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="logo-footer">
+                <img src="Images/logobranca.png" alt="" srcset="">
+            </div>
+            <div class="footer-col">
+                <h3>Belle Sucré Café</h3>
+                <p>Experiência única em cafés e doces artesanais brasileiros com o toque clássico francês.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Links</h3>
+                <a href="cardapio-user.html">Cardápio</a>
+                <a href="historia-user.html">Sobre nós</a>
+                <a href="jornal-user.html">Jornal</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <a href="#">Instagram</a>
+                <a href="#">WhatsApp</a>
+                <a href="#">Email</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Belle Sucré Café - Empresa Fictícia<br>
+            Criado por Vinicius Ribeiro.
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" type="module"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        let isDragging = false, startX, startY, posX = 0, posY = 0, currentScale = 1;
+        const imgToEdit = document.getElementById('img-to-edit');
+        const modal = document.getElementById('modal-edit');
+        const zoomSlider = document.getElementById('zoom-slider');
+        const photoPreview = document.getElementById('photo-preview');
+
+        document.getElementById('foto-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    imgToEdit.src = event.target.result;
+                    modal.style.display = 'flex';
+                    posX = 0; posY = 0; currentScale = 1;
+                    zoomSlider.value = 1;
+                    updateTransform();
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        imgToEdit.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX - posX;
+            startY = e.clientY - posY;
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            posX = e.clientX - startX;
+            posY = e.clientY - startY;
+            updateTransform();
+        });
+
+        window.addEventListener('mouseup', () => isDragging = false);
+
+        zoomSlider.addEventListener('input', function() {
+            currentScale = this.value;
+            updateTransform();
+        });
+
+        function updateTransform() {
+            imgToEdit.style.transform = `translate(${posX}px, ${posY}px) scale(${currentScale})`;
+        }
+
+        function closeModal() { modal.style.display = 'none'; }
+
+        function savePhoto() {
+            photoPreview.style.backgroundImage = `url(${imgToEdit.src})`;
+            photoPreview.style.backgroundSize = "cover";
+            const cameraIcon = document.getElementById('camera-icon');
+            if(cameraIcon) cameraIcon.style.display = 'none';
+            closeModal();
+        }
+
+        function toggleSenha() {
+            const input = document.getElementById('input-senha');
+            const aberto = document.getElementById('icon-aberto');
+            const fechado = document.getElementById('icon-fechado');
+            if (input.type === 'password') {
+                input.type = 'text';
+                aberto.style.display = 'none';
+                fechado.style.display = 'block';
+            } else {
+                input.type = 'password';
+                aberto.style.display = 'block';
+                fechado.style.display = 'none';
+            }
+        }
+
+        document.getElementById('formRegistro').onsubmit = function() {
+            document.getElementById('btnFinalizar').innerText = "Processando...";
+        };
+    </script>
+</body>
+</html>

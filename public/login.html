@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belle Sucré Café - Login</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./Images/logobranca.png" type="image/x-icon">
+</head>
+<body>
+    <nav class="menu">
+        <a href="index.html">
+            <div class="logo">
+                <img src="./Images/logo.png" alt="Logo" id="logo">
+            </div>
+        </a>
+        <div class="itens">
+            <a href="historia.html"><ion-icon name="book-outline"></ion-icon> História</a>
+            <a href="cardapio.html"><ion-icon name="reader-outline"></ion-icon> Cardápio </a>
+            <a href="carrinho.html"><ion-icon name="cart-outline"></ion-icon> Carrinho</a>
+            <a href="jornal.html"><ion-icon name="newspaper-outline"></ion-icon> Jornal</a>
+            <a href="login.html">
+                <button id="select-btn"><ion-icon name="person-outline"></ion-icon> Login</button>
+            </a>  
+            <a href="registro.html">
+                <button><ion-icon name="key-outline"></ion-icon> Registrar</button>
+            </a>
+        </div>
+    </nav>
+
+    <form action="/api/login" method="POST" id="loginForm">
+        <div class="login">
+            <h1>Logue-se!</h1>
+            <div class="container-login">
+                <h4>Coloque seu gmail</h4>
+                <div class="input-box">
+                    <input type="email" name="email" placeholder="Coloque seu gmail" required>
+                    <ion-icon name="mail-outline" class="icon"></ion-icon>
+                </div>
+                
+                <h4>Coloque sua senha</h4>
+                <div class="input-box"> 
+                    <div class="senha-wrapper">
+                        <input type="password" name="senha" id="input-senha" placeholder="Sua senha" required>
+                        <div id="btn-revelar" onclick="toggleSenha()">
+                            <ion-icon name="eye-outline" id="icon-aberto"></ion-icon>
+                            <ion-icon name="eye-off-outline" id="icon-fechado" style="display: none;"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-entrar" id="btnEntrar">Entrar</button>
+            </div>
+        </div>
+    </form>
+    <footer>
+        <div class="footer-container">
+            <div class="logo-footer">
+                <img src="Images/logobranca.png" alt="" srcset="">
+            </div>
+            <div class="footer-col">
+                <h3>Belle Sucré Café</h3>
+                <p>Experiência única em cafés e doces artesanais brasileiros com o toque clássico francês.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Links</h3>
+                <a href="cardapio-user.html">Cardápio</a>
+                <a href="historia-user.html">Sobre nós</a>
+                <a href="jornal-user.html">Jornal</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <a href="#">Instagram</a>
+                <a href="#">WhatsApp</a>
+                <a href="#">Email</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Belle Sucré Café - Empresa Fictícia<br>
+            Criado por Vinicius Ribeiro.
+        </div>
+    </footer>
+    
+    <script>
+        function toggleSenha() {
+            const input = document.getElementById('input-senha');
+            const aberto = document.getElementById('icon-aberto');
+            const fechado = document.getElementById('icon-fechado');
+            if (input.type === 'password') {
+                input.type = 'text';
+                aberto.style.display = 'none';
+                fechado.style.display = 'block';
+            } else {
+                input.type = 'password';
+                aberto.style.display = 'block';
+                fechado.style.display = 'none';
+            }
+        }
+
+        document.getElementById('loginForm').onsubmit = function() {
+            const btn = document.getElementById('btnEntrar');
+            btn.innerText = "Validando...";
+        };
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belle Sucré Café</title>
+    <link id="theme-link" rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./Images/logobranca.png" type="image/x-icon">
+    <script src="index.js"></script>
+</head>
+<body>
+    <nav class="menu">
+        <a href="inicio-user.html">
+        <div class="logo">
+            <img src="./Images/logo.png" alt="" id="logo">
+        </div>
+        </a>
+        <div class="itens">
+            <a href="historia-user.html"><ion-icon name="book-outline"></ion-icon> História</a>
+            <a href="cardapio-user.html"><ion-icon name="reader-outline"></ion-icon> Cardápio </a>
+            <a href="carrinho-user.html"><ion-icon name="cart-outline"></ion-icon> Carrinho</a>
+            <a href="jornal-user.html"><ion-icon name="newspaper-outline"></ion-icon> Jornal</a>
+            <div class="user">
+                <div class="foto-user" id="user-photo"></div>
+                <div class="user" id="user-name">Olá, Visitante!</div>
+                
+            </div>
+            <div class="useri"><ion-icon name="chevron-down-outline"></ion-icon></div>
+            
+            
+        </div>
+        
+        
+    </nav>
+    <div class="user-infs">
+                <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
+                <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
+                <a href="index.html">Sair <ion-icon name="exit-outline"></ion-icon></a>
+    </div>
+    
+    <h1 class="titulo-principal">Olá, seja bem-vindo ao site da Belle Sucré Café!</h1>
+    <div class="apresentação">
+        <div class="conteudo-principal">
+            <div class="coluna-texto">
+                
+                <h1 class="sub-titulo-secao">Sobre</h1>
+                <p class="paragrafo-apresentacao">Esse é o site da Belle Sucré Café, aqui você pode pedir doces e consultar o nosso cardápio exclusivo.</p>
+                <p class="paragrafo-apresentacao">Navegue pelos links abaixo para mergulhar na nossa experiência gastronômica!</p>
+                
+                <h2 class="sub-titulo-secao">Conheça a nossa história:</h2>
+                <p class="paragrafo-apresentacao">A Belle Sucré surgiu inspirada nas tradicionais confeitarias francesas, trazendo para nossa cidade o encanto de receitas artesanais e o prazer de um bom café.</p>
+                <a href="historia-user.html" class="link-historia">Ler história completa</a>
+
+                <h2 class="sub-titulo-secao">Conheça o nosso cardápio:</h2>
+                
+                <div class="slideshow-container">
+                    <div class="meu-slide ativo">
+                        <div class="card-produto">
+                            <div class="img-container"><img src="./Images/torta de morango.jpg" alt="Torta"></div>
+                            <div class="infos-produto">
+                                <h3>Torta de Morango</h3>
+                                <p class="preco">Uma torta deliciosa de morango gourmet.</p>
+                                <a href="cardapio-user.html">
+                                    <button class="btn-adicionar">Ir ao Cardápio</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="meu-slide">
+                        <div class="card-produto">
+                            <div class="img-container"><img src="./Images/bolo de chocolate.jpg" alt="Bolo"></div>
+                            <div class="infos-produto">
+                                <h3>Bolo de Chocolate</h3>
+                                <p class="preco">Um delicioso bolo de chocolate gourmet.</p>
+                                <a href="cardapio-user.html">
+                                    <button class="btn-adicionar">Ir ao Cardápio</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <button class="seta anterior" onclick="mudarSlide(-1)"><ion-icon name="chevron-back-outline"></ion-icon></button>
+                    <button class="seta proximo" onclick="mudarSlide(1)"><ion-icon name="chevron-forward-outline"></ion-icon></button>
+                </div>
+                <a href="cardapio-user.html">Cardápio</a>
+
+                <h2 class="sub-titulo-secao">Jornal</h2>
+                <p class="paragrafo-apresentacao">O nosso jornal é onde deixamos as nossas apresentações da nossa empresa, acesse o nosso jornal para ver novas notícias da empresa. </p>
+                <a href="jornal-user.html">Jornal</a>
+            </div>
+            
+
+            <div class="coluna-imagem-loja">
+                <img src="Images/loja.png" alt="Loja Belle Sucré">
+            </div>
+        </div>
+    </div>
+    
+
+    <footer>
+        
+        <div class="footer-container">
+            <div class="logo-footer">
+                <img src="Images/logobranca.png" alt="" srcset="">
+            </div>
+            <div class="footer-col">
+                <h3>Belle Sucré Café</h3>
+                <p>Experiência única em cafés e doces artesanais brasileiros com o toque clássico francês.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Links</h3>
+                <a href="cardapio-user.html">Cardápio</a>
+                <a href="historia-user.html">Sobre nós</a>
+                <a href="jornal-user.html">Jornal</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <a href="#">Instagram</a>
+                <a href="#">WhatsApp</a>
+                <a href="#">Email</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Belle Sucré Café - Empresa Fictícia<br>
+            Criado por Vinicius Ribeiro.
+        </div>
+    </footer>
+
+
+        
+</body>
+<script>
+    // 1. Efeito de Revelação ao Rolar a Tela
+    const observarScroll = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visivel');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    // Seleciona elementos para animar
+    document.querySelectorAll('.sub-titulo-secao, .paragrafo-apresentacao, .card-produto').forEach((el) => {
+        el.classList.add('revelar');
+        observarScroll.observe(el);
+    });
+
+    // 2. Efeito Magnético Simples nas Setas
+    const setas = document.querySelectorAll('.seta');
+    setas.forEach(seta => {
+        seta.addEventListener('mousemove', (e) => {
+            const x = (e.offsetX - seta.clientWidth / 2) * 0.4;
+            const y = (e.offsetY - seta.clientHeight / 2) * 0.4;
+            seta.style.transform = `translateY(-50%) translate(${x}px, ${y}px)`;
+        });
+        
+        seta.addEventListener('mouseleave', () => {
+            seta.style.transform = `translateY(-50%) translate(0, 0)`;
+        });
+    });
+
+    let slideIndex = 0;
+    const slides = document.getElementsByClassName("meu-slide");
+
+    function mudarSlide(n) {
+        // Remove a classe ativo do slide atual
+        slides[slideIndex].classList.remove("ativo");
+        
+        // Calcula o próximo índice
+        slideIndex += n;
+
+        // Se chegar no fim, volta pro começo
+        if (slideIndex >= slides.length) {
+            slideIndex = 0;
+        }
+        // Se for antes do primeiro, vai pro último
+        if (slideIndex < 0) {
+            slideIndex = slides.length - 1;
+        }
+
+        // Adiciona a classe ativo no novo slide
+        slides[slideIndex].classList.add("ativo");
+}
+
+    document.addEventListener("DOMContentLoaded", () => {
+    fetch("/usuario-logado")
+        .then(res => res.json())
+        .then(usuario => {
+            if (usuario && usuario.nome) {
+                // 1. Atualiza o Menu Superior (o que você já tinha)
+                const menuName = document.getElementById("user-name");
+                if (menuName) menuName.innerText = `Olá, ${usuario.nome}!`;
+
+                // 2. ATUALIZA O H1 DA PÁGINA (A parte que você pediu)
+                const welcomeH1 = document.getElementById("user-welcome");
+                if (welcomeH1) welcomeH1.innerText = usuario.nome;
+
+                // 3. Atualiza as Fotos (Menu e Banner)
+                if (usuario.foto) {
+                    const fotoUrl = `/uploads/${usuario.foto}`;
+                    const fotoDiv = document.querySelector(".foto-user");
+                    if (fotoDiv) {
+                        fotoDiv.style.backgroundImage = `url('${fotoUrl}')`;
+                        fotoDiv.style.backgroundSize = "cover";
+                    }
+                }
+            }
+                })
+                .catch(err => console.error("Erro ao carregar dados:", err));
+        });
+    document.addEventListener("DOMContentLoaded", () => {
+    fetch("/usuario-logado")
+        .then(res => res.json())
+        .then(usuario => {
+            if (usuario) {
+                // 1. Atualiza o Menu Superior (o que você já tinha)
+                document.querySelector(".user div:last-child").innerText = `Olá, ${usuario.nome}!`;
+                
+                // 2. Atualiza a Página de Perfil (Banner e Nome)
+                document.getElementById("display-name").innerText = `Seu nome: ${usuario.nome}`;
+                if(document.getElementById("display-email")) {
+                    document.getElementById("display-email").innerText = `E-mail: ${usuario.email || 'Não informado'}`;
+                }
+
+                // 3. Atualiza as Fotos (Menu e Banner)
+                if (usuario.foto) {
+                    const fotoUrl = `/uploads/${usuario.foto}`;
+                    
+                    // Foto do Menu
+                    const fotoDiv = document.querySelector(".foto-user");
+                    fotoDiv.style.backgroundImage = `url('${fotoUrl}')`;
+                    fotoDiv.style.backgroundSize = "cover";
+
+                    // Foto do Banner
+                    const profileImg = document.getElementById("profile-img");
+                    if(profileImg) profileImg.src = fotoUrl;
+                }
+            }
+        })
+        .catch(err => console.error("Erro ao carregar dados:", err));
+});
+
+function abrirEdicao() {
+    // Aqui você pode redirecionar para uma página de formulário
+    // ou abrir um modal. Exemplo de redirecionamento:
+    window.location.href = "editar-perfil.html";
+}
+
+    const btnDarkMode = document.querySelector('.darkmode');
+    const themeLink = document.querySelector('#theme-link');
+
+    btnDarkMode.addEventListener('click', () => {
+        // Verifica se o href atual é o estilo padrão
+        if (themeLink.getAttribute('href') === 'style.css') {
+            themeLink.setAttribute('href', 'style-dark.css'); // Muda para o Dark
+            btnDarkMode.classList.add('active'); // Classe opcional para animar ícones
+        } else {
+            themeLink.setAttribute('href', 'style.css'); // Volta para o Light
+            btnDarkMode.classList.remove('active');
+        }
+    });
+
+
+   
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch("/usuario-logado")
+            .then(res => {
+                if (!res.ok) throw new Error("Não logado");
+                return res.json();
+            })
+            .then(usuario => {
+                if (usuario && usuario.nome) {
+                    // Atualiza o nome no Menu
+                    const menuName = document.getElementById("user-name");
+                    if (menuName) menuName.innerText = `Olá, ${usuario.nome}!`;
+
+                    // Atualiza o título de boas-vindas se existir um ID 'user-welcome'
+                    const welcomeH1 = document.getElementById("user-welcome");
+                    if (welcomeH1) welcomeH1.innerText = usuario.nome;
+
+                    // Atualiza a Foto do Menu
+                    if (usuario.foto) {
+                        const fotoUrl = `/uploads/${usuario.foto}`;
+                        const fotoDiv = document.getElementById("user-photo");
+                        if (fotoDiv) {
+                            fotoDiv.style.backgroundImage = `url('${fotoUrl}')`;
+                            fotoDiv.style.backgroundSize = "cover";
+                            fotoDiv.style.backgroundPosition = "center";
+                        }
+                    }
+                }
+            })
+            .catch(err => {
+                console.log("Usuário não está logado ou erro na API:", err);
+                // Opcional: redirecionar para login.html se não houver sessão
+                // window.location.href = "login.html";
+            });
+    });
+
+    // Mantendo sua lógica de dropdown e darkmode...
+    const userIcon = document.querySelector('.useri');
+    const userInfs = document.querySelector('.user-infs');
+    
+    if(userIcon) {
+        userIcon.addEventListener('click', () => {
+            userInfs.classList.toggle('active');
+        });
+    }
+</script>
+<script  type = "module"  src = " https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js " > </script> 
+<script nomodule src = " https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js " >   </script>
+</html>

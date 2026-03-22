@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belle Sucré Café - Seu perfil</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./Images/logobranca.png" type="image/x-icon">
+    <style>
+        /* Estilos para o Modal de Ajuste (Zoom e Arrastar) */
+        .modal-ajuste {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .ajuste-content {
+            background-color: #fff;
+            margin: 1% auto; 
+            padding: 20px;
+            border-radius: 15px;
+            width: 98%; max-width: 800px;
+            text-align: center;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+        }
+        .preview-window {
+            width: 100%; 
+            height: 500px;
+            margin: 10px auto;
+            overflow: hidden;
+            border: 3px solid #333;
+            position: relative;
+            cursor: move;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #img-ajuste {
+            position: absolute;
+            transition: transform 0.05s linear;
+            user-select: none;
+            -webkit-user-drag: none;
+            max-width: none;
+        }
+        .zoom-slider { width: 95%; margin: 15px 0; cursor: pointer; }
+        
+        .banner {
+            width: 100%;
+            height: 300px; /* Define uma altura padrão */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="menu">
+        <a href="inicio-user.html">
+            <div class="logo"><img src="./Images/logo.png" alt="Logo" id="logo"></div>
+        </a>
+        <div class="itens">
+            <a href="historia-user.html"><ion-icon name="book-outline"></ion-icon> História</a>
+            <a href="cardapio-user.html"><ion-icon name="reader-outline"></ion-icon> Cardápio </a>
+            <a href="carrinho-user.html"><ion-icon name="cart-outline"></ion-icon> Carrinho</a>
+            <a href="jornal-user.html"><ion-icon name="newspaper-outline"></ion-icon> Jornal</a>
+            <div class="user" style="cursor: pointer;" onclick="toggleMenu()">
+                <div class="foto-user" id="user-photo"></div>
+                <div id="user-name-nav" style="margin-left: 10px;">Olá!</div>
+                <div class="useri"><ion-icon name="chevron-down-outline"></ion-icon></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="user-infs" id="dropdown-menu" style="display: none;">
+        <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
+        <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
+        <a href="index.html">Sair <ion-icon name="exit-outline"></ion-icon></a>
+    </div>
+
+    <div class="user-container">
+        <div class="banner" id="display-banner" onclick="abrirEdicao()" title="Clique para editar banner">
+            <div class="perfil" id="profile-pic-container" onclick="event.stopPropagation(); abrirEdicao();">
+                <img src="./Images/default-user.png" alt="Foto de Perfil" id="profile-img">
+            </div>
+        </div>
+        <div class="user-details">
+            <h1 id="display-name">Carregando...</h1>
+            <div class="info-group">
+                <p><strong><ion-icon name="mail-outline"></ion-icon> E-mail:</strong> <span id="display-email">...</span></p>
+                <p><strong><ion-icon name="location-outline"></ion-icon> Endereço:</strong> <span id="display-address">Não cadastrado</span></p>
+            </div>
+            <button onclick="abrirEdicao()" class="btn-edit">Editar Perfil <ion-icon name="create-outline"></ion-icon></button>
+        </div>
+    </div>
+
+    <div id="modal-editar" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharEdicao()">&times;</span>
+            <h2>Editar Informações</h2>
+            <form id="form-editar-perfil">
+                <label>Nome:</label>
+                <input type="text" id="edit-nome" name="nome" required>
+                <label>Endereço:</label>
+                <input type="text" id="edit-endereco" name="endereco">
+                <label>Nova Foto de Perfil:</label>
+                <input type="file" id="input-foto" accept="image/*" onchange="iniciarAjuste(this, 'perfil')">
+                <label>Novo Banner:</label>
+                <input type="file" id="input-banner" accept="image/*" onchange="iniciarAjuste(this, 'banner')">
+                <button type="submit" class="btn-salvar" id="btn-final-salvar">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-ajuste" class="modal-ajuste">
+        <div class="ajuste-content">
+            <h2 id="titulo-ajuste">Ajuste sua imagem</h2>
+            <div class="preview-window" id="window-ajuste">
+                <img id="img-ajuste" src="">
+            </div>
+            <p>Arraste a foto para centralizar e use o zoom:</p>
+            <input type="range" class="zoom-slider" id="zoom-range" min="1" max="5" step="0.02" value="1">
+            <br>
+            <button class="btn-salvar" onclick="confirmarAjuste()">Confirmar Ajuste</button>
+        </div>
+    </div>
+
+    
+<footer>
+        
+        <div class="footer-container">
+            <div class="logo-footer">
+                <img src="Images/logobranca.png" alt="" srcset="">
+            </div>
+            <div class="footer-col">
+                <h3>Belle Sucré Café</h3>
+                <p>Experiência única em cafés e doces artesanais brasileiros com o toque clássico francês.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Links</h3>
+                <a href="cardapio-user.html">Cardápio</a>
+                <a href="historia-user.html">Sobre nós</a>
+                <a href="jornal-user.html">Jornal</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <a href="#">Instagram</a>
+                <a href="#">WhatsApp</a>
+                <a href="#">Email</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Belle Sucré Café - Empresa Fictícia<br>
+            Criado por Vinicius Ribeiro.
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('form-editar-perfil').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('btn-final-salvar');
+        
+        // 1. ATUALIZAÇÃO VISUAL INSTANTÂNEA
+        const novoNome = document.getElementById('edit-nome').value;
+        const novoEndereco = document.getElementById('edit-endereco').value;
+        
+        document.getElementById("display-name").innerText = novoNome;
+        document.getElementById("user-name-nav").innerText = `Olá, ${novoNome}!`;
+        document.getElementById("display-address").innerText = novoEndereco || "Não cadastrado";
+        
+        fecharEdicao(); 
+        btn.innerText = "Salvando..."; 
+
+        // 2. PREPARAÇÃO DO FORMULÁRIO (Certifique-se de que os IDs batem com os inputs)
+        const formData = new FormData();
+        formData.append('nome', novoNome);
+        formData.append('endereco', novoEndereco);
+        
+        const fotoFile = document.getElementById('input-foto').files[0];
+        const bannerFile = document.getElementById('input-banner').files[0];
+
+        if (fotoFile) formData.append('foto', fotoFile);
+        if (bannerFile) formData.append('banner', bannerFile);
+
+        // 3. ENVIO REAL PARA O SERVIDOR
+        fetch("/atualizar-perfil", { 
+            method: "POST", 
+            body: formData // Não defina Headers de Content-Type aqui, o navegador faz isso sozinho para FormData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                console.log("Sucesso! As imagens foram salvas permanentemente.");
+                btn.innerText = "Salvar Alterações";
+            } else {
+                alert("O servidor não conseguiu salvar: " + data.message);
+                btn.innerText = "Tentar Novamente";
+            }
+        })
+        .catch(err => {
+            console.error("Erro de conexão:", err);
+            btn.innerText = "Erro ao Salvar";
+        });
+    });
+
+        let zoom = 1, posX = 0, posY = 0, isDragging = false, startX, startY, tipoAjusteAtivo = '';
+        let tempFotoURL = null;
+        let tempBannerURL = null;
+
+        const imgAjuste = document.getElementById('img-ajuste'), windowAjuste = document.getElementById('window-ajuste'), zoomRange = document.getElementById('zoom-range');
+
+        function toggleMenu() {
+            const menu = document.getElementById('dropdown-menu');
+            menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("/usuario-logado").then(res => res.json()).then(usuario => {
+                if (usuario) {
+                    document.getElementById("display-name").innerText = usuario.nome;
+                    document.getElementById("display-email").innerText = usuario.email || "Não informado";
+                    document.getElementById("display-address").innerText = usuario.endereco || "Não cadastrado";
+                    document.getElementById("user-name-nav").innerText = `Olá, ${usuario.nome}!`;
+                    if (usuario.foto) {
+                        const url = `/uploads/${usuario.foto}`;
+                        document.getElementById("profile-img").src = url;
+                        document.getElementById("user-photo").style.backgroundImage = `url('${url}')`;
+                    }
+                    if (usuario.banner) document.getElementById("display-banner").style.backgroundImage = `url('/uploads/${usuario.banner}')`;
+                }
+            });
+        });
+
+        function iniciarAjuste(input, tipo) {
+            if (input.files && input.files[0]) {
+                tipoAjusteAtivo = tipo;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imgAjuste.src = e.target.result;
+                    document.getElementById('modal-ajuste').style.display = 'block';
+                    windowAjuste.style.borderRadius = (tipo === 'perfil') ? '50%' : '10px';
+                    windowAjuste.style.width = (tipo === 'perfil') ? '450px' : '100%';
+                    posX = 0; posY = 0; zoom = 1; zoomRange.value = 1;
+                    atualizarTransform();
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        windowAjuste.addEventListener('mousedown', (e) => { isDragging = true; startX = e.clientX - posX; startY = e.clientY - posY; windowAjuste.style.cursor = 'grabbing'; });
+        window.addEventListener('mousemove', (e) => { if (!isDragging) return; posX = e.clientX - startX; posY = e.clientY - startY; atualizarTransform(); });
+        window.addEventListener('mouseup', () => { isDragging = false; windowAjuste.style.cursor = 'move'; });
+        zoomRange.addEventListener('input', () => { zoom = zoomRange.value; atualizarTransform(); });
+        function atualizarTransform() { imgAjuste.style.transform = `translate(${posX}px, ${posY}px) scale(${zoom})`; }
+
+        function confirmarAjuste() {
+            const tempUrl = imgAjuste.src;
+            if (tipoAjusteAtivo === 'perfil') {
+                tempFotoURL = tempUrl;
+                // Aplica preview visual imediato
+                document.getElementById('profile-img').src = tempUrl;
+                document.getElementById('user-photo').style.backgroundImage = `url('${tempUrl}')`;
+            } else {
+                tempBannerURL = tempUrl;
+                // Aplica preview visual imediato
+                document.getElementById('display-banner').style.backgroundImage = `url('${tempUrl}')`;
+            }
+            document.getElementById('modal-ajuste').style.display = 'none';
+        }
+
+        function abrirEdicao() {
+            document.getElementById('modal-editar').style.display = 'block';
+            document.getElementById('edit-nome').value = document.getElementById('display-name').innerText;
+            const end = document.getElementById('display-address').innerText;
+            document.getElementById('edit-endereco').value = (end === "Não cadastrado") ? "" : end;
+        }
+
+        function fecharEdicao() { document.getElementById('modal-editar').style.display = 'none'; }
+
+        document.getElementById('form-editar-perfil').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-final-salvar');
+            
+            // 1. Atualização Visual Instantânea (UI Otimista)
+            const novoNome = document.getElementById('edit-nome').value;
+            document.getElementById("display-name").innerText = novoNome;
+            document.getElementById("user-name-nav").innerText = `Olá, ${novoNome}!`;
+            document.getElementById("display-address").innerText = document.getElementById('edit-endereco').value || "Não cadastrado";
+            
+            fecharEdicao(); 
+            btn.innerText = "Salvando..."; 
+
+            const formData = new FormData();
+            formData.append('nome', novoNome);
+            formData.append('endereco', document.getElementById('edit-endereco').value);
+            
+            const fotoFile = document.getElementById('input-foto').files[0];
+            const bannerFile = document.getElementById('input-banner').files[0];
+            if (fotoFile) formData.append('foto', fotoFile);
+            if (bannerFile) formData.append('banner', bannerFile);
+
+            // 2. Envio para o banco
+            fetch("/atualizar-perfil", { method: "POST", body: formData })
+            .then(res => res.json())
+            .then(data => {
+                if (!data.success) {
+                    alert("Erro ao sincronizar com banco: " + data.message);
+                } else {
+                    console.log("Perfil atualizado no banco com sucesso.");
+                }
+            })
+            .catch(err => console.error("Erro no salvamento:", err));
+        });
+
+        window.onclick = (e) => { if (e.target.classList.contains('modal')) fecharEdicao(); }
+    </script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
