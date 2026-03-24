@@ -13,46 +13,7 @@
     <style>
         
 
-        @keyframes fadeInSurgir {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes linhaPulsa {
-            0% { width: 0; opacity: 0; }
-            100% { width: 70px; opacity: 1; }
-        }
-
-        .item-logo-animado {
-            opacity: 0;
-            animation: fadeInSurgir 0.8s ease-out forwards;
-        }
-
-        .linha-conexo {
-            height: 2px;
-            background: #AB7743;
-            position: absolute;
-            animation: linhaPulsa 1s ease-out forwards;
-            animation-delay: 0.6s;
-        }
-
-        .linha-conexo::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-top: 2px solid #AB7743;
-            border-right: 2px solid #AB7743;
-            top: -4px;
-        }
-
-        .seta-esq::after { right: 0; transform: rotate(45deg); }
-        .seta-dir::after { left: 0; transform: rotate(-135deg); }
-
-        .logo-central-float {
-            animation: flutuarLogo 4s ease-in-out infinite;
-        }
-
+        
         @keyframes flutuarLogo {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -261,5 +222,6 @@
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> 
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>

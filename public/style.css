@@ -491,11 +491,73 @@ footer{
     position: relative;
 }
 
+.linha-conexo {
+            height: 2px;
+            background: #AB7743;
+            position: absolute;
+            animation: linhaPulsa 1s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+
+        .linha-conexo::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid #AB7743;
+            border-right: 2px solid #AB7743;
+            top: -4px;
+        }
+
+        .seta-esq::after { right: 0; transform: rotate(45deg); }
+        .seta-dir::after { left: 0; transform: rotate(-135deg); }
+
 #camera-icon {
     font-size: 35px;
     color: #4A403A;
     /* O flexbox do pai já garante a centralização perfeita */
 }
+
+@keyframes fadeInSurgir {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes linhaPulsa {
+            0% { width: 0; opacity: 0; }
+            100% { width: 70px; opacity: 1; }
+        }
+
+        .item-logo-animado {
+            opacity: 0;
+            animation: fadeInSurgir 0.8s ease-out forwards;
+        }
+
+        .linha-conexo {
+            height: 2px;
+            background: #AB7743;
+            position: absolute;
+            animation: linhaPulsa 1s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+
+        .linha-conexo::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid #AB7743;
+            border-right: 2px solid #AB7743;
+            top: -4px;
+        }
+
+        .seta-esq::after { right: 0; transform: rotate(45deg); }
+        .seta-dir::after { left: 0; transform: rotate(-135deg); }
+
+        .logo-central-float {
+            animation: flutuarLogo 4s ease-in-out infinite;
+        }
+
 .foto-user {
     width: 40px;
     height: 40px;
@@ -557,11 +619,15 @@ footer{
     transform: rotate(180deg);
 }
 .cardapio {
+    display: flexbox;
+    justify-content: center;
     text-align: center;
+    margin: auto;
 }
 .carrinho {
     text-align: center;
-    width: 1800px;
+    width: 80%;
+
 }
 .container-carrinho-cards {
     display: flex;
@@ -646,7 +712,7 @@ footer{
 
     /* RESUMO DO PEDIDO */
 .resumo-carrinho {
-    background: #fdfaf8;
+    background: #D7BDA6;
     padding: 25px;
     border-radius: 20px;
     border: 1px solid #d3b8a4;
@@ -662,6 +728,22 @@ footer{
     font-weight: bold;
     cursor: pointer;
     margin-top: 15px;
+    transition: 0.3s all;
+    border: #5a3e2b solid 2px;
+
+}
+.btn-finalizar:hover {
+    width: 100%;
+    background: #D7BDA6;
+    color: #5a3e2b;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s all;
+    border: #5a3e2b solid 2px;
 }
 .container-prod {
     display: flex;

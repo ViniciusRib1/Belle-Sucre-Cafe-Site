@@ -1,22 +1,57 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
 <head>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Belle Sucré Café - Cardápio</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="shortcut icon" href="./Images/logobranca.png" type="image/x-icon">
-    <script src="index.js"></script>
+    
+    <style>
+        /* Estilos do Modal de Confirmação */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(3px);
+        }
+        .modal-confirm {
+            background: #fdf5e6; 
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid #6d4c41; 
+            text-align: center;
+            max-width: 350px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .modal-confirm h3 { color: #6d4c41; margin-bottom: 15px; font-family: 'Magra', sans-serif; }
+        .modal-btns { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
+        .btn-modal {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-confirm { background: #6d4c41; color: white; }
+        .btn-cancel { background: #d7ccc8; color: #6d4c41; }
+        .btn-confirm:hover { background: #4e342e; }
+        .btn-cancel:hover { background: #bcaaa4; }
+    </style>
 </head>
 <body>
     <nav class="menu">
         <a href="inicio-user.html">
-        <div class="logo">
-            <img src="./Images/logo.png" alt="" id="logo">
-        </div>
+            <div class="logo"><img src="./Images/logo.png" alt="" id="logo"></div>
         </a>
         <div class="itens">
             <a href="historia-user.html"><ion-icon name="book-outline"></ion-icon> História</a>
@@ -25,102 +60,88 @@
             <a href="jornal-user.html"><ion-icon name="newspaper-outline"></ion-icon> Jornal</a>
             <div class="user">
                 <div class="foto-user" id="user-photo"></div>
-                <div class="user" id="user-name">Olá, Visitante!</div>
-                
+                <div id="user-name">Olá, Visitante!</div>
             </div>
             <div class="useri"><ion-icon name="chevron-down-outline"></ion-icon></div>
-            
-            
         </div>
-        
-        
     </nav>
+
     <div class="user-infs">
-                <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
-                <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
-                <a href="index.html">Sair <ion-icon name="exit-outline"></ion-icon></a>
+        <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
+        <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
+        <a href="index.html">Sair <ion-icon name="exit-outline"></ion-icon></a>
+    </div>
+
+    <div id="modal-confirmacao" class="modal-overlay">
+        <div class="modal-confirm">
+            <h3 id="txt-modal">Adicionar ao carrinho?</h3>
+            <div class="modal-btns">
+                <button class="btn-modal btn-cancel" onclick="fecharModal()">Cancelar</button>
+                <button class="btn-modal btn-confirm" id="btn-confirmar-acao">Confirmar</button>
             </div>
+        </div>
+    </div>
+
     <div class="cardapio">
         <h1 class="titulo-principal">Cardápio</h1>
         <h2>Menu de doces:</h2>
         <div class="container-prod">
-    <div class="produtos">
-        <div class="img-container">
-            <img src="./Images/torta de morango.jpg" alt="Torta de Morango">
-        </div>
-            <div class="infos-produto">
-                <h1>Torta de Morango</h1>
-                <p class="preco">R$ 18,50</p>
-                <button class="btn-comprar" onclick="adicionarAoCarrinho(1)">
-                    <ion-icon name="cart-outline"></ion-icon> Adicionar
-                </button>
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/torta de morango.jpg" alt="Torta de Morango"></div>
+                <div class="infos-produto">
+                    <h1>Torta de Morango</h1>
+                    <p class="preco">R$ 18,50</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(1, 'Torta de Morango')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
             </div>
-            
-    </div>
-    <div class="produtos">
-        <div class="img-container">
-            <img src="./Images/bolo de chocolate.jpg" alt="Torta de Morango">
-        </div>
-            <div class="infos-produto">
-                <h1>Bolo de chocolate</h1>
-                <p class="preco">R$ 20,00</p>
-                <button class="btn-comprar" onclick="adicionarAoCarrinho(2)">
-                    <ion-icon name="cart-outline"></ion-icon> Adicionar
-                </button>
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/bolo de chocolate.jpg" alt="Bolo de chocolate"></div>
+                <div class="infos-produto">
+                    <h1>Bolo de chocolate</h1>
+                    <p class="preco">R$ 20,00</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(2, 'Bolo de chocolate')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
             </div>
-            
-    </div>
-    <div class="produtos">
-        <div class="img-container">
-            <img src="./Images/doce de pistache.jpg" alt="Torta de Morango">
-        </div>
-            <div class="infos-produto">
-                <h1>Doce de pistache</h1>
-                <p class="preco">R$ 15,50</p>
-                <button class="btn-comprar" onclick="adicionarAoCarrinho(3)">
-                    <ion-icon name="cart-outline"></ion-icon> Adicionar
-                </button>
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/doce de pistache.jpg" alt="Doce de pistache"></div>
+                <div class="infos-produto">
+                    <h1>Doce de pistache</h1>
+                    <p class="preco">R$ 15,50</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(3, 'Doce de pistache')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
             </div>
-        
-            
-    </div>
-    <div class="produtos">
-        <div class="img-container">
-            <img src="./Images/petit gâteau.jpg" alt="Torta de Morango">
-        </div>
-            <div class="infos-produto">
-                <h1>Petit gâteau</h1>
-                <p class="preco">R$ 25,50</p>
-                <button class="btn-comprar" onclick="adicionarAoCarrinho(4)">
-                    <ion-icon name="cart-outline"></ion-icon> Adicionar
-                </button>
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/petit gâteau.jpg" alt="Petit gâteau"></div>
+                <div class="infos-produto">
+                    <h1>Petit gâteau</h1>
+                    <p class="preco">R$ 25,50</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(4, 'Petit gâteau')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
             </div>
-            
-    </div>
-    <div class="produtos">
-        <div class="img-container">
-            <img src="./Images/bolo de morango.jpg" alt="Torta de Morango">
-        </div>
-            <div class="infos-produto">
-                <h1>Bolo de Morango</h1>
-                <p class="preco">R$ 20,00</p>
-                <button class="btn-comprar" onclick="adicionarAoCarrinho(5)">
-                    <ion-icon name="cart-outline"></ion-icon> Adicionar
-                </button>
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/bolo de morango.jpg" alt="Bolo de Morango"></div>
+                <div class="infos-produto">
+                    <h1>Bolo de Morango</h1>
+                    <p class="preco">R$ 20,00</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(5, 'Bolo de Morango')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
             </div>
-            
+        </div>
     </div>
-    </div>
-    </div>
-    </div>
-
 
     <footer>
-        
         <div class="footer-container">
-            <div class="logo-footer">
-                <img src="Images/logobranca.png" alt="" srcset="">
-            </div>
+            <div class="logo-footer"><img src="Images/logobranca.png" alt=""></div>
             <div class="footer-col">
                 <h3>Belle Sucré Café</h3>
                 <p>Experiência única em cafés e doces artesanais brasileiros com o toque clássico francês.</p>
@@ -131,12 +152,6 @@
                 <a href="historia-user.html">Sobre nós</a>
                 <a href="jornal-user.html">Jornal</a>
             </div>
-            <div class="footer-col">
-                <h3>Contato</h3>
-                <a href="#">Instagram</a>
-                <a href="#">WhatsApp</a>
-                <a href="#">Email</a>
-            </div>
         </div>
         <div class="footer-bottom">
             &copy; 2026 Belle Sucré Café - Empresa Fictícia<br>
@@ -144,59 +159,68 @@
         </div>
     </footer>
 
-        
-</body>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // 1. Carrega dados do usuário
-        fetch("/usuario-logado", { credentials: "include" })
-            .then(res => res.json())
-            .then(usuario => {
-                if (usuario && usuario.nome) {
-                    document.getElementById("user-name").innerText = `Olá, ${usuario.nome}!`;
-                    if (usuario.foto) {
-                        const fotoDiv = document.querySelector(".foto-user");
-                        fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
-                        fotoDiv.style.backgroundSize = "cover";
+    <script>
+        let idParaAdicionar = null;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Carregar Usuário
+            fetch("/usuario-logado", { credentials: "include" })
+                .then(res => res.json())
+                .then(usuario => {
+                    if (usuario && usuario.nome) {
+                        document.getElementById("user-name").innerText = `Olá, ${usuario.nome}!`;
+                        if (usuario.foto) {
+                            const fotoDiv = document.getElementById("user-photo");
+                            fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
+                            fotoDiv.style.backgroundSize = "cover";
+                        }
                     }
-                }
-            });
+                });
 
-        // 2. Lógica para abrir o menu da setinha (useri)
-        const setaMenu = document.querySelector(".useri");
-        const caixaPerfil = document.querySelector(".user-infs");
-        if (setaMenu && caixaPerfil) {
-            setaMenu.onclick = (e) => {
+            // Menu Dropdown
+            const seta = document.querySelector(".useri");
+            const menu = document.querySelector(".user-infs");
+            seta.onclick = (e) => {
                 e.stopPropagation();
-                caixaPerfil.style.display = caixaPerfil.style.display === "flex" ? "none" : "flex";
+                menu.style.display = menu.style.display === "flex" ? "none" : "flex";
             };
+        });
+
+        // Funções do Modal
+        function confirmarAdicao(id, nome) {
+            idParaAdicionar = id;
+            document.getElementById("txt-modal").innerText = `Deseja adicionar "${nome}" ao seu carrinho?`;
+            document.getElementById("modal-confirmacao").style.display = "flex";
         }
-    });
 
-    function adicionarAoCarrinho(idProduto) {
-    fetch("/adicionar-carrinho", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ produto_id: idProduto }),
-        credentials: "include" // <--- Isso aqui é o que mantém você logado
-    })
-    .then(res => {
-        if (!res.ok) throw new Error();
-        return res.json();
-    })
-    .then(data => {
-        if (data.sucesso) {
-            alert("Adicionado com sucesso! ");
-        } else {
-            alert("Erro: Sessão perdida. Por favor, faça login novamente.");
-            window.location.href = "/login.html";
+        function fecharModal() {
+            document.getElementById("modal-confirmacao").style.display = "none";
+            idParaAdicionar = null;
         }
-    })
-    .catch(() => alert("Erro na conexão com o servidor."));
-}
 
-</script>
-
-<script  type = "module"  src = " https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js " > </script> 
-<script nomodule src = " https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js " >   </script>
+        // Lógica do botão Confirmar
+        document.getElementById("btn-confirmar-acao").onclick = () => {
+            if (idParaAdicionar) {
+                fetch("/adicionar-carrinho", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ produto_id: idParaAdicionar }),
+                    credentials: "include"
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.sucesso) {
+                        alert("Adicionado com sucesso! ☕");
+                        fecharModal();
+                    } else {
+                        window.location.href = "/login.html";
+                    }
+                })
+                .catch(err => alert("Erro ao conectar com o servidor."));
+            }
+        };
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
 </html>

@@ -91,4 +91,41 @@ exports.atualizarPerfil = (req, res) => {
         req.session.usuario.banner = novoBanner;
         res.json({ success: true, message: "Perfil atualizado!", usuario: req.session.usuario });
     });
+
+    exports.atualizarPerfil = (req, res) => {
+    // Verifica se existe usuário na sessão
+    if (!req.session.usuario || !req.session.usuario.id) {
+        return res.status(401).json({ success: false, message: "Sessão expirada." });
+    }
+
+    const { nome, endereco } = req.body;
+    const userId = req.session.usuario.id;
+
+    // Mantém as fotos antigas caso o usuário não envie novas
+    let fotoFinal = req.session.usuario.foto;
+    let bannerFinal = req.session.usuario.banner;
+
+    // Se novos arquivos foram enviados pelo Multer
+    if (req.files) {
+        if (req.files['foto']) {
+            fotoFinal = req.files['foto'][0].filename;
+        }
+        if (req.files['banner']) {
+            bannerFinal = req.files['banner'][0].filename;
+        }
+    }
+
+    // Chama o Model para salvar no MySQL
+    User.update(userId, nome, endereco, fotoFinal, bannerFinal, (err, result) => {
+        if (err) return res.status(500).json({ success: false, message: "Erro no banco." });
+
+        // Atualiza a SESSÃO para refletir as mudanças nas próximas páginas
+        req.session.usuario.nome = nome;
+        req.session.usuario.endereco = endereco;
+        req.session.usuario.foto = fotoFinal;
+        req.session.usuario.banner = bannerFinal;
+
+        res.json({ success: true, message: "Perfil atualizado com sucesso!", usuario: req.session.usuario });
+    });
+};
 };

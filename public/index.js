@@ -21,11 +21,116 @@ function resetTimer() {
   startAutoSlide();
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("/usuario-logado")
+        .then(res => res.json())
+        .then(data => {
+            // Note que usamos 'data.success' e 'data.usuario' conforme seu controller
+            if (data.success && data.usuario) {
+                const usuario = data.usuario;
+
+                // 1. Atualiza o Nome no Menu (Olá, Vinicius!)
+                const nameDisplay = document.getElementById("user-name");
+                if (nameDisplay) {
+                    nameDisplay.innerText = `Olá, ${usuario.nome}!`;
+                }
+
+                // 2. Atualiza a Foto Circular no Menu
+                if (usuario.foto) {
+                    const fotoUrl = `/uploads/${usuario.foto}`;
+                    const fotoDiv = document.getElementById("user-photo");
+                    if (fotoDiv) {
+                        fotoDiv.style.backgroundImage = `url('${fotoUrl}')`;
+                        fotoDiv.style.backgroundSize = "cover";
+                        fotoDiv.style.backgroundPosition = "center";
+                    }
+                }
+                
+                // 3. Atualiza o Título Principal (opcional, se você tiver o ID)
+                const welcomeH1 = document.getElementById("user-welcome");
+                if (welcomeH1) welcomeH1.innerText = usuario.nome;
+            }
+        })
+        .catch(err => console.error("Erro ao carregar dados do usuário:", err));
+});
+
 // Próximo / Anterior
 function plusSlides(n) {
   showSlides(slideIndex += n);
   resetTimer();
 }
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("/api/usuario-logado") // Ajuste o caminho se sua rota for diferente
+        .then(res => res.json())
+        .then(data => {
+            // Seu controller envia { success: true, usuario: {...} }
+            if (data.success && data.usuario) {
+                const usuario = data.usuario;
+
+                // 1. Atualiza o Nome no Menu
+                const nameDisplay = document.getElementById("user-name");
+                if (nameDisplay) {
+                    nameDisplay.innerText = `Olá, ${usuario.nome}!`;
+                }
+
+                // 2. Atualiza a Foto no Menu (o círculo cinza da imagem)
+                if (usuario.foto) {
+                    const fotoUrl = `/uploads/${usuario.foto}`;
+                    const fotoDiv = document.getElementById("user-photo");
+                    if (fotoDiv) {
+                        fotoDiv.style.backgroundImage = `url('${fotoUrl}')`;
+                        fotoDiv.style.backgroundSize = "cover";
+                        fotoDiv.style.backgroundPosition = "center";
+                        fotoDiv.innerHTML = ""; // Remove ícones se houver
+                    }
+                }
+                
+                // 3. Atualiza o H1 de boas-vindas se existir na página
+                const welcomeH1 = document.getElementById("user-welcome");
+                if (welcomeH1) welcomeH1.innerText = usuario.nome;
+            } else {
+                // Se não estiver logado e tentar acessar uma página -user, volta pro login
+                if (window.location.pathname.includes("-user.html")) {
+                    window.location.href = "login.html";
+                }
+            }
+        })
+        .catch(err => console.error("Erro ao carregar dados:", err));
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("/usuario-logado")
+        .then(res => res.json())
+        .then(data => {
+            // O seu controller envia { success: true, usuario: {...} }
+            if (data.success && data.usuario) {
+                const usuario = data.usuario;
+
+                // 1. Atualiza Nome e Email na página de perfil
+                document.getElementById("display-name").innerText = usuario.nome;
+                document.getElementById("user-name-nav").innerText = `Olá, ${usuario.nome.split(' ')[0]}!`;
+                document.getElementById("display-email").innerText = usuario.email;
+                document.getElementById("display-address").innerText = usuario.endereco || "Não cadastrado";
+
+                // 2. Aplica a Foto de Perfil (Círculo Central e Nav)
+                if (usuario.foto) {
+                    const fotoUrl = `/uploads/${usuario.foto}`;
+                    document.getElementById("profile-img").src = fotoUrl;
+                    const navPhoto = document.getElementById("user-photo");
+                    if (navPhoto) {
+                        navPhoto.style.backgroundImage = `url('${fotoUrl}')`;
+                        navPhoto.style.backgroundSize = "cover";
+                    }
+                }
+
+                // 3. Aplica o Banner
+                if (usuario.banner) {
+                    const bannerUrl = `/uploads/${usuario.banner}`;
+                    document.getElementById("display-banner").style.backgroundImage = `url('${bannerUrl}')`;
+                }
+            }
+        });
+});
 
 // Ir para slide específico
 function currentSlide(n) {

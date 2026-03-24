@@ -9,6 +9,7 @@
     <title>Belle Sucré Café - Carrinho</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="shortcut icon" href="./Images/logobranca.png" type="image/x-icon">
+    <script src="index.js"></script>
 </head>
 <body>
     <nav class="menu">
@@ -137,6 +138,47 @@
                 });
         }
         // ... (resto das suas funções de remover e finalizar permanecem iguais)
+    
+    let idParaAdicionar = null;
+
+    // Função para abrir o modal de confirmação
+    function confirmarAdicao(id, nome) {
+        idParaAdicionar = id;
+        document.getElementById("txt-modal").innerText = `Deseja adicionar "${nome}" ao seu carrinho?`;
+        document.getElementById("modal-confirmacao").style.display = "flex";
+    }
+
+    function fecharModal() {
+        document.getElementById("modal-confirmacao").style.display = "none";
+        idParaAdicionar = null;
+    }
+
+    // Evento do botão Confirmar do Modal
+    document.getElementById("btn-confirmar-acao").addEventListener("click", () => {
+        if (idParaAdicionar) {
+            processarAdicao(idParaAdicionar);
+            fecharModal();
+        }
+    });
+
+    function processarAdicao(idProduto) {
+        fetch("/adicionar-carrinho", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ produto_id: idProduto }),
+            credentials: "include"
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.sucesso) {
+                // Feedback visual suave em vez de alert
+                alert("Item adicionado com sucesso! ☕"); 
+            } else {
+                window.location.href = "/login.html";
+            }
+        })
+        .catch(() => console.error("Erro na conexão."));
+    }
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

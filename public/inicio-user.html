@@ -27,19 +27,17 @@
             <div class="user">
                 <div class="foto-user" id="user-photo"></div>
                 <div class="user" id="user-name">Olá, Visitante!</div>
-                
             </div>
             <div class="useri"><ion-icon name="chevron-down-outline"></ion-icon></div>
             
-            
         </div>
-        
+        <script src="index.js"></script>
         
     </nav>
     <div class="user-infs">
-                <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
-                <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
-                <a href="index.html">Sair <ion-icon name="exit-outline"></ion-icon></a>
+        <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
+        <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
+        <a href="/logout">Sair <ion-icon name="exit-outline"></ion-icon></a>
     </div>
     
     <h1 class="titulo-principal">Olá, seja bem-vindo ao site da Belle Sucré Café!</h1>
@@ -272,6 +270,45 @@ function abrirEdicao() {
    
 </script>
 <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    fetch("/usuario-logado")
+        .then(res => {
+            if (!res.ok) throw new Error("Não logado");
+            return res.json();
+        })
+        .then(usuario => {
+            if (usuario) {
+                // 1. Atualiza o Nome no Menu
+                const nameSpan = document.getElementById("user-name-text");
+                if (nameSpan) {
+                    nameSpan.innerText = usuario.nome;
+                }
+
+                // 2. Atualiza a Foto no Menu
+                if (usuario.foto) {
+                    const fotoUrl = `/uploads/${usuario.foto}`;
+                    const fotoDiv = document.getElementById("user-photo");
+                    if (fotoDiv) {
+                        fotoDiv.style.backgroundImage = `url('${fotoUrl}')`;
+                        fotoDiv.style.backgroundSize = "cover";
+                        fotoDiv.style.backgroundPosition = "center";
+                        fotoDiv.style.borderRadius = "50%"; // Garante que fique redonda
+                    }
+                }
+
+                // 3. Caso exista um H1 de boas-vindas específico na página
+                const welcomeH1 = document.getElementById("user-welcome");
+                if (welcomeH1) {
+                    welcomeH1.innerText = usuario.nome;
+                }
+            }
+        })
+        .catch(err => {
+            console.log("Acesso como visitante:", err);
+            // Se quiser forçar login, descomente a linha abaixo:
+            // window.location.href = "login.html";
+        });
+});
     document.addEventListener("DOMContentLoaded", () => {
         fetch("/usuario-logado")
             .then(res => {
