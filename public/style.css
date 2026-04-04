@@ -5,13 +5,13 @@
     font-weight: normal;
     font-style: normal;
 }
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     
 }
-
 
 body {
     font-family: 'Catchy Mager', serif;
@@ -207,7 +207,6 @@ img#logo {
     color: white;
 }
 
-/* DOTS CENTRALIZADOS DENTRO DA IMAGEM */
 .dots-container {
     position: absolute;
     bottom: 20px;
@@ -231,7 +230,6 @@ img#logo {
     border: 2px solid #4A403A;
 }
 
-/* ANIMAÇÃO */
 .fade {
     animation: fade 1.5s;
 }
@@ -333,20 +331,20 @@ footer{
     background-color: #4c2b08;
     color: #ffffff;
 }
-/* Centralização da caixa de login na página */
+
+
 .login {
     display: flex;
     margin: 80px auto;
     flex-direction: column;
-    border-radius: 20px;
+    border-radius: 30px;
     justify-content: center;
     align-items: center;
-    border: 2px solid #4A403A;
+    border: 2px solid #AB7743;
     width: 600px;
     padding: 60px;
-    background-color: #a8896f;
-    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.1);
-    
+    background-color: #D7BDA6;
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.1);  
 }
 
 .container-login {
@@ -359,8 +357,8 @@ footer{
 .login h1 {
     font-family: 'Playfair Display', serif;
     font-size: 32px;
-    margin-bottom: 40px; /* Mais espaço abaixo do título */
-    border-bottom: 2px solid #4A403A; 
+    margin-bottom: 40px; 
+    border-bottom: 2px solid #AB7743; 
     padding-bottom: 10px; 
     width: fit-content; 
     width: 300px;
@@ -386,20 +384,21 @@ footer{
     margin-bottom: 30px; 
     display: flex; 
     align-items: center;
-    background-color: #a8896f;
+    background-color: #D7BDA6;
 }
 
 .container-login input {
     width: 100%;
     height: 50px; 
     border: 1px solid #6D3914;
-    border-radius: 10px; 
+    border-radius: 25px; 
     padding: 0 45px 0 18px; 
     font-family: 'Cormorant Garamond', serif;
     font-size: 18px;
     outline: none;
     transition: 0.3s;
-    background-color: #a8896f;
+    background-color: #D7BDA6;
+    border-radius: 40px;
 }
 
 .container-login input:focus {
@@ -407,21 +406,19 @@ footer{
     box-shadow: 0 0 5px rgba(74, 64, 58, 0.2);
 }
 
-.input-box .icon, 
-#btn-revelar {
+.input-box .icon, #btn-revelar {
     position: absolute;
     right: 15px; 
     font-size: 22px;
     color: #492d1a;
     cursor: pointer;
-    display: flex; /* Garante que o ícone em si seja flex */
-    align-items: center; /* Centraliza internamente se necessário */
+    display: flex; 
+    align-items: center; 
 }
 
-/* Link Esqueceu a senha com mais margem */
 .esqueceu-senha {
     display: block;
-    margin-bottom: 35px; /* Mais espaço antes do botão */
+    margin-bottom: 35px; 
     font-size: 16px;
     text-decoration: underline;
     color: #492d1a;
@@ -429,22 +426,24 @@ footer{
 
 .btn-entrar {
     width: 100%;
-    height: 55px; 
-    background-color: #6D3914;
+    height: 50px; 
+    background-color: #AB7743;
     color: #ffffff;
-    border: 2px solid #6D3914;
-    border-radius: 30px; 
+    border: 2px solid #AB7743;
+    border-radius: 40px; 
     font-family: 'Cormorant Garamond', serif;
     font-size: 20px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: 0.4s ease;
 }
 
 .btn-entrar:hover {
-    background-color: #a8896f;
+    background-color: transparent;
     color: #ffffff;
     box-shadow: 0 5px 15px rgba(74, 64, 58, 0.2);
+    transition: 0.4s ease;
+    color: #AB7743;
 }
 .esqueceu-senha {
     display: block;
@@ -479,43 +478,46 @@ footer{
 .photo-circle {
     width: 100px;
     height: 100px;
-    border: 2px solid #492d1a; /* Borda sólida para combinar com o layout */
+    border: 2px solid #492d1a; 
     border-radius: 50%;
-    margin: 15px auto; /* Centraliza o círculo no container */
+    margin: 15px auto; 
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background-color: #f9f9f9;
+    background-color: transparent;
     overflow: hidden;
     position: relative;
 }
 
 .linha-conexo {
-            height: 2px;
-            background: #AB7743;
-            position: absolute;
-            animation: linhaPulsa 1s ease-out forwards;
-            animation-delay: 0.6s;
-        }
+    height: 2px;
+    background: #AB7743;
+    position: absolute;
+    animation: linhaPulsa 1s ease-out forwards;
+    animation-delay: 0.6s;
+}
 
-        .linha-conexo::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-top: 2px solid #AB7743;
-            border-right: 2px solid #AB7743;
-            top: -4px;
-        }
+.linha-conexo::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #AB7743;
+    border-right: 2px solid #AB7743;
+    top: -4px;
+}
 
-        .seta-esq::after { right: 0; transform: rotate(45deg); }
-        .seta-dir::after { left: 0; transform: rotate(-135deg); }
+.seta-esq::after { 
+    right: 0; transform: rotate(45deg); 
+}
+.seta-dir::after { 
+    left: 0; transform: rotate(-135deg); 
+}
 
 #camera-icon {
     font-size: 35px;
     color: #4A403A;
-    /* O flexbox do pai já garante a centralização perfeita */
 }
 
 @keyframes fadeInSurgir {
@@ -541,28 +543,32 @@ footer{
             animation-delay: 0.6s;
         }
 
-        .linha-conexo::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-top: 2px solid #AB7743;
-            border-right: 2px solid #AB7743;
-            top: -4px;
-        }
+.linha-conexo::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #AB7743;
+    border-right: 2px solid #AB7743;
+    top: -4px;
+}
 
-        .seta-esq::after { right: 0; transform: rotate(45deg); }
-        .seta-dir::after { left: 0; transform: rotate(-135deg); }
+.seta-esq::after {
+    right: 0; transform: rotate(45deg); 
+}
+.seta-dir::after { 
+    left: 0; transform: rotate(-135deg); 
+}
 
-        .logo-central-float {
-            animation: flutuarLogo 4s ease-in-out infinite;
-        }
+.logo-central-float {
+    animation: flutuarLogo 4s ease-in-out infinite;
+}
 
 .foto-user {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #ccc; /* Cor padrão caso não tenha foto */
+    background-color: #ccc; 
     border: 1px solid #4A403A;
 }
 
@@ -576,22 +582,21 @@ footer{
 }
 
 .user-infs {
-    display: none; /* Começa escondido */
+    display: none; 
     flex-direction: column;
-    width: 200px; /* Reduzi um pouco, 500px é quase a tela toda */
+    width: 200px; 
     background-color: #ffffff;
     border: solid 2px #4A403A;
     padding: 10px;
-    position: absolute; /* Para flutuar sobre o conteúdo */
-    top: 60px; /* Ajuste conforme a altura do seu menu */
-    right: 0;  /* Alinha à direita dos itens, ou use left: 0 se preferir */
-    z-index: 1000;
+    position: absolute; 
+    top: 60px; 
+    right: 0;  
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
 }
 
 .user-infs.active {
-    display: flex; /* Classe que o JS vai adicionar para mostrar */
+    display: flex; 
 }
 
 .user-infs a {
@@ -614,7 +619,6 @@ footer{
     transition: 0.3s;
 }
 
-/* Girar a setinha quando estiver aberto */
 .useri.rotate {
     transform: rotate(180deg);
 }
@@ -689,7 +693,6 @@ footer{
     margin-bottom: 10px;
 }
 
-        /* BOTÃO DE LIXEIRA */
 .btn-remover-carrinho {
     background: #ff4d4d;
     color: white;
@@ -710,7 +713,6 @@ footer{
     transform: scale(1.05);
 }
 
-    /* RESUMO DO PEDIDO */
 .resumo-carrinho {
     background: #D7BDA6;
     padding: 25px;
@@ -766,7 +768,6 @@ footer{
     cursor: pointer;
 }
 
-
 .produtos:hover {
     box-shadow: 20px 20px 20px rgba(74, 64, 58, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -790,8 +791,6 @@ footer{
     object-fit: cover; 
     transition: transform 0.5s ease;
 }
-
-
 
 .infos-produto {
     display: flex;
@@ -932,7 +931,6 @@ ion-icon {
     backdrop-filter: blur(5px);
 }
 
-/* Caixa do Modal */
 .modal-content {
     background-color: #a8896f;
     margin: 5% auto;
@@ -973,10 +971,10 @@ ion-icon {
     cursor: pointer;
     font-weight: bold;
 }
-/* Container do Banner */
+
 .banner {
     width: 100%;
-    height: 250px; /* Formato retangular */
+    height: 250px; 
     background-color: #a8896f;
     background-position: center;
     background-size: cover;
@@ -990,7 +988,7 @@ ion-icon {
     border-radius: 50%;
     border: 5px solid #a8896f;
     position: absolute;
-    bottom: -65px; /* Metade para fora do banner */
+    bottom: -65px; 
     left: 50%;
     transform: translateX(-50%);
     overflow: hidden;
@@ -1003,15 +1001,14 @@ ion-icon {
     object-fit: cover;
 }
 
-/* Ajuste do Modal para não ficar muito longo */
 .modal-content {
     max-height: 90vh;
     overflow-y: auto;
 }
-/* Ajuste do Container do Perfil */
+
 .banner {
     width: 100%;
-    height: 250px; /* Altura do retângulo do banner */
+    height: 250px; 
     background-color: #a8896f;
     background-size: cover;
     background-position: center;
@@ -1025,10 +1022,10 @@ ion-icon {
     border-radius: 50%;
     border: 5px solid white;
     position: absolute;
-    bottom: -75px; /* Metade para dentro, metade para fora */
+    bottom: -75px; 
     left: 50%;
     transform: translateX(-50%);
-    overflow: hidden; /* Garante que a foto fique redonda */
+    overflow: hidden; 
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -1038,34 +1035,33 @@ ion-icon {
 .perfil img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Não deixa a foto esticar */
+    object-fit: cover; 
 }
 
 .user-details {
-    margin-top: 85px; /* Espaço para não bater na foto que subiu */
+    margin-top: 85px; 
     text-align: center;
 }
 
-/* Modal Ajustado */
+
 .modal-content {
     max-width: 500px;
     width: 90%;
 }
-/* Foto do Menu Lateral */
+
 .foto-user {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background-size: cover;
     background-position: center;
-    background-color: #ddd; /* Cor de fundo caso não tenha foto */
+    background-color: #ddd; 
     display: inline-block;
 }
 
-/* Banner e Perfil Central */
 .banner {
     width: 100%;
-    height: 250px; /* Essencial para o banner aparecer */
+    height: 250px; 
     background-color: #f0f0f0;
     background-size: cover;
     background-position: center;
@@ -1082,7 +1078,7 @@ ion-icon {
     bottom: -75px;
     left: 50%;
     transform: translateX(-50%);
-    overflow: hidden; /* Garante o formato circular */
+    overflow: hidden;
     background: #a8896f;
 }
 
@@ -1098,10 +1094,10 @@ ion-icon {
 }
 .apresentação {
     max-width: 1800px;
-    width: 98%; /* Ocupa quase a tela toda */
+    width: 98%; 
     margin: 40px auto;
     background-color: #a8896f;
-    overflow: hidden; /* Corta a imagem da loja nas bordas arredondadas */
+    overflow: hidden; 
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -1110,13 +1106,13 @@ ion-icon {
 .conteudo-principal {
     display: flex;
     width: 100%;
-    justify-content: space-between; /* Empurra a imagem para o extremo */
+    justify-content: space-between;
     align-items: stretch;
 }
 
 .coluna-texto {
-    flex: 1; /* Ocupa metade do espaço */
-    padding: 60px; /* Padding apenas no texto */
+    flex: 1; 
+    padding: 60px; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1137,7 +1133,7 @@ ion-icon {
     line-height: 1.8;
     margin-bottom: 30px;
     color: #4C2B08;
-    max-width: 800px; /* Evita que o texto fique largo demais para ler */
+    max-width: 800px; 
 }
 
 .sub-titulo-secao {
@@ -1148,27 +1144,31 @@ ion-icon {
     align-self: flex-start;
 }
 
-/* Vitrine de Slides */
 .slideshow-container {
     position: relative;
     max-width: 450px;
     margin-top: 20px;
-    padding: 0 60px; /* Garante que as setas fiquem "dentro" do respiro */
+    padding: 0 60px; 
 }
 
-.meu-slide { display: none; }
-.meu-slide.ativo { display: block; animation: fade 0.5s; }
+.meu-slide { 
+    display: none; 
+}
+.meu-slide.ativo { 
+    display: block; animation: fade 0.5s; 
+}
 
-@keyframes fade { from {opacity: 0;} to {opacity: 1;} }
+@keyframes fade { 
+    from {opacity: 0;} to {opacity: 1;} 
+}
 
-/* Setas - Garantindo que fiquem dentro da .apresentacao */
-/* Setas - Centralização do ícone e ajuste de posição */
+
 .seta {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #4C2B08; /* Espresso */
-    color: #D7BDA6; /* Vanilla */
+    background-color: #4C2B08; 
+    color: #D7BDA6; 
     border: none;
     width: 45px;
     height: 45px;
@@ -1184,17 +1184,15 @@ ion-icon {
     width: 100%;
     max-width: 50px;  
     font-size: 100px;   
-    /* --------------------------------------- */
-
     transition: background-color 0.3s, transform 0.2s;
 }
 
 .seta:hover {
-    background-color: #AB7743; /* Caramel */
-    transform: translateY(-50%) scale(1.1); /* Efeito de destaque */
+    background-color: #AB7743; 
+    transform: translateY(-50%) scale(1.1); 
 }
 
-/* Ajuste fino para as setas não ficarem coladas no card */
+
 .anterior { 
     left: -10px; 
 }
@@ -1202,19 +1200,22 @@ ion-icon {
 .proximo { 
     right: -10px; 
 }
-.anterior { left: 0; }
-.proximo { right: 0; }
+.anterior { 
+    left: 0; 
+}
+.proximo { 
+    right: 0; 
+}
 
-/* Imagem da Loja - Colada na Direita */
 .coluna-imagem-loja {
-    flex: 1; /* Ocupa a outra metade */
+    flex: 1; 
     min-height: 100%;
 }
 
 .coluna-imagem-loja img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Faz a imagem preencher toda a lateral */
+    object-fit: cover; 
     display: block;
 }
 
@@ -1238,7 +1239,6 @@ ion-icon {
     margin-bottom: 20px;
 }
 
-/* SETAS DE NAVEGAÇÃO */
 .seta {
     cursor: pointer;
     position: absolute;
@@ -1260,28 +1260,29 @@ ion-icon {
     color: #D7BDA6;
 }
 
-.anterior { left: -70px; } /* Posicionadas fora do card */
-.proximo { right: -70px; }
+.anterior { 
+    left: -70px; 
+} 
+.proximo { 
+    right: -70px; 
+}
 
-/* Efeito do cursor piscando */
 .digitando {
-    border-right: 3px solid #4C2B08; /* A linha que pisca */
-    padding-right: 5px;             /* Espaço entre a última letra e a barra */
+    border-right: 3px solid #4C2B08; 
+    padding-right: 5px;             
     white-space: nowrap;
     overflow: hidden;
     display: inline-block;
-    vertical-align: middle;         /* Alinha a barra com o texto */
+    vertical-align: middle;         
     animation: cursor-pisca 0.7s step-end infinite;
 }
 
-/* Removemos qualquer borda lateral antiga */
 .digitando {
     border-right: none !important;
 }
 
-/* Criamos o cursor único e infinito */
 .typewriter::after {
-    content: '|'; /* O caractere único */
+    content: '|'; 
     margin-left: 2px;
     color: #4C2B08;
     animation: cursor-pisca 0.8s infinite;
@@ -1295,14 +1296,13 @@ ion-icon {
     50% { opacity: 0; }
 }
 
-/* Botão de Adicionar - Premium */
 .btn-adicionar {
     background-color: #4C2B08;
     color: #ffffff;
     border: none;
     padding: 15px;
     width: 100%;
-    border-radius: 50px; /* Estilo pílula */
+    border-radius: 50px; 
     font-size: 1.1rem;
     cursor: pointer;
     transition: 0.3s;
@@ -1313,7 +1313,6 @@ ion-icon {
     transform: scale(1.02);
 }
 
-/* Imagem da Loja */
 .coluna-imagem-loja {
     flex: 1.5;
 }
@@ -1339,19 +1338,31 @@ ion-icon {
     align-items: center;    
     justify-content: center; 
     text-align: center;
-    gap: 10px; /* Controla o espaço entre o nome e o código */
+    gap: 10px; 
 }
 
 .cor h1, .cor p {
     margin: 0;
     padding: 0;
 }
-.cor1 { background-color: #D7BDA6; }
-.cor2 { background-color: #AB7743; }
-.cor3 { background-color: #B7957F; }
-.cor4 { background-color: #6D3914; }
-.cor5 { background-color: #84593D; }
-.cor6 { background-color: #4C2B08; }
+.cor1 { 
+    background-color: #D7BDA6; 
+}
+.cor2 { 
+    background-color: #AB7743; 
+}
+.cor3 { 
+    background-color: #B7957F; 
+}
+.cor4 { 
+    background-color: #6D3914; 
+}
+.cor5 { 
+    background-color: #84593D; 
+}
+.cor6 { 
+    background-color: #4C2B08; 
+}
 
 @keyframes fadeIn {
     from {
@@ -1371,6 +1382,7 @@ ion-icon {
     padding: 40px;
     flex-wrap: wrap;
 }
+
 .valor {
     width: 350px;
     height: 450px;
@@ -1399,7 +1411,6 @@ ion-icon {
     animation: fadeIn 1s ease-in-out;
     text-align: start;
 }
-
 
 .visao {
     width: 350px;
@@ -1455,11 +1466,11 @@ ion-icon {
 
 @media (max-width: 600px) {
     .typewriter {
-        white-space: normal; /* Permite quebra de linha em telas pequenas */
-        border-right: none;   /* Remove o cursor se o texto quebrar */
+        white-space: normal; 
+        border-right: none;   
     }
 }
-/* --- Novas Animações --- */
+
 @keyframes slideUpFade {
     from {
         opacity: 0;
@@ -1471,16 +1482,19 @@ ion-icon {
     }
 }
 
-/* Aplicando animação aos textos */
 .titulo-principal, .sub-titulo-secao, .paragrafo-apresentacao, .link-historia {
     animation: slideUpFade 0.8s ease forwards;
 }
 
-/* Delays para as letras aparecerem em ordem */
-.sub-titulo-secao { animation-delay: 0.2s; opacity: 0; }
-.paragrafo-apresentacao { animation-delay: 0.4s; opacity: 0; }
+.sub-titulo-secao { 
+    animation-delay: 0.2s; 
+    opacity: 0; 
+}
+.paragrafo-apresentacao { 
+    animation-delay: 0.4s; 
+    opacity: 0; 
+}
 
-/* --- Ajuste dos Slides --- */
 .meu-slide {
     display: none;
     width: 100%;
@@ -1496,7 +1510,6 @@ ion-icon {
     to { opacity: 1; transform: scale(1); }
 }
 
-/* --- Correção das Setas --- */
 .seta {
     position: absolute;
     top: 50%;
@@ -1601,7 +1614,7 @@ ion-icon {
     }
 
     .itens {
-        flex-wrap: wrap; /* Permite que os itens quebrem linha */
+        flex-wrap: wrap; 
         justify-content: center;
         margin-top: 15px;
         gap: 10px;
@@ -1648,13 +1661,13 @@ ion-icon {
         width: 100%;
     }
 
-    footer {
-        padding: 40px 20px;
-        margin-top: 100px; 
-        position: sticky;
-        top: 100vh;
-        margin-top: 50px;
-    }
+footer {
+    padding: 40px 20px;
+    margin-top: 100px; 
+    position: sticky;
+    top: 100vh;
+    margin-top: 50px;
+}
 
 .footer-container {
     display: flex;
@@ -1677,8 +1690,6 @@ ion-icon {
     text-align: left; 
 }
 
-
-/* Ajustes para Celulares Pequenos (Telas menores que 480px) */
 @media (max-width: 480px) {
     .mySlides img {
         height: 200px;
@@ -1689,7 +1700,6 @@ ion-icon {
         height: 50px;
     }
 
-    /* Ajuste da lixeira e botões no carrinho */
     .btn-remover-carrinho {
         width: 100%;
         padding: 12px;
