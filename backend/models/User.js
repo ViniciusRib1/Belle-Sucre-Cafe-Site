@@ -32,7 +32,6 @@ exports.atualizarPerfil = (req, res) => {
     User.updateProfile(userId, novosDados, (err, result) => {
         if (err) return res.status(500).json({ success: false, message: "Erro ao salvar." });
 
-        // IMPORTANTE: Atualiza a sessão para que o "Olá" mude em todas as páginas
         req.session.usuario.nome = nome;
         req.session.usuario.endereco = endereco;
         req.session.usuario.foto = fotoAtual;

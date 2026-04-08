@@ -11,14 +11,16 @@ exports.registrar = (req, res) => {
     db.query(query, [nome, email, senha, foto], (err, result) => {
         if (err) {
             console.error("Erro ao registrar:", err);
-            // O 'return' impede que o código continue e tente enviar outra resposta abaixo
             return res.status(500).json({ error: "Erro ao registrar usuário" });
         }
 
-        // Salva na sessão para o front-end buscar depois
-        req.session.usuario = { nome, email, foto };
+        req.session.usuario = {
+            id: result.insertId,
+            nome,
+            email,
+            foto
+        };
 
-        // REDIRECIONAMENTO CORRETO
         return res.redirect('/inicio-user.html');
     });
 };
@@ -36,14 +38,13 @@ exports.login = (req, res) => {
         if (results.length > 0) {
             const usuario = results[0];
             
-            // Salva os dados na sessão
             req.session.usuario = {
+                id: usuario.id,
                 nome: usuario.nome,
                 email: usuario.email,
                 foto: usuario.foto
             };
 
-            // REDIRECIONAMENTO APÓS SUCESSO
             return res.redirect('/inicio-user.html');
         } else {
             // Caso falhe, você pode redirecionar de volta com um erro ou mandar um status
@@ -53,10 +54,9 @@ exports.login = (req, res) => {
 };
 exports.getUsuarioLogado = (req, res) => {
     if (req.session.usuario) {
-        res.json({ success: true, usuario: req.session.usuario });
-    } else {
-        res.json({ success: false, message: "Nenhum usuário logado." });
+        return res.json(req.session.usuario);
     }
+    return res.status(401).json({ success: false, message: "Nenhum usuário logado." });
 };
 
 exports.atualizarPerfil = (req, res) => {

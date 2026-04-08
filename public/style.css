@@ -6,6 +6,10 @@
     font-style: normal;
 }
 
+html {
+    min-height: 100%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -18,6 +22,9 @@ body {
     color: #4c2b08;
     min-height: 100vh;
     background-color: #a8896f;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
 }
 body a {
     color: #4c2b08;
@@ -31,31 +38,29 @@ nav {
     padding: 0 60px;
     width: 100%;
     height: 80px;
-    background-color: #a8896f;
+    background-color: #4C2B08;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    color: #D7BDA6;
 }
 
 .itens {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
+
 
 .itens a {
     font-size: 22px;
     text-decoration: none;
-    color: #4c2b08;
+    color: #D7BDA6;
     position: relative;
-    padding: 10px 10px; 
+    padding: 14px 16px;
     transition: color 0.3s ease;
-}
-
-.itens a {
-    font-size: 22px;
-    text-decoration: none;
-    color: #4c2b08;
-    position: relative;
-    padding: 10px 10px;
-    transition: color 0.3s ease;
+    
 }
 
 .itens a::after {
@@ -65,7 +70,7 @@ nav {
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: #4c2b08;
+    background-color: #D7BDA6;
     transition: all 0.2s ease-in-out;
     transform: translateX(-50%);
 }
@@ -81,7 +86,7 @@ nav {
     left: 50%;
     width: 100%; 
     height: 2px;
-    background-color: #4c2b08;
+    background-color: #D7BDA6;
     transform: translateX(-50%);
 }
 
@@ -193,6 +198,9 @@ img#logo {
     transition: 0.3s ease;
     background-color: rgba(0, 0, 0, 0.8);
 }
+.conteudo {
+    margin-top: 100px;
+}
 
 .next {
     right: 20px;
@@ -240,12 +248,12 @@ footer{
     color: #ffffff;
     padding: 60px 20px 20px;
     font-family: 'Poppins', sans-serif;
-    margin-top: 50px;
+    margin-top: 0;
     box-sizing: border-box;
     width: 100%;
-    position: sticky;
-    top: 100vh;
-    margin-top: 50px;
+    position: static;
+    top: auto;
+    margin-top: auto;
 }
 
         .footer-container {
@@ -323,6 +331,7 @@ footer{
 }
 .cardapio {
     text-align: center;
+    flex: 1;
 }
 .jornal {
     text-align: center;
@@ -1663,10 +1672,9 @@ ion-icon {
 
 footer {
     padding: 40px 20px;
-    margin-top: 100px; 
-    position: sticky;
-    top: 100vh;
-    margin-top: 50px;
+    margin-top: 0;
+    position: static;
+    top: auto;
 }
 
 .footer-container {

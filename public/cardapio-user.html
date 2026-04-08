@@ -48,6 +48,7 @@
     </style>
 </head>
 <body>
+    
     <nav class="menu">
         <a href="inicio-user.html">
             <div class="logo"><img src="./Images/logo.png" alt="" id="logo"></div>
@@ -164,16 +165,28 @@
         document.addEventListener("DOMContentLoaded", () => {
             // Carregar Usuário
             fetch("/usuario-logado", { credentials: "include" })
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) throw new Error("Não autorizado");
+                    return res.json();
+                })
                 .then(usuario => {
                     if (usuario && usuario.nome) {
                         document.getElementById("user-name").innerText = `Olá, ${usuario.nome}!`;
+                        const fotoDiv = document.getElementById("user-photo");
                         if (usuario.foto) {
-                            const fotoDiv = document.getElementById("user-photo");
                             fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
                             fotoDiv.style.backgroundSize = "cover";
+                            fotoDiv.style.backgroundPosition = "center";
+                            fotoDiv.style.backgroundRepeat = "no-repeat";
+                        } else {
+                            fotoDiv.style.backgroundImage = "none";
                         }
+                    } else {
+                        window.location.href = "/login.html";
                     }
+                })
+                .catch(() => {
+                    window.location.href = "/login.html";
                 });
 
             // Menu Dropdown

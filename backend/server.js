@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 const userRoutes = require('./routes/userRoutes');
 
 app.use('/api', userRoutes);
+app.use('/', userRoutes);
 
 app.get('/test', (req, res) => res.send("Servidor Belle Sucré está ativo!"));
 
