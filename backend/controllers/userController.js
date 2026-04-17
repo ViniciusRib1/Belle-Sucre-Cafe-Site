@@ -1,131 +1,67 @@
-const db = require("../db");
-const User = require("../models/User");
-const fs = require('fs');
-const path = require('path');
+const User = require('../models/User');
 
-exports.registrar = (req, res) => {
-    const { nome, email, senha } = req.body;
-    const foto = req.file ? req.file.filename : null;
-
-    const query = 'INSERT INTO usuarios (nome, email, senha, foto) VALUES (?, ?, ?, ?)';
-    db.query(query, [nome, email, senha, foto], (err, result) => {
-        if (err) {
-            console.error("Erro ao registrar:", err);
-            return res.status(500).json({ error: "Erro ao registrar usuário" });
+exports.login = (req, res) => {
+    const { email, senha } = req.body;
+    User.findByEmail(email, (err, results) => {
+        if (err) return res.status(500).send("Erro no servidor");
+        
+        if (results.length > 0 && results[0].senha === senha) {
+            req.session.userId = results[0].id;
+            return res.redirect('/inicio-user.html');
+        } else {
+            return res.redirect('/login.html?erro=1');
         }
-
-        req.session.usuario = {
-            id: result.insertId,
-            nome,
-            email,
-            foto
-        };
-
-        return res.redirect('/inicio-user.html');
     });
 };
 
-// Exemplo de Login
+// backend/controllers/userController.js
 exports.login = (req, res) => {
     const { email, senha } = req.body;
 
-    const query = 'SELECT * FROM usuarios WHERE email = ? AND senha = ?';
-    db.query(query, [email, senha], (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: "Erro no servidor" });
-        }
+    User.findByEmail(email, (err, results) => {
+        if (err) return res.status(500).send("Erro no servidor");
 
-        if (results.length > 0) {
-            const usuario = results[0];
-            
-            req.session.usuario = {
-                id: usuario.id,
-                nome: usuario.nome,
-                email: usuario.email,
-                foto: usuario.foto
-            };
+        if (results.length > 0 && results[0].senha === senha) {
+            // 1. Define os dados na sessão
+            req.session.userId = results[0].id;
 
-            return res.redirect('/inicio-user.html');
+            // 2. SALVA MANUALMENTE E SÓ REDIRECIONA NO CALLBACK
+            req.session.save((err) => {
+                if (err) {
+                    console.error("Erro ao salvar sessão:", err);
+                    return res.redirect('/login.html?erro=2');
+                }
+                return res.redirect('/inicio-user.html');
+            });
         } else {
-            // Caso falhe, você pode redirecionar de volta com um erro ou mandar um status
-            return res.status(401).send('<script>alert("Login inválido"); window.location.href="/login.html";</script>');
+            return res.redirect('/login.html?erro=1');
         }
     });
 };
+
+exports.registrar = (req, res) => {
+    const { nome, email, senha } = req.body;
+    const foto = req.file ? req.file.filename : 'default.png';
+
+    User.create({ nome, email, senha, foto }, (err, result) => {
+        if (err) return res.status(500).send("Erro ao registrar");
+
+        // Criar a sessão
+        req.session.userId = result.insertId;
+
+        // FORÇAR O SALVAMENTO ANTES DO REDIRECT
+        req.session.save((err) => {
+            if (err) return res.status(500).send("Erro ao salvar sessão");
+            res.redirect('/inicio-user.html');
+        });
+    });
+};
+
 exports.getUsuarioLogado = (req, res) => {
-    if (req.session.usuario) {
-        return res.json(req.session.usuario);
-    }
-    return res.status(401).json({ success: false, message: "Nenhum usuário logado." });
-};
+    if (!req.session.userId) return res.status(401).json({ logado: false });
 
-exports.atualizarPerfil = (req, res) => {
-    if (!req.session.usuario) return res.status(401).json({ success: false });
-    const { nome, endereco } = req.body;
-    const id = req.session.usuario.id;
-
-    const deletarArquivo = (nomeArquivo) => {
-        if (nomeArquivo && !nomeArquivo.includes('default-')) {
-            const caminho = path.join(__dirname, "../../public/uploads/", nomeArquivo);
-            if (fs.existsSync(caminho)) fs.unlinkSync(caminho);
-        }
-    };
-
-    let novaFoto = req.session.usuario.foto;
-    let novoBanner = req.session.usuario.banner;
-
-    if (req.files && req.files['foto']) {
-        deletarArquivo(req.session.usuario.foto);
-        novaFoto = req.files['foto'][0].filename;
-    }
-    if (req.files && req.files['banner']) {
-        deletarArquivo(req.session.usuario.banner);
-        novoBanner = req.files['banner'][0].filename;
-    }
-
-    User.update(id, nome, endereco, novaFoto, novoBanner, (err) => {
-        if (err) return res.status(500).json({ success: false, message: "Erro ao atualizar." });
-        req.session.usuario.nome = nome;
-        req.session.usuario.endereco = endereco;
-        req.session.usuario.foto = novaFoto;
-        req.session.usuario.banner = novoBanner;
-        res.json({ success: true, message: "Perfil atualizado!", usuario: req.session.usuario });
+    User.findById(req.session.userId, (err, results) => {
+        if (err || results.length === 0) return res.status(404).json({ logado: false });
+        res.json(results[0]);
     });
-
-    exports.atualizarPerfil = (req, res) => {
-    // Verifica se existe usuário na sessão
-    if (!req.session.usuario || !req.session.usuario.id) {
-        return res.status(401).json({ success: false, message: "Sessão expirada." });
-    }
-
-    const { nome, endereco } = req.body;
-    const userId = req.session.usuario.id;
-
-    // Mantém as fotos antigas caso o usuário não envie novas
-    let fotoFinal = req.session.usuario.foto;
-    let bannerFinal = req.session.usuario.banner;
-
-    // Se novos arquivos foram enviados pelo Multer
-    if (req.files) {
-        if (req.files['foto']) {
-            fotoFinal = req.files['foto'][0].filename;
-        }
-        if (req.files['banner']) {
-            bannerFinal = req.files['banner'][0].filename;
-        }
-    }
-
-    // Chama o Model para salvar no MySQL
-    User.update(userId, nome, endereco, fotoFinal, bannerFinal, (err, result) => {
-        if (err) return res.status(500).json({ success: false, message: "Erro no banco." });
-
-        // Atualiza a SESSÃO para refletir as mudanças nas próximas páginas
-        req.session.usuario.nome = nome;
-        req.session.usuario.endereco = endereco;
-        req.session.usuario.foto = fotoFinal;
-        req.session.usuario.banner = bannerFinal;
-
-        res.json({ success: true, message: "Perfil atualizado com sucesso!", usuario: req.session.usuario });
-    });
-};
 };

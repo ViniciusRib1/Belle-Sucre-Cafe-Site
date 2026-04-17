@@ -38,12 +38,13 @@ nav {
     padding: 0 60px;
     width: 100%;
     height: 80px;
-    background-color: #4C2B08;
+    background-color: #a8896f;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    color: #D7BDA6;
+    color: #4C2B08;
+    box-shadow: black 0.5px 0.5px 30px 1px;
 }
 
 .itens {
@@ -56,7 +57,7 @@ nav {
 .itens a {
     font-size: 22px;
     text-decoration: none;
-    color: #D7BDA6;
+    color: #4C2B08;
     position: relative;
     padding: 14px 16px;
     transition: color 0.3s ease;
@@ -70,7 +71,7 @@ nav {
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: #D7BDA6;
+    background-color: #4C2B08;
     transition: all 0.2s ease-in-out;
     transform: translateX(-50%);
 }
@@ -86,7 +87,7 @@ nav {
     left: 50%;
     width: 100%; 
     height: 2px;
-    background-color: #D7BDA6;
+    background-color: #4C2B08;
     transform: translateX(-50%);
 }
 
@@ -595,7 +596,7 @@ footer{
     flex-direction: column;
     width: 200px; 
     background-color: #ffffff;
-    border: solid 2px #4A403A;
+    border: solid 2px #AB7743;
     padding: 10px;
     position: absolute; 
     top: 60px; 
@@ -610,7 +611,7 @@ footer{
 
 .user-infs a {
     text-decoration: none;
-    color: #4A403A;
+    color: #4C2B08;
     padding: 8px;
     display: flex;
     justify-content: space-between;
@@ -619,7 +620,7 @@ footer{
 }
 
 .user-infs a:hover {
-    background-color: #f4f4f4;
+    background-color: #AB7743;
     border-radius: 5px;
 }
 
@@ -1234,8 +1235,8 @@ ion-icon {
 }
 
 .card-produto {
-    background: #fff;
-    border: 2px solid #D7BDA6;
+    background: #D7BDA6;
+    border: 2px solid #AB7743;
     border-radius: 25px;
     padding: 25px;
     text-align: center;

@@ -51,7 +51,7 @@
     
     <nav class="menu">
         <a href="inicio-user.html">
-            <div class="logo"><img src="./Images/logo.png" alt="" id="logo"></div>
+            <div class="logo"><img src="./Images/logo.png" alt="Logo" id="logo"></div>
         </a>
         <div class="itens">
             <a href="historia-user.html"><ion-icon name="book-outline"></ion-icon> História</a>
@@ -68,7 +68,6 @@
 
     <div class="user-infs">
         <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
-        <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
         <a href="index.html">Sair <ion-icon name="exit-outline"></ion-icon></a>
     </div>
 
@@ -141,7 +140,7 @@
 
     <footer>
         <div class="footer-container">
-            <div class="logo-footer"><img src="Images/logobranca.png" alt=""></div>
+            <div class="logo-footer"><img src="Images/logobranca.png" alt="Logo Branca"></div>
             <div class="footer-col">
                 <h3>Belle Sucré Café</h3>
                 <p>Experiência única em cafés e doces artesanais brasileiros com o toque clássico francês.</p>
@@ -151,6 +150,12 @@
                 <a href="cardapio-user.html">Cardápio</a>
                 <a href="historia-user.html">Sobre nós</a>
                 <a href="jornal-user.html">Jornal</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <a href="#">Instagram</a>
+                <a href="#">WhatsApp</a>
+                <a href="#">Email</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -177,25 +182,30 @@
                             fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
                             fotoDiv.style.backgroundSize = "cover";
                             fotoDiv.style.backgroundPosition = "center";
-                            fotoDiv.style.backgroundRepeat = "no-repeat";
-                        } else {
-                            fotoDiv.style.backgroundImage = "none";
                         }
                     } else {
-                        window.location.href = "/login.html";
+                        window.location.href = "login.html";
                     }
                 })
-                .catch(() => {
-                    window.location.href = "/login.html";
+                .catch(err => {
+                    console.warn("Usuário não logado ou erro no servidor:", err);
+                    // Opcional: window.location.href = "login.html";
                 });
 
             // Menu Dropdown
             const seta = document.querySelector(".useri");
             const menu = document.querySelector(".user-infs");
-            seta.onclick = (e) => {
-                e.stopPropagation();
-                menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-            };
+            if(seta && menu) {
+                seta.onclick = (e) => {
+                    e.stopPropagation();
+                    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+                };
+            }
+            
+            // Fechar menu ao clicar fora
+            document.addEventListener("click", () => {
+                if(menu) menu.style.display = "none";
+            });
         });
 
         // Funções do Modal
@@ -225,10 +235,14 @@
                         alert("Adicionado com sucesso! ☕");
                         fecharModal();
                     } else {
-                        window.location.href = "/login.html";
+                        alert("Sessão expirada. Por favor, faça login novamente.");
+                        window.location.href = "login.html";
                     }
                 })
-                .catch(err => alert("Erro ao conectar com o servidor."));
+                .catch(err => {
+                    console.error(err);
+                    alert("Erro ao conectar com o servidor.");
+                });
             }
         };
     </script>

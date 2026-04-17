@@ -137,6 +137,7 @@
         
 </body>
 <script>
+    
     // 1. Efeito de Revelação ao Rolar a Tela
     const observarScroll = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -268,7 +269,37 @@ function abrirEdicao() {
     });
 
 
-   
+   document.addEventListener("DOMContentLoaded", () => {
+    // Tenta buscar o usuário. Verifique se a rota é /api/usuario-logado ou apenas /usuario-logado
+    fetch("/api/usuario-logado") 
+        .then(res => {
+            if (!res.ok) throw new Error("Sessão não encontrada");
+            return res.json();
+        })
+        .then(usuario => {
+            console.log("Usuário carregado com sucesso:", usuario.nome);
+            
+            // Atualiza o nome no menu
+            const userText = document.getElementById("user-name");
+            if (userText) userText.innerText = `Olá, ${usuario.nome}!`;
+
+            // Atualiza a foto
+            if (usuario.foto) {
+                const fotoDiv = document.getElementById("user-photo");
+                if (fotoDiv) {
+                    fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
+                    fotoDiv.style.backgroundSize = "cover";
+                }
+            }
+        })
+        .catch(err => {
+            console.error("Erro de autenticação:", err);
+            // SÓ REDIRECIONE SE TIVER CERTEZA QUE FALHOU
+            // Para testar, comente a linha abaixo. Se o nome ficar "Visitante" e não sair da página, 
+            // você saberá que o fetch está falhando.
+            window.location.href = "login.html"; 
+        });
+});
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {

@@ -385,3 +385,53 @@ function typeWriter(elemento) {
         const titulos = document.querySelectorAll('.typewriter');
         titulos.forEach(titulo => typeWriter(titulo));
     });
+
+document.addEventListener("DOMContentLoaded", () => {
+        // Busca os dados na rota correta da API
+        fetch("/api/usuario-logado") 
+            .then(res => {
+                if (!res.ok) {
+                    // Se o servidor retornar erro (401), manda de volta pro login
+                    console.log("Sessão inválida, redirecionando...");
+                    window.location.href = "login.html";
+                    return;
+                }
+                return res.json();
+            })
+            .then(usuario => {
+                if (usuario && usuario.nome) {
+                    // 1. Atualiza o texto "Olá, Visitante"
+                    const nameDiv = document.getElementById("user-name");
+                    if (nameDiv) nameDiv.innerText = `Olá, ${usuario.nome}!`;
+
+                    // 2. Atualiza o H1 principal se você der a ele o id="user-welcome"
+                    // No seu HTML mude: <h1 class="titulo-principal"> para <h1 id="user-welcome" class="titulo-principal">
+                    const welcomeH1 = document.getElementById("user-welcome");
+                    if (welcomeH1) welcomeH1.innerText = `Olá, ${usuario.nome}! Seja bem-vindo ao Belle Sucré Café!`;
+
+                    // 3. Atualiza a Foto do Menu
+                    if (usuario.foto) {
+                        const fotoUrl = `/uploads/${usuario.foto}`;
+                        const fotoDiv = document.getElementById("user-photo");
+                        if (fotoDiv) {
+                            fotoDiv.style.backgroundImage = `url('${fotoUrl}')`;
+                            fotoDiv.style.backgroundSize = "cover";
+                            fotoDiv.style.backgroundPosition = "center";
+                        }
+                    }
+                }
+            })
+            .catch(err => {
+                console.error("Erro na verificação:", err);
+                window.location.href = "login.html";
+            });
+    });
+
+    // Lógica do Dropdown (Seta para baixo)
+    const userIcon = document.querySelector('.useri');
+    const userInfs = document.querySelector('.user-infs');
+    if(userIcon) {
+        userIcon.addEventListener('click', () => {
+            userInfs.classList.toggle('active');
+        });
+    }
