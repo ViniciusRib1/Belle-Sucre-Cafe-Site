@@ -335,6 +335,7 @@ function abrirEdicao() {
                 }
             }
         })
+        
         .catch(err => {
             console.log("Acesso como visitante:", err);
             // Se quiser forçar login, descomente a linha abaixo:
@@ -385,6 +386,27 @@ function abrirEdicao() {
             userInfs.classList.toggle('active');
         });
     }
+</script>
+<script>
+    fetch('/api/usuario-logado')
+        .then(res => {
+            if (!res.ok) {
+                // Se o status não for 200 (ex: 401 ou 404), manda para o login
+                throw new Error("Não logado");
+            }
+            return res.json();
+        })
+        .then(data => {
+            console.log("Usuário autenticado:", data);
+            // Opcional: Preencher dados na tela
+            if(data.nome) {
+                const nomeExibicao = document.getElementById('nome-usuario');
+                if(nomeExibicao) nomeExibicao.innerText = data.nome;
+            }
+        })
+        .catch(err => {
+            console.error("Erro de autenticação:", err);
+        });
 </script>
 <script  type = "module"  src = " https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js " > </script> 
 <script nomodule src = " https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js " >   </script>

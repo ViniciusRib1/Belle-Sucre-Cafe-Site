@@ -165,6 +165,53 @@
     </footer>
 
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    // Carregar Usuário Corretamente
+    fetch("/api/usuario-logado")
+        .then(res => res.json())
+        .then(data => {
+            // Ajuste aqui: data.usuario em vez de apenas usuario
+            if (data.success && data.usuario) {
+                const usuario = data.usuario;
+                document.getElementById("user-name").innerText = `Olá, ${usuario.nome}!`;
+                
+                if (usuario.foto) {
+                    const fotoDiv = document.getElementById("user-photo");
+                    fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
+                    fotoDiv.style.backgroundSize = "cover";
+                    fotoDiv.style.backgroundPosition = "center";
+                }
+            } else {
+                window.location.href = "login.html";
+            }
+        })
+        .catch(err => console.error("Erro ao carregar usuário:", err));
+
+    // ... lógica do menu dropdown ...
+});
+
+// Lógica do botão Confirmar para levar ao carrinho
+document.getElementById("btn-confirmar-acao").onclick = () => {
+    if (idParaAdicionar) {
+        fetch("/api/adicionar-carrinho", { // Verifique se sua rota tem o prefixo /api
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ produto_id: idParaAdicionar }),
+            credentials: "include"
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.sucesso || data.success) {
+                // REDIRECIONAR APÓS ADICIONAR
+                window.location.href = "carrinho-user.html";
+            } else {
+                alert("Erro ao adicionar. Faça login novamente.");
+                window.location.href = "login.html";
+            }
+        })
+        .catch(err => console.error("Erro:", err));
+    }
+};
         let idParaAdicionar = null;
 
         document.addEventListener("DOMContentLoaded", () => {

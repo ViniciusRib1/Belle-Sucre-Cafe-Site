@@ -2,40 +2,17 @@ const User = require('../models/User');
 
 exports.login = (req, res) => {
     const { email, senha } = req.body;
-    User.findByEmail(email, (err, results) => {
-        if (err) return res.status(500).send("Erro no servidor");
-        
-        if (results.length > 0 && results[0].senha === senha) {
-            req.session.userId = results[0].id;
-            return res.redirect('/inicio-user.html');
-        } else {
-            return res.redirect('/login.html?erro=1');
-        }
-    });
-};
-
-// backend/controllers/userController.js
-exports.login = (req, res) => {
-    const { email, senha } = req.body;
 
     User.findByEmail(email, (err, results) => {
-        if (err) return res.status(500).send("Erro no servidor");
+        if (err) return res.status(500).send("Erro interno");
 
         if (results.length > 0 && results[0].senha === senha) {
-            // 1. Define os dados na sessão
             req.session.userId = results[0].id;
-
-            // 2. SALVA MANUALMENTE E SÓ REDIRECIONA NO CALLBACK
-            req.session.save((err) => {
-                if (err) {
-                    console.error("Erro ao salvar sessão:", err);
-                    return res.redirect('/login.html?erro=2');
-                }
-                return res.redirect('/inicio-user.html');
+            return req.session.save(() => {
+                res.redirect('/inicio-user.html');
             });
-        } else {
-            return res.redirect('/login.html?erro=1');
-        }
+        } 
+        return res.redirect('/login.html?erro=1'); 
     });
 };
 
@@ -46,11 +23,8 @@ exports.registrar = (req, res) => {
     User.create({ nome, email, senha, foto }, (err, result) => {
         if (err) return res.status(500).send("Erro ao registrar");
 
-        // Criar a sessão
         req.session.userId = result.insertId;
-
-        // FORÇAR O SALVAMENTO ANTES DO REDIRECT
-        req.session.save((err) => {
+        return req.session.save((err) => {
             if (err) return res.status(500).send("Erro ao salvar sessão");
             res.redirect('/inicio-user.html');
         });
@@ -58,10 +32,22 @@ exports.registrar = (req, res) => {
 };
 
 exports.getUsuarioLogado = (req, res) => {
-    if (!req.session.userId) return res.status(401).json({ logado: false });
+    if (!req.session.userId) {
+        return res.json({ success: false });
+    }
 
     User.findById(req.session.userId, (err, results) => {
-        if (err || results.length === 0) return res.status(404).json({ logado: false });
-        res.json(results[0]);
+        if (err || results.length === 0) {
+            return res.json({ success: false });
+        }
+        // Retorna a estrutura que o frontend agora espera
+        res.json({ success: true, usuario: results[0] });
+    });
+};
+
+exports.logout = (req, res) => {
+    req.session.destroy(() => {
+        res.clearCookie('connect.sid'); // Limpa o cookie da sessão
+        res.redirect('/login.html');
     });
 };

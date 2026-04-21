@@ -8,28 +8,21 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// server.js
 app.use(session({
     secret: 'belle-sucre-secret',
-    resave: false,             // Evita regravar sessões não modificadas
-    saveUninitialized: false,  // Não cria sessão para quem não logou
+    resave: false,
+    saveUninitialized: false, // Importante: deixe false
     cookie: { 
-        secure: false,         // OBRIGATÓRIO false para rodar em HTTP (localhost)
+        secure: false, // Obrigatório ser false para localhost (HTTP)
         httpOnly: true, 
-        maxAge: 1000 * 60 * 60 // 1 hora
+        maxAge: 1000 * 60 * 60 
     }
 }));
 
-// AS ROTAS DEVEM VIR DEPOIS DA SESSÃO
 app.use('/api', userRoutes);
-app.use(express.static(path.join(__dirname, '../public')));
 
-// Servir arquivos estáticos (HTML, CSS, JS do frontend)
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
-
-// Uso das rotas MVC
-app.use('/api', userRoutes); 
 
 const PORT = 3000;
 app.listen(PORT, () => {

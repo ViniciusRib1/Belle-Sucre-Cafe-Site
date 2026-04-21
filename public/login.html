@@ -30,60 +30,59 @@
     </nav>
 
     <div class="conteudo">
-
-
-    <form action="/api/login" method="POST" id="loginForm">
-        <div class="login">
-            <h1>Logue-se!</h1>
-            <div class="container-login">
-                <h4>Coloque seu gmail</h4>
-                <div class="input-box">
-                    <input type="email" name="email" placeholder="Coloque seu gmail" required>
-                    <ion-icon name="mail-outline" class="icon"></ion-icon>
-                </div>
-                
-                <h4>Coloque sua senha</h4>
-                <div class="input-box"> 
-                    <div class="senha-wrapper">
-                        <input type="password" name="senha" id="input-senha" placeholder="Sua senha" required>
-                        <div id="btn-revelar" onclick="toggleSenha()">
-                            <ion-icon name="eye-outline" id="icon-aberto"></ion-icon>
-                            <ion-icon name="eye-off-outline" id="icon-fechado" style="display: none;"></ion-icon>
+        <form action="/api/login" method="POST" id="loginForm">
+            <div class="login">
+                <h1>Logue-se!</h1>
+                <div class="container-login">
+                    <h4>Coloque seu gmail</h4>
+                    <div class="input-box">
+                        <input type="email" name="email" placeholder="Coloque seu gmail" required>
+                        <ion-icon name="mail-outline" class="icon"></ion-icon>
+                    </div>
+                    
+                    <h4>Coloque sua senha</h4>
+                    <div class="input-box"> 
+                        <div class="senha-wrapper">
+                            <input type="password" name="senha" id="input-senha" placeholder="Sua senha" required>
+                            <div id="btn-revelar" onclick="toggleSenha()">
+                                <ion-icon name="eye-outline" id="icon-aberto"></ion-icon>
+                                <ion-icon name="eye-off-outline" id="icon-fechado" style="display: none;"></ion-icon>
+                            </div>
                         </div>
                     </div>
+                    
+                    <button type="submit" class="btn-entrar" id="btnEntrar">Entrar</button>
                 </div>
-                
-                <button type="submit" class="btn-entrar" id="btnEntrar">Entrar</button>
             </div>
-        </div>
-    </form>
-    <footer>
-        <div class="footer-container">
-            <div class="logo-footer">
-                <img src="Images/logobranca.png" alt="" srcset="">
+        </form>
+
+        <footer>
+            <div class="footer-container">
+                <div class="logo-footer">
+                    <img src="Images/logobranca.png" alt="">
+                </div>
+                <div class="footer-col">
+                    <h3>Belle Sucré Café</h3>
+                    <p>Experiência única em cafés e doces artesanais brasileiros com o toque clássico francês.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Links</h3>
+                    <a href="cardapio-user.html">Cardápio</a>
+                    <a href="historia-user.html">Sobre nós</a>
+                    <a href="jornal-user.html">Jornal</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <a href="#">Instagram</a>
+                    <a href="#">WhatsApp</a>
+                    <a href="#">Email</a>
+                </div>
             </div>
-            <div class="footer-col">
-                <h3>Belle Sucré Café</h3>
-                <p>Experiência única em cafés e doces artesanais brasileiros com o toque clássico francês.</p>
+            <div class="footer-bottom">
+                &copy; 2026 Belle Sucré Café - Empresa Fictícia<br>
+                Criado por Vinicius Ribeiro.
             </div>
-            <div class="footer-col">
-                <h3>Links</h3>
-                <a href="cardapio-user.html">Cardápio</a>
-                <a href="historia-user.html">Sobre nós</a>
-                <a href="jornal-user.html">Jornal</a>
-            </div>
-            <div class="footer-col">
-                <h3>Contato</h3>
-                <a href="#">Instagram</a>
-                <a href="#">WhatsApp</a>
-                <a href="#">Email</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2026 Belle Sucré Café - Empresa Fictícia<br>
-            Criado por Vinicius Ribeiro.
-        </div>
-    </footer>
+        </footer>
     </div>
     
     <script>
@@ -106,6 +105,11 @@
             const btn = document.getElementById('btnEntrar');
             btn.innerText = "Validando...";
         };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('erro')) {
+            alert('Email ou senha incorretos.');
+        }
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

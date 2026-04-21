@@ -1,4 +1,4 @@
-const db = require('../db'); // Seu arquivo de conexão mysql2
+const db = require('../db');
 
 const User = {
     findByEmail: (email, callback) => {

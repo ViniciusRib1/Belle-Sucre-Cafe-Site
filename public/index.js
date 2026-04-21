@@ -22,48 +22,9 @@ function resetTimer() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    fetch("/usuario-logado")
+    fetch("/api/usuario-logado")
         .then(res => res.json())
         .then(data => {
-            // Note que usamos 'data.success' e 'data.usuario' conforme seu controller
-            if (data.success && data.usuario) {
-                const usuario = data.usuario;
-
-                // 1. Atualiza o Nome no Menu (Olá, Vinicius!)
-                const nameDisplay = document.getElementById("user-name");
-                if (nameDisplay) {
-                    nameDisplay.innerText = `Olá, ${usuario.nome}!`;
-                }
-
-                // 2. Atualiza a Foto Circular no Menu
-                if (usuario.foto) {
-                    const fotoUrl = `/uploads/${usuario.foto}`;
-                    const fotoDiv = document.getElementById("user-photo");
-                    if (fotoDiv) {
-                        fotoDiv.style.backgroundImage = `url('${fotoUrl}')`;
-                        fotoDiv.style.backgroundSize = "cover";
-                        fotoDiv.style.backgroundPosition = "center";
-                    }
-                }
-                
-                // 3. Atualiza o Título Principal (opcional, se você tiver o ID)
-                const welcomeH1 = document.getElementById("user-welcome");
-                if (welcomeH1) welcomeH1.innerText = usuario.nome;
-            }
-        })
-        .catch(err => console.error("Erro ao carregar dados do usuário:", err));
-});
-
-// Próximo / Anterior
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-  resetTimer();
-}
-document.addEventListener("DOMContentLoaded", () => {
-    fetch("/api/usuario-logado") // Ajuste o caminho se sua rota for diferente
-        .then(res => res.json())
-        .then(data => {
-            // Seu controller envia { success: true, usuario: {...} }
             if (data.success && data.usuario) {
                 const usuario = data.usuario;
 
