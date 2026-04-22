@@ -31,7 +31,7 @@
 
     <div class="user-infs">
         <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
-        <a href="/logout">Sair <ion-icon name="exit-outline"></ion-icon></a>
+        <a href="login.html">Sair <ion-icon name="exit-outline"></ion-icon></a>
     </div>
 
     <h1 class="titulo-principal">Meu carrinho:</h1>
@@ -50,6 +50,27 @@
                 <input type="text" id="endereco" placeholder="Rua, Número, Bairro, Cidade">
             </div>
             <button class="btn-finalizar" onclick="finalizarPedido()">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <!-- Modal de Pagamento -->
+    <div id="modal-pagamento" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <h2>Pagamento</h2>
+            <p>Valor total: <span id="valor-total-modal">R$ 0,00</span></p>
+            <form id="form-pagamento">
+                <label for="numero-cartao">Número do Cartão:</label>
+                <input type="text" id="numero-cartao" placeholder="1234 5678 9012 3456" required>
+
+                <label for="validade">Validade:</label>
+                <input type="text" id="validade" placeholder="MM/AA" required>
+
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" placeholder="123" required>
+
+                <button type="submit">Pagar</button>
+            </form>
         </div>
     </div>
 
@@ -80,7 +101,9 @@
     </footer>
 
     <script>
-        
+
+        // Exemplo da função que deve estar no seu script do carrinho
+
         document.addEventListener("DOMContentLoaded", () => {
             // Carregar Usuário
             fetch("/usuario-logado")
@@ -104,6 +127,44 @@
                 e.stopPropagation();
                 menu.style.display = menu.style.display === "flex" ? "none" : "flex";
             };
+
+            const formPagamento = document.getElementById('form-pagamento');
+            if (formPagamento) {
+                formPagamento.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    if (!window.pedidoData) {
+                        alert('Finalize o pedido antes de pagar.');
+                        return;
+                    }
+
+                    alert('Pagamento processado com sucesso!');
+
+                    fetch('/api/finalizar-pedido', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            endereco: window.pedidoData.endereco,
+                            total: window.pedidoData.total
+                        }),
+                        credentials: 'include'
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.sucesso) {
+                            alert('Pedido finalizado com sucesso!');
+                            window.location.href = 'inicio-user.html';
+                        } else {
+                            alert('Erro ao finalizar pedido');
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Erro:', err);
+                        alert('Erro ao processar pedido');
+                    });
+
+                    document.getElementById('modal-pagamento').style.display = 'none';
+                });
+            }
         });
 
         function carregarCarrinho() {
@@ -144,46 +205,6 @@
         }
         // ... (resto das suas funções de remover e finalizar permanecem iguais)
     
-    let idParaAdicionar = null;
-
-    // Função para abrir o modal de confirmação
-    function confirmarAdicao(id, nome) {
-        idParaAdicionar = id;
-        document.getElementById("txt-modal").innerText = `Deseja adicionar "${nome}" ao seu carrinho?`;
-        document.getElementById("modal-confirmacao").style.display = "flex";
-    }
-
-    function fecharModal() {
-        document.getElementById("modal-confirmacao").style.display = "none";
-        idParaAdicionar = null;
-    }
-
-    // Evento do botão Confirmar do Modal
-    document.getElementById("btn-confirmar-acao").addEventListener("click", () => {
-        if (idParaAdicionar) {
-            processarAdicao(idParaAdicionar);
-            fecharModal();
-        }
-    });
-
-    function processarAdicao(idProduto) {
-        fetch("/api/adicionar-carrinho", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ produto_id: idProduto }),
-            credentials: "include"
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.sucesso) {
-                // Feedback visual suave em vez de alert
-                alert("Item adicionado com sucesso! ☕"); 
-            } else {
-                window.location.href = "/login.html";
-            }
-        })
-        .catch(() => console.error("Erro na conexão."));
-    }
     function removerItem(id) {
 
     fetch(`/remover-do-carrinho/${id}`, {
@@ -199,6 +220,41 @@
     });
 
 }
+
+function finalizarPedido() {
+    const endereco = document.getElementById('endereco').value.trim();
+    if (!endereco) {
+        alert('Por favor, insira um endereço de entrega!');
+        return;
+    }
+
+    // Calcular total
+    fetch("/api/meu-carrinho", { credentials: "include" })
+        .then(res => res.json())
+        .then(produtos => {
+            let total = 0;
+            produtos.forEach(item => {
+                total += parseFloat(item.preco);
+            });
+            const taxaEntrega = 5;
+            const totalFinal = total + taxaEntrega;
+            
+            // Armazenar dados para uso no pagamento
+            window.pedidoData = {
+                endereco: endereco,
+                total: totalFinal,
+                produtos: produtos
+            };
+
+            document.getElementById('valor-total-modal').innerText = `R$ ${totalFinal.toFixed(2)}`;
+            document.getElementById('modal-pagamento').style.display = 'block';
+        });
+}
+
+function fecharModal() {
+    document.getElementById('modal-pagamento').style.display = 'none';
+}
+
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

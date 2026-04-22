@@ -1,16 +1,14 @@
-// Simulação de Model (Pode ser substituído por Sequelize, Mongoose ou SQL puro)
-const db = require('./database'); // Seu arquivo de conexão
+const db = require('../db');
 
-const CarrinhoModel = {
-    adicionar: async (usuarioId, produtoId) => {
-        // Lógica para inserir no banco de dados
-        const query = "INSERT INTO carrinho (usuario_id, produto_id) VALUES (?, ?)";
-        return await db.execute(query, [usuarioId, produtoId]);
+const Produto = {
+    create: (produto, callback) => {
+        const sql = "INSERT INTO produtos (nome, preco, imagem) VALUES (?, ?, ?)";
+        db.query(sql, [produto.nome, produto.preco, produto.imagem], callback);
     },
-    buscarPorUsuario: async (usuarioId) => {
-        const query = "SELECT p.* FROM produtos p INNER JOIN carrinho c ON p.id = c.produto_id WHERE c.usuario_id = ?";
-        return await db.execute(query, [usuarioId]);
+    findAll: (callback) => {
+        const sql = "SELECT * FROM produtos";
+        db.query(sql, callback);
     }
 };
 
-module.exports = CarrinhoModel;
+module.exports = Produto;

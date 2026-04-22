@@ -36,6 +36,18 @@ exports.login = (req, res) => {
 
 };
 
+exports.loginFuncionario = (req, res) => {
+    const { email, senha } = req.body;
+
+    if (email === 'admin@gmail.com' && senha === 'adm123') {
+        req.session.funcionarioId = 'admin';
+        
+            res.redirect('/dashboard-funcionario.html');
+    } else {
+        return res.status(401).send("Email ou senha inválidos");
+    }
+};
+
 exports.registrar = (req, res) => {
 
     const { nome, email, senha } = req.body;

@@ -4,7 +4,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belle Sucré Café - Login</title>
+    <title>Belle Sucré Café - Login Funcionário</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="shortcut icon" href="./Images/logobranca.png" type="image/x-icon">
 </head>
@@ -21,7 +21,7 @@
             <a href="carrinho.html"><ion-icon name="cart-outline"></ion-icon> Carrinho</a>
             <a href="jornal.html"><ion-icon name="newspaper-outline"></ion-icon> Jornal</a>
             <a href="login.html">
-                <button id="select-btn"><ion-icon name="person-outline"></ion-icon> Login</button>
+                <button><ion-icon name="person-outline"></ion-icon> Login</button>
             </a>  
             <a href="registro.html">
                 <button><ion-icon name="key-outline"></ion-icon> Registrar</button>
@@ -30,17 +30,17 @@
     </nav>
 
     <div class="conteudo">
-        <form action="/api/login" method="POST" id="loginForm">
+        <form action="/api/login-funcionario" method="POST" id="loginFuncionarioForm">
             <div class="login">
-                <h1>Login</h1>
+                <h1>Login de Funcionário</h1>
                 <div class="container-login">
-                    <h4>Coloque seu gmail</h4>
+                    <h4>Email</h4>
                     <div class="input-box">
-                        <input type="email" name="email" placeholder="Coloque seu gmail" required>
+                        <input type="email" name="email" placeholder="Email do funcionário" required>
                         <ion-icon name="mail-outline" class="icon"></ion-icon>
                     </div>
                     
-                    <h4>Coloque sua senha</h4>
+                    <h4>Senha</h4>
                     <div class="input-box"> 
                         <div class="senha-wrapper">
                             <input type="password" name="senha" id="input-senha" placeholder="Sua senha" required>
@@ -51,10 +51,6 @@
                         </div>
                         
                     </div>
-                    <a href="esqueci-senha.html">Esqueci a senha</a>
-                    <br>
-                    <a href="login-funcionario.html">Login de Funcionário</a>
-                    <br>
                     <button type="submit" class="btn-entrar" id="btnEntrar">Entrar</button>
                 </div>
             </div>
@@ -103,16 +99,6 @@
                 aberto.style.display = 'block';
                 fechado.style.display = 'none';
             }
-        }
-
-        document.getElementById('loginForm').onsubmit = function() {
-            const btn = document.getElementById('btnEntrar');
-            btn.innerText = "Validando...";
-        };
-
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('erro')) {
-            alert('Email ou senha incorretos.');
         }
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

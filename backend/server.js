@@ -2,11 +2,16 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const db = require('./db');
+const { inicializarProdutos } = require('./inicializarDB');
+
+// Inicializar produtos no banco de dados
+setTimeout(inicializarProdutos, 2000);
 
 
 const userRoutes = require('./routes/userRoutes');
 const carrinhoRoutes = require('./routes/carrinhoRoutes');
 const cardapioRoutes = require('./routes/cardapioRoutes');
+const funcionarioRoutes = require('./routes/funcionarioRoutes');
 
 
 const app = express();
@@ -47,6 +52,7 @@ app.delete("/remover-do-carrinho/:id", (req, res) => {
 app.use('/api', userRoutes);
 app.use('/api', carrinhoRoutes);
 app.use('/api', cardapioRoutes);
+app.use('/api', funcionarioRoutes);
 app.use('/Images', express.static('Images'));
 app.use(express.static('public'));
 

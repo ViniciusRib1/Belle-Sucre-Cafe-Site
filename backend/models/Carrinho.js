@@ -1,10 +1,10 @@
-// Exemplo de Model utilizando uma estrutura de banco de dados fictícia
-const db = require('../config/database');
+// Exemplo de Model utilizando uma conexão de banco de dados
+const db = require('../db');
 
 const Carrinho = {
-    adicionar: async (usuarioId, produtoId) => {
-        const sql = "INSERT INTO itens_carrinho (id_usuario, id_produto) VALUES (?, ?)";
-        return await db.query(sql, [usuarioId, produtoId]);
+    adicionar: (usuarioId, produtoId, callback) => {
+        const sql = "INSERT INTO carrinho (usuario_id, produto_id) VALUES (?, ?)";
+        return db.query(sql, [usuarioId, produtoId], callback);
     }
 };
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db'); // importar conexão com banco
+const carrinhoController = require('../controllers/carrinhoController');
 
 // Listar produtos que estão no carrinho
 router.get("/meu-carrinho", (req, res) => {
@@ -42,5 +43,7 @@ router.post('/remover-carrinho/:id', (req, res) => {
         res.redirect('/carrinho');
     });
 });
+
+router.post('/finalizar-pedido', carrinhoController.finalizarPedido);
 
 module.exports = router;
