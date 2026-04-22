@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belle Sucré Café - Esqueci a Senha</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./Images/logobranca.png" type="image/x-icon">
+    <style>
+        .reset-container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 30px;
+            background: #D7BDA6;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: 60%;
+        }
+
+        .reset-container h1 {
+            text-align: center;
+            color: #4a3328;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .input-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0d7d1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-box input:focus {
+            outline: none;
+            border-color: #b5835a;
+        }
+
+        .btn-reset {
+            width: 100%;
+            padding: 15px;
+            background: #b5835a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-reset:hover {
+            background: #a06a4a;
+        }
+
+        .btn-reset:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #b5835a;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="menu">
+        <a href="index.html">
+            <div class="logo">
+                <img src="./Images/logo.png" alt="Logo" id="logo">
+            </div>
+        </a>
+        <div class="itens">
+            <a href="historia.html"><ion-icon name="book-outline"></ion-icon> História</a>
+            <a href="cardapio.html"><ion-icon name="reader-outline"></ion-icon> Cardápio </a>
+            <a href="carrinho.html"><ion-icon name="cart-outline"></ion-icon> Carrinho</a>
+            <a href="jornal.html"><ion-icon name="newspaper-outline"></ion-icon> Jornal</a>
+            <a href="login.html">
+                <button id="select-btn"><ion-icon name="person-outline"></ion-icon> Login</button>
+            </a>
+            <a href="registro.html">
+                <button><ion-icon name="key-outline"></ion-icon> Registrar</button>
+            </a>
+        </div>
+    </nav>
+
+    <div class="conteudo">
+        <div class="reset-container">
+            <h1>Esqueci a Senha</h1>
+
+            <div id="message" class="message" style="display: none;"></div>
+
+            <form id="resetForm">
+                <div class="input-box">
+                    <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+                </div>
+
+                <button type="submit" class="btn-reset" id="btnReset">Enviar Instruções</button>
+            </form>
+
+            <a href="login.html" class="back-link">← Voltar ao Login</a>
+        </div>
+
+        <footer>
+            <div class="footer-container">
+                <div class="logo-footer">
+                    <img src="Images/logobranca.png" alt="">
+                </div>
+                <div class="footer-col">
+                    <h3>Belle Sucré Café</h3>
+                    <p>Experiência única em cafés e doces artesanais brasileiros com o toque clássico francês.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Links</h3>
+                    <a href="cardapio-user.html">Cardápio</a>
+                    <a href="historia-user.html">Sobre nós</a>
+                    <a href="jornal-user.html">Jornal</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <a href="https://www.instagram.com/bellesucreoficial/">Instagram</a>
+                    <a href="#">WhatsApp</a>
+                    <a href="#">Email</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Belle Sucré Café - Empresa Fictícia<br>
+                Criado por Vinicius Ribeiro.
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('resetForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const btn = document.getElementById('btnReset');
+            const messageDiv = document.getElementById('message');
+            const email = document.getElementById('email').value;
+
+            // Desabilita botão
+            btn.disabled = true;
+            btn.innerText = "Enviando...";
+
+            try {
+                const response = await fetch('/api/solicitar-reset-senha', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await response.json();
+
+                messageDiv.style.display = 'block';
+                if (data.success) {
+                    messageDiv.className = 'message success';
+                    messageDiv.innerHTML = data.message;
+
+                    if (data.debug) {
+                        messageDiv.innerHTML += '<br><br><strong>Para desenvolvimento:</strong><br>' +
+                            'Link: <a href="' + data.debug.link + '" target="_blank">' + data.debug.link + '</a><br>' +
+                            'Token: ' + data.debug.token;
+                    }
+
+                    // Limpa o formulário
+                    document.getElementById('resetForm').reset();
+                } else {
+                    messageDiv.className = 'message error';
+                    messageDiv.innerText = data.message;
+                }
+
+            } catch (error) {
+                console.error('Erro:', error);
+                messageDiv.style.display = 'block';
+                messageDiv.className = 'message error';
+                messageDiv.innerText = 'Erro ao conectar com o servidor. Tente novamente.';
+            } finally {
+                // Reabilita botão
+                btn.disabled = false;
+                btn.innerText = "Enviar Instruções";
+            }
+        });
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

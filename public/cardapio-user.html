@@ -61,6 +61,7 @@
             <div class="user">
                 <div class="foto-user" id="user-photo"></div>
                 <div id="user-name">Olá, Visitante!</div>
+                <script src="index.js"></script>
             </div>
             <div class="useri"><ion-icon name="chevron-down-outline"></ion-icon></div>
         </div>
@@ -83,6 +84,7 @@
 
     <div class="cardapio">
         <h1 class="titulo-principal">Cardápio</h1>
+        
         <h2>Menu de doces:</h2>
         <div class="container-prod">
             <div class="produtos">
@@ -136,8 +138,105 @@
                 </div>
             </div>
         </div>
-    </div>
 
+        <h2>Menu de salgados:</h2>
+        <div class="container-prod">
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/coxinha.png" alt="Coxinha"></div>
+                <div class="infos-produto">
+                    <h1>Coxinha</h1>
+                    <p class="preco">R$ 20,00</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(6, 'Coxinha')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
+            </div>
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/presuntoequeijo.png" alt="Presunto e queijo"></div>
+                <div class="infos-produto">
+                    <h1>Presunto e queijo</h1>
+                    <p class="preco">R$ 25,00</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(7, 'Presunto e queijo')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
+            </div>
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/esfihadecarne.png" alt="Esfiha de carne"></div>
+                <div class="infos-produto">
+                    <h1>Esfiha de carne</h1>
+                    <p class="preco">R$ 29,00</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(8, 'Esfiha de carne')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
+            </div>
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/kibe.png" alt="Kibe"></div>
+                <div class="infos-produto">
+                    <h1>Kibe</h1>
+                    <p class="preco">R$ 32,00</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(9, 'Kibe')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
+            </div>
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/bolinhadequeijo.png" alt="Bolinha de queijo"></div>
+                <div class="infos-produto">
+                    <h1>Bolinha de queijo</h1>
+                    <p class="preco">R$ 28,00</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(10, 'Bolinha de queijo')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <h2>Menu de bebidas:</h2>
+        <div class="container-prod">
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/cappucino.png" alt="Cappucino"></div>
+                <div class="infos-produto">
+                    <h1>Cappucino</h1>
+                    <p class="preco">R$ 2,00</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(11, 'Cappucino')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
+            </div>
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/cafe.png" alt="Café"></div>
+                <div class="infos-produto">
+                    <h1>Café</h1>
+                    <p class="preco">R$ 1,00</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(12, 'Café')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
+            </div>
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/cafe-espresso.png" alt="Café Espresso"></div>
+                <div class="infos-produto">
+                    <h1>Café Espresso</h1>
+                    <p class="preco">R$ 1,50</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(13, 'Café Espresso')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
+            </div>
+            <div class="produtos">
+                <div class="img-container"><img src="./Images/iceCoffe.png" alt="Café Gelado Caramelizado"></div>
+                <div class="infos-produto">
+                    <h1>Café Gelado Caramelizado</h1>
+                    <p class="preco">R$ 3,50</p>
+                    <button class="btn-comprar" onclick="confirmarAdicao(14, 'Café Gelado Caramelizado')">
+                        <ion-icon name="cart-outline"></ion-icon> Adicionar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer>
         <div class="footer-container">
             <div class="logo-footer"><img src="Images/logobranca.png" alt="Logo Branca"></div>
@@ -153,7 +252,7 @@
             </div>
             <div class="footer-col">
                 <h3>Contato</h3>
-                <a href="#">Instagram</a>
+                <a href="https://www.instagram.com/bellesucreoficial/">Instagram</a>
                 <a href="#">WhatsApp</a>
                 <a href="#">Email</a>
             </div>
@@ -165,97 +264,76 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-    // Carregar Usuário Corretamente
-    fetch("/api/usuario-logado")
-        .then(res => res.json())
-        .then(data => {
-            // Ajuste aqui: data.usuario em vez de apenas usuario
-            if (data.success && data.usuario) {
-                const usuario = data.usuario;
-                document.getElementById("user-name").innerText = `Olá, ${usuario.nome}!`;
-                
-                if (usuario.foto) {
-                    const fotoDiv = document.getElementById("user-photo");
-                    fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
-                    fotoDiv.style.backgroundSize = "cover";
-                    fotoDiv.style.backgroundPosition = "center";
-                }
-            } else {
-                window.location.href = "login.html";
-            }
-        })
-        .catch(err => console.error("Erro ao carregar usuário:", err));
+        
 
-    // ... lógica do menu dropdown ...
-});
 
-// Lógica do botão Confirmar para levar ao carrinho
-document.getElementById("btn-confirmar-acao").onclick = () => {
-    if (idParaAdicionar) {
-        fetch("/api/adicionar-carrinho", { // Verifique se sua rota tem o prefixo /api
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ produto_id: idParaAdicionar }),
-            credentials: "include"
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.sucesso || data.success) {
-                // REDIRECIONAR APÓS ADICIONAR
-                window.location.href = "carrinho-user.html";
-            } else {
-                alert("Erro ao adicionar. Faça login novamente.");
-                window.location.href = "login.html";
-            }
-        })
-        .catch(err => console.error("Erro:", err));
-    }
-};
+// Variável global para armazenar o ID do produto a ser adicionado
         let idParaAdicionar = null;
 
         document.addEventListener("DOMContentLoaded", () => {
-            // Carregar Usuário
-            fetch("/usuario-logado", { credentials: "include" })
+            // 1. Carregar Dados do Usuário Logado
+            carregarUsuario();
+
+            // 2. Configurar Menu Dropdown do Usuário
+            configurarMenuDropdown();
+        });
+
+        // --- Funções Auxiliares ---
+
+        function carregarUsuario() {
+            // Padronizado para usar a rota com prefixo /api
+            fetch("/api/usuario-logado", { credentials: "include" })
                 .then(res => {
-                    if (!res.ok) throw new Error("Não autorizado");
+                    if (!res.ok) throw new Error("Usuário não autenticado");
                     return res.json();
                 })
-                .then(usuario => {
+                .then(data => {
+                    // Trata as diferentes estruturas de resposta possíveis (data ou data.usuario)
+                    const usuario = data.usuario || data;
+
                     if (usuario && usuario.nome) {
                         document.getElementById("user-name").innerText = `Olá, ${usuario.nome}!`;
-                        const fotoDiv = document.getElementById("user-photo");
+                        
                         if (usuario.foto) {
+                            const fotoDiv = document.getElementById("user-photo");
+                            // Ajustado para o caminho correto das imagens de upload
                             fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
                             fotoDiv.style.backgroundSize = "cover";
                             fotoDiv.style.backgroundPosition = "center";
                         }
                     } else {
-                        window.location.href = "login.html";
+                        redirecionarParaLogin();
                     }
                 })
                 .catch(err => {
-                    console.warn("Usuário não logado ou erro no servidor:", err);
-                    // Opcional: window.location.href = "login.html";
+                    console.warn("Erro ao carregar usuário:", err.message);
+                    redirecionarParaLogin();
                 });
+        }
 
-            // Menu Dropdown
+        function configurarMenuDropdown() {
             const seta = document.querySelector(".useri");
             const menu = document.querySelector(".user-infs");
+            
             if(seta && menu) {
                 seta.onclick = (e) => {
                     e.stopPropagation();
                     menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
                 };
-            }
-            
-            // Fechar menu ao clicar fora
-            document.addEventListener("click", () => {
-                if(menu) menu.style.display = "none";
-            });
-        });
 
-        // Funções do Modal
+                // Fechar menu ao clicar fora
+                document.addEventListener("click", () => {
+                    menu.style.display = "none";
+                });
+            }
+        }
+
+        function redirecionarParaLogin() {
+            window.location.href = "login.html";
+        }
+
+        // --- Funções do Modal de Confirmação ---
+
         function confirmarAdicao(id, nome) {
             idParaAdicionar = id;
             document.getElementById("txt-modal").innerText = `Deseja adicionar "${nome}" ao seu carrinho?`;
@@ -267,28 +345,30 @@ document.getElementById("btn-confirmar-acao").onclick = () => {
             idParaAdicionar = null;
         }
 
-        // Lógica do botão Confirmar
+        // --- Lógica ÚNICA e CORRIGIDA para o botão Confirmar do Modal ---
         document.getElementById("btn-confirmar-acao").onclick = () => {
             if (idParaAdicionar) {
-                fetch("/adicionar-carrinho", {
+                // Padronizado para usar a rota com prefixo /api
+                fetch("/api/adicionar-carrinho", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ produto_id: idParaAdicionar }),
-                    credentials: "include"
+                    credentials: "include" // Importante para enviar os cookies da sessão
                 })
                 .then(res => res.json())
                 .then(data => {
-                    if (data.sucesso) {
-                        alert("Adicionado com sucesso! ☕");
-                        fecharModal();
+                    // Aceita tanto 'sucesso' quanto 'success' como chaves válidas
+                    if (data.sucesso || data.success) {
+                        // REDIRECIONAR PARA A PÁGINA DO CARRINHO APÓS SUCESSO NO BANCO
+                        window.location.href = "carrinho-user.html";
                     } else {
-                        alert("Sessão expirada. Por favor, faça login novamente.");
-                        window.location.href = "login.html";
+                        alert("Sessão expirada ou erro ao adicionar. Faça login novamente.");
+                        redirecionarParaLogin();
                     }
                 })
                 .catch(err => {
-                    console.error(err);
-                    alert("Erro ao conectar com o servidor.");
+                    console.error("Erro na conexão:", err);
+                    alert("Erro ao conectar com o servidor. Tente novamente mais tarde.");
                 });
             }
         };

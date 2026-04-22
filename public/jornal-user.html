@@ -1,80 +1,200 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belle Sucré Café - Carrinho</title>
+    <title>Belle Sucré Café - Jornal</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="shortcut icon" href="./Images/logobranca.png" type="image/x-icon">
-    <script src="index.js"></script>
+    <style>
+    /* Container do slideshow */
+.slideshow-container-jornal {
+    width: 80%;
+    position: relative;
+    margin: auto;
+}
+
+/* Cada slide */
+.mySlides-jornal {
+    display: none;
+}
+
+/* Imagens */
+.mySlides-jornal img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+/* Texto do slide */
+.text {
+    color: white;
+    font-size: 18px;
+    padding: 8px 12px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 5px;
+
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+}
+
+/* Botões anterior e próximo */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 12px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    background-color: rgba(0,0,0,0.4);
+    user-select: none;
+    transform: translateY(-50%);
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.7);
+}
+
+/* Bolinhas */
+.dot-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+/* Animação fade */
+.fade {
+    animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+.user-infs {
+    display: none; 
+    position: absolute;
+    right: 20px;
+    top: 70px;
+    background: #a8896f;
+    border: 1px solid #ddd;
+    padding: 10px;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.user-infs.active {
+    display: flex; 
+}
+.user-infs {
+    display: none; 
+  
+}
+
+.user-infs.active {
+    display: flex !important; 
+}
+.user-container {
+    text-align: center;
+    padding: 20px;
+}
+.useri {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.useri.rotate {
+    transform: rotate(180deg);
+}
+       
+    </style>
 </head>
 <body>
    
     <nav class="menu">
         <a href="inicio-user.html">
-        <div class="logo">
-            <img src="./Images/logo.png" alt="" id="logo">
-        </div>
+            <div class="logo">
+                <img src="./Images/logo.png" alt="Logo" id="logo">
+            </div>
         </a>
         <div class="itens">
             <a href="historia-user.html"><ion-icon name="book-outline"></ion-icon> História</a>
             <a href="cardapio-user.html"><ion-icon name="reader-outline"></ion-icon> Cardápio </a>
             <a href="carrinho-user.html"><ion-icon name="cart-outline"></ion-icon> Carrinho</a>
             <a href="jornal-user.html" id="select"><ion-icon name="newspaper-outline"></ion-icon> Jornal</a>
-            <div class="user">
+              <div class="user">
                 <div class="foto-user" id="user-photo"></div>
                 <div class="user" id="user-name">Olá, Visitante!</div>
-                
             </div>
             <div class="useri"><ion-icon name="chevron-down-outline"></ion-icon></div>
             
-            
         </div>
-        
-        
     </nav>
-     <div class="conteudo"></div>
-    <div class="user-infs">
-                <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
-                <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
-                <a href="login.html">Sair <ion-icon name="exit-outline"></ion-icon></a>
+
+    <div class="user-infs" id="user-dropdown">
+        <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
+        <a href="login.html">Sair <ion-icon name="exit-outline"></ion-icon></a>
+    </div>
+
+    <div class="conteudo">
+        <h1 class="titulo-principal">Jornal Belle Sucré</h1>
+        
+        <div class="slideshow-container-jornal">
+            <div class="mySlides-jornal fade">
+                <img src="./Images/JornalMensal.png">
+                <div class="text">Jornal mensal</div>
             </div>
-    
-    
-            <h1 class="titulo-principal">Jornal</h1>
-            <div class="slideshow-container">
 
-    <div class="mySlides fade">
-    <img src="./Images/JornalMensal.png" style="width:100%">
-    <div class="text">Jornal Mensal</div>
-    <a href="jornal.html">Jornal mensal</a>
-  </div>
+            <div class="mySlides-jornal fade">
+                <img src="./Images/JaneiroBranco.png">
+                <div class="text">Campanha Janeiro Branco</div>
+            </div>
 
-  <div class="mySlides fade">
-    <img src="./Images/JaneiroBranco.png" style="width:100%">
-    <div class="text">Janeiro branco</div>
-    <a href="jornal.html">Jornal mensal</a>
-  </div>
+            <div class="mySlides-jornal fade">
+                <img src="./Images/apresentacaofinal.png">
+                <div class="text">Nossa Apresentação Final</div>
+            </div>
 
-  <div class="mySlides fade">
-    <img src="./Images/apresentaçãofinal.png" style="width:100%">
-    <div class="text">Apresentação final da Belle Sucré Café</div>
-    <a href="jornal.html">Jornal mensal</a>
-  </div>
+            <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+            <button class="next" onclick="plusSlides(1)">&#10095;</button>
+        </div>
 
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    </div>
-    <br>
+        <div class="dot-container">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
 
-    <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-    </div>
-    <footer>
+        <footer>
         
         <div class="footer-container">
             <div class="logo-footer">
@@ -92,7 +212,7 @@
             </div>
             <div class="footer-col">
                 <h3>Contato</h3>
-                <a href="#">Instagram</a>
+                <a href="https://www.instagram.com/bellesucreoficial/">Instagram</a>
                 <a href="#">WhatsApp</a>
                 <a href="#">Email</a>
             </div>
@@ -102,29 +222,125 @@
             Criado por Vinicius Ribeiro.
         </div>
     </footer>
-</div>
-        
-</body>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        fetch("/usuario-logado")
-            .then(res => res.json())
-            .then(usuario => {
-                if (usuario) {
-                    // Atualiza o texto "Olá nome user!"
-                    document.querySelector(".user div:last-child").innerText = `Olá, ${usuario.nome}!`;
-                    
-                    // Atualiza a foto no círculo do menu
-                    if (usuario.foto) {
-                        const fotoDiv = document.querySelector(".foto-user");
-                        fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
-                        fotoDiv.style.backgroundSize = "cover";
-                        fotoDiv.style.backgroundPosition = "center";
+    </div>
+
+    <script>
+
+        /* SLIDESHOW */
+
+        let slideIndex = 0;
+        let slides;
+        let dots;
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            slides = document.getElementsByClassName("mySlides-jornal");
+            dots = document.getElementsByClassName("dot");
+
+            showSlides();
+
+            setInterval(showSlides, 5000);
+
+        });
+
+        function showSlides(){
+
+            for(let i = 0; i < slides.length; i++){
+                slides[i].style.display = "none";
+            }
+
+            slideIndex++;
+
+            if(slideIndex > slides.length){
+                slideIndex = 1;
+            }
+
+            for(let i = 0; i < dots.length; i++){
+                dots[i].classList.remove("active");
+            }
+
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].classList.add("active");
+
+        }
+
+        function plusSlides(n){
+
+            slideIndex += n-1;
+
+            if(slideIndex < 0){
+                slideIndex = slides.length-1;
+            }
+
+            if(slideIndex >= slides.length){
+                slideIndex = 0;
+            }
+
+            for(let i = 0; i < slides.length; i++){
+                slides[i].style.display = "none";
+            }
+
+            for(let i = 0; i < dots.length; i++){
+                dots[i].classList.remove("active");
+            }
+
+            slides[slideIndex].style.display = "block";
+            dots[slideIndex].classList.add("active");
+
+        }
+
+        function currentSlide(n){
+
+            slideIndex = n-1;
+
+            for(let i = 0; i < slides.length; i++){
+                slides[i].style.display = "none";
+            }
+
+            for(let i = 0; i < dots.length; i++){
+                dots[i].classList.remove("active");
+            }
+
+            slides[slideIndex].style.display = "block";
+            dots[slideIndex].classList.add("active");
+
+        }
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("/api/usuario-logado")
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success && data.usuario) {
+                        const usuario = data.usuario;
+                        document.getElementById("user-name").innerText = `Olá, ${usuario.nome.split(" ")[0]}!`;
+                        if (usuario.foto) {
+                            const fotoDiv = document.getElementById("user-photo");
+                            fotoDiv.style.backgroundImage = `url('/uploads/${usuario.foto}')`;
+                            fotoDiv.style.backgroundSize = "cover";
+                            fotoDiv.style.backgroundPosition = "center";
+                        }
                     }
-                }
+                }).catch(e => console.log("Visitante"));
+        });
+
+        const userIcon = document.querySelector('.useri');
+        const userInfs = document.querySelector('.user-infs');
+        
+        if(userIcon && userInfs) {
+            userIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userInfs.classList.toggle('active');
             });
-    });
-</script>
-<script  type = "module"  src = " https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js " > </script> 
-<script nomodule src = " https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js " >   </script>
+
+            document.addEventListener('click', () => {
+                userInfs.classList.remove('active');
+            });
+        }
+
+       
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
 </html>

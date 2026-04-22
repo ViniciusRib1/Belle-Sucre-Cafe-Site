@@ -1,29 +1,46 @@
+const express = require('express');
+const router = express.Router();
+const db = require('../db'); // importar conexão com banco
+
 // Listar produtos que estão no carrinho
-app.get("/meu-carrinho", (req, res) => {
+router.get("/meu-carrinho", (req, res) => {
     const usuario_id = req.session.usuarioId;
 
     if (!usuario_id) return res.json([]);
 
-    // Busca o nome e preço do produto juntando as tabelas 'carrinho' e 'produtos'
     const sql = `
-        SELECT c.id AS carrinho_id, p.nome, p.preco 
-        FROM carrinho c 
-        JOIN produtos p ON c.produto_id = p.id 
-        WHERE c.usuario_id = ?`;
+        SELECT carrinho.id as carrinho_id,
+        produtos.nome,
+        produtos.preco,
+        produtos.imagem
+        FROM carrinho
+        JOIN produtos ON carrinho.produto_id = produtos.id
+        WHERE carrinho.usuario_id = ?
+        `;
 
     db.query(sql, [usuario_id], (err, results) => {
-        if (err) return res.status(500).json([]);
+        if (err) {
+            console.error(err);
+            return res.status(500).json([]);
+        }
         res.json(results);
     });
 });
 
 // Remover produto do carrinho
-app.delete("/remover-do-carrinho/:id", (req, res) => {
-    const idItemCarrinho = req.params.id;
+router.post('/remover-carrinho/:id', (req, res) => {
+    const id = req.params.id;
 
     const sql = "DELETE FROM carrinho WHERE id = ?";
-    db.query(sql, [idItemCarrinho], (err, result) => {
-        if (err) return res.status(500).json({ sucesso: false });
-        res.json({ sucesso: true });
+
+    db.query(sql, [id], (err) => {
+        if (err) {
+            console.log(err);
+            return res.send("Erro ao remover");
+        }
+
+        res.redirect('/carrinho');
     });
 });
+
+module.exports = router;

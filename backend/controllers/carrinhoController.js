@@ -17,3 +17,4 @@ exports.adicionarAoCarrinho = async (req, res) => {
         res.status(500).json({ sucesso: false, mensagem: "Erro no servidor." });
     }
 };
+

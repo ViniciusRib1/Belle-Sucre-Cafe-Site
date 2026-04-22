@@ -1,6 +1,3 @@
-let slideIndex = 1;
-let slideTimer;
-
 
 // Quando a página carregar
 document.addEventListener("DOMContentLoaded", function () {
@@ -8,18 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   startAutoSlide();
 });
 
-// Inicia o timer automático
-function startAutoSlide() {
-  slideTimer = setInterval(function () {
-    plusSlides(1);
-  }, 5000); // 5 segundos
-}
 
-// Reseta o timer quando clicar manualmente
-function resetTimer() {
-  clearInterval(slideTimer);
-  startAutoSlide();
-}
 
 document.addEventListener("DOMContentLoaded", () => {
     fetch("/api/usuario-logado")
@@ -93,40 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 });
 
-// Ir para slide específico
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-  resetTimer();
-}
 
-function showSlides(n) {
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
 
-  if (slides.length === 0) return;
 
-  if (n > slides.length) { slideIndex = 1; }
-  if (n < 1) { slideIndex = slides.length; }
 
-  // Esconde todos
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-
-  // Remove active dos dots
-  for (let i = 0; i < dots.length; i++) {
-    dots[i].classList.remove("active");
-  }
-
-  // Mostra o atual
-  slides[slideIndex - 1].style.display = "block";
-
-  if (dots.length > 0) {
-    dots[slideIndex - 1].classList.add("active");
-  }
-}
-
-// --- NOVO: SISTEMA DE VER SENHA ---
 function toggleSenha() {
   const inputSenha = document.getElementById('input-senha');
   const iconAberto = document.getElementById('icon-aberto');
@@ -169,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Erro ao carregar dados do usuário:", err));
 });
 
-// Esta parte deve rodar APENAS se estiver na página inicio-user.html
 if (window.location.pathname.includes("inicio-user.html")) {
     document.addEventListener("DOMContentLoaded", () => {
         fetch("/usuario-logado")
@@ -215,7 +170,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// No seu script do cardapio-user.html, adicione esta função:
 function adicionarAoCarrinho(idProduto) {
     fetch("/adicionar-carrinho", {
         method: "POST",
@@ -226,9 +180,6 @@ function adicionarAoCarrinho(idProduto) {
     .then(data => alert(data.mensagem))
     .catch(err => console.error("Erro:", err));
 }
-
-// No HTML, altere o botão:
-// <button onclick="adicionarAoCarrinho(1)" class="btn-comprar"> Adicionar </button>
 
 function renderizarCarrinho() {
     fetch("/meu-carrinho")
@@ -255,19 +206,7 @@ function renderizarCarrinho() {
             `;
         });
 }
-const btnDarkMode = document.querySelector('.darkmode');
-const themeLink = document.querySelector('#theme-link');
 
-btnDarkMode.addEventListener('click', () => {
-    // Verifica se o href atual contém 'style-dark.css'
-    if (themeLink.getAttribute('href').includes('style-dark.css')) {
-        themeLink.setAttribute('href', 'style.css'); // Volta pro Light
-        btnDarkMode.classList.remove('active');
-    } else {
-        themeLink.setAttribute('href', 'style-dark.css'); // Vai pro Dark
-        btnDarkMode.classList.add('active');
-    }
-});
 document.addEventListener("DOMContentLoaded", () => {
     fetch("/usuario-logado")
         .then(res => res.json())
@@ -300,11 +239,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Erro ao carregar dados:", err));
 });
 
-function abrirEdicao() {
-    // Aqui você pode redirecionar para uma página de formulário
-    // ou abrir um modal. Exemplo de redirecionamento:
-    window.location.href = "editar-perfil.html";
-}
 
 
 
@@ -396,3 +330,128 @@ document.addEventListener("DOMContentLoaded", () => {
             userInfs.classList.toggle('active');
         });
     }
+
+// ===== FUNÇÕES PARA EDIÇÃO DE PERFIL =====
+
+// Variáveis globais para o ajuste de imagem
+let imgAjuste = {
+    transformX: 0,
+    transformY: 0,
+    zoom: 1,
+    isDragging: false,
+    startX: 0,
+    startY: 0,
+    tipo: '' // 'perfil' ou 'banner'
+};
+
+function abrirEdicao() {
+    const modal = document.getElementById("modal-editar");
+    if (modal) {
+        modal.style.display = "flex";
+        
+        // Preenche os campos com dados atuais
+        fetch("/usuario-logado")
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.usuario) {
+                    const usuario = data.usuario;
+                    document.getElementById("edit-nome").value = usuario.nome || '';
+                    document.getElementById("edit-endereco").value = usuario.endereco || '';
+                }
+            })
+            .catch(err => console.error("Erro ao carregar dados:", err));
+    }
+}
+
+function fecharEdicao() {
+    const modal = document.getElementById("modal-editar");
+    if (modal) {
+        modal.style.display = "none";
+    }
+}
+
+function iniciarAjuste(input, tipo) {
+    if (!input.files || !input.files[0]) {
+        return;
+    }
+
+    imgAjuste.tipo = tipo;
+    const reader = new FileReader();
+    
+    reader.onload = (e) => {
+        const img = document.getElementById("img-ajuste");
+        img.src = e.target.result;
+        
+        // Reseta valores de ajuste
+        imgAjuste.transformX = 0;
+        imgAjuste.transformY = 0;
+        imgAjuste.zoom = 1;
+        
+        document.getElementById("zoom-range").value = 1;
+        
+        const titulo = tipo === 'perfil' ? 'Ajuste sua Foto de Perfil' : 'Ajuste seu Banner';
+        document.getElementById("titulo-ajuste").innerText = titulo;
+        
+        // Abre o modal
+        const modalAjuste = document.getElementById("modal-ajuste");
+        if (modalAjuste) {
+            modalAjuste.style.display = "flex";
+        }
+        
+        // Configurar eventos de arrastar
+        img.onmousedown = (evt) => {
+            imgAjuste.isDragging = true;
+            imgAjuste.startX = evt.clientX - imgAjuste.transformX;
+            imgAjuste.startY = evt.clientY - imgAjuste.transformY;
+            img.style.cursor = "grabbing";
+        };
+
+        document.onmousemove = (evt) => {
+            if (imgAjuste.isDragging) {
+                imgAjuste.transformX = evt.clientX - imgAjuste.startX;
+                imgAjuste.transformY = evt.clientY - imgAjuste.startY;
+                atualizarTransformacao();
+            }
+        };
+
+        document.onmouseup = () => {
+            imgAjuste.isDragging = false;
+            img.style.cursor = "move";
+        };
+
+        // Slider de zoom
+        const zoomRange = document.getElementById("zoom-range");
+        if (zoomRange) {
+            zoomRange.oninput = (evt) => {
+                imgAjuste.zoom = parseFloat(evt.target.value);
+                atualizarTransformacao();
+            };
+        }
+    };
+    
+    reader.readAsDataURL(input.files[0]);
+}
+
+function atualizarTransformacao() {
+    const img = document.getElementById("img-ajuste");
+    if (img) {
+        img.style.transform = `translate(${imgAjuste.transformX}px, ${imgAjuste.transformY}px) scale(${imgAjuste.zoom})`;
+    }
+}
+
+function confirmarAjuste() {
+    // Não precisa fazer nada aqui - o formulário já tem o input de arquivo
+    // Apenas fecha o modal
+    const modalAjuste = document.getElementById("modal-ajuste");
+    if (modalAjuste) {
+        modalAjuste.style.display = "none";
+    }
+}
+
+// Fechar modais ao clicar no X
+document.addEventListener("DOMContentLoaded", () => {
+    const closeBtn = document.querySelector(".close");
+    if (closeBtn) {
+        closeBtn.addEventListener("click", fecharEdicao);
+    }
+});

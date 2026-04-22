@@ -31,7 +31,6 @@
 
     <div class="user-infs">
         <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
-        <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
         <a href="/logout">Sair <ion-icon name="exit-outline"></ion-icon></a>
     </div>
 
@@ -42,11 +41,13 @@
         </div>
         <div class="resumo-carrinho">
             <h3 id="total-carrinho">Total: R$ 0,00</h3>
+
             <hr>
             <div class="entrega">
                 <h3>Endereço para entrega:</h3>
-                <input type="text" id="endereco" placeholder="Rua, Número, Bairro, Cidade">
                 <p>Taxa de entrega: <strong>R$ 5,00</strong></p>
+
+                <input type="text" id="endereco" placeholder="Rua, Número, Bairro, Cidade">
             </div>
             <button class="btn-finalizar" onclick="finalizarPedido()">Finalizar Pedido</button>
         </div>
@@ -67,7 +68,7 @@
             </div>
             <div class="footer-col">
                 <h3>Contato</h3>
-                <a href="#">Instagram</a>
+                <a href="https://www.instagram.com/bellesucreoficial/">Instagram</a>
                 <a href="#">WhatsApp</a>
                 <a href="#">Email</a>
             </div>
@@ -106,7 +107,7 @@
         });
 
         function carregarCarrinho() {
-            fetch("/meu-carrinho")
+            fetch("/api/meu-carrinho", { credentials: "include" }) 
                 .then(res => res.json())
                 .then(produtos => {
                     const container = document.getElementById("itens-carrinho");
@@ -123,11 +124,11 @@
                     produtos.forEach(item => {
                         html += `
                             <div class="card-produto-carrinho">
-                                <img src="./Images/${item.nome.toLowerCase()}.jpg" class="img-card-carrinho" onerror="this.src='./Images/logo.png'">
+                                <img src="./Images/${item.imagem}" class="img-card-carrinho" onerror="this.src='./Images/logo.png'">
                                 <div class="infos-card-carrinho">
                                     <h3>${item.nome}</h3>
                                     <p class="preco-card-carrinho">R$ ${parseFloat(item.preco).toFixed(2)}</p>
-                                    <button class="btn-remover-carrinho" onclick="removerItem(${item.id})">
+                                    <button class="btn-remover-carrinho" onclick="removerItem(${item.carrinho_id})">
                                         <ion-icon name="trash-outline"></ion-icon> Remover
                                     </button>
                                 </div>
@@ -135,7 +136,10 @@
                         total += parseFloat(item.preco);
                     });
                     container.innerHTML = html;
-                    totalTxt.innerText = `Total: R$ ${(total + 5).toFixed(2)} (com taxa)`;
+                    const taxaEntrega = 5;
+                    const totalFinal = total + taxaEntrega;
+
+                    totalTxt.innerText = `Total: R$ ${totalFinal.toFixed(2)}`;
                 });
         }
         // ... (resto das suas funções de remover e finalizar permanecem iguais)
@@ -163,7 +167,7 @@
     });
 
     function processarAdicao(idProduto) {
-        fetch("/adicionar-carrinho", {
+        fetch("/api/adicionar-carrinho", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ produto_id: idProduto }),
@@ -180,6 +184,21 @@
         })
         .catch(() => console.error("Erro na conexão."));
     }
+    function removerItem(id) {
+
+    fetch(`/remover-do-carrinho/${id}`, {
+        method: "DELETE"
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.sucesso) {
+            location.reload();
+        }
+
+    });
+
+}
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

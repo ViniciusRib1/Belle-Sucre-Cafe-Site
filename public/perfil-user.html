@@ -18,7 +18,7 @@
             background-color: rgba(0,0,0,0.9);
         }
         .ajuste-content {
-            background-color: #fff;
+            background-color: #D7BDA6;
             margin: 1% auto; 
             padding: 20px;
             border-radius: 15px;
@@ -34,7 +34,7 @@
             border: 3px solid #333;
             position: relative;
             cursor: move;
-            background-color: #f0f0f0;
+            background-color: #D7BDA6;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -58,7 +58,73 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            background-color: #D7BDA6;
         }
+        /* Estilos para o novo contêiner unificado */
+.user-container {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.banner-container {
+    width: 100%;
+    height: 300px; /* Mesma altura do banner original */
+    background-color: #D7BDA6; /* Cor de fundo padrão (área cinza clara na imagem) */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    border-radius: 20px;
+}
+
+.profile-pic-circle {
+    width: 180px; 
+    height: 180px;
+    border-radius: 50%;
+    border: 5px solid #AB7743; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    overflow: hidden; 
+    background-color: #D7BDA6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    margin: auto;
+}
+
+.profile-pic-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.user-details {
+    width: 90%;
+    max-width: 800px;
+    margin-top: -50px; /* Puxa os detalhes para cima, sobrepondo ligeiramente o banner */
+    background-color: #D7BDA6;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    z-index: 20;
+    border: #AB7743 2px solid;
+}
+
+.user-title {
+    font-size: 2em;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
     </style>
 </head>
 <body>
@@ -81,25 +147,27 @@
 
     <div class="user-infs" id="dropdown-menu" style="display: none;">
         <a href="perfil-user.html">Perfil <ion-icon name="person-circle-outline"></ion-icon></a>
-        <a href="">Configurações <ion-icon name="cog-outline"></ion-icon></a>
         <a href="index.html">Sair <ion-icon name="exit-outline"></ion-icon></a>
     </div>
 
     <div class="user-container">
-        <div class="banner" id="display-banner" onclick="abrirEdicao()" title="Clique para editar banner">
-            <div class="perfil" id="profile-pic-container" onclick="event.stopPropagation(); abrirEdicao();">
-                <img src="./Images/perfil-vinicius.png" alt="Foto de Perfil" id="profile-img">
-            </div>
+    <div class="banner-container" id="display-banner" onclick="abrirEdicao()" title="Clique no banner ou na foto para editar">
+        
+        <div class="profile-pic-circle" id="profile-pic-container" onclick="event.stopPropagation(); abrirEdicao();">
+            <img src="./Images/default-avatar.png" alt="Foto de Perfil" id="profile-img">
         </div>
-        <div class="user-details">
-            <div class="user" id="user-name">Olá, Visitante!</div>
-            <div class="info-group">
-                <p><strong><ion-icon name="mail-outline"></ion-icon> E-mail:</strong> <span id="display-email">vinicius.ribeiro@fatec.sp.gov.br</span></p>
-                <p><strong><ion-icon name="location-outline"></ion-icon> Endereço:</strong> <span id="display-address">Não cadastrado</span></p>
-            </div>
-            <button onclick="abrirEdicao()" class="btn-edit">Editar Perfil <ion-icon name="create-outline"></ion-icon></button>
-        </div>
+
     </div>
+
+    <div class="user-details">
+        <div class="user-title" id="display-name">Carregando nome...</div>
+        <div class="info-group">
+            <p><strong><ion-icon name="mail-outline"></ion-icon> E-mail:</strong> <span id="display-email"></span></p>
+            <p><strong><ion-icon name="location-outline"></ion-icon> Endereço:</strong> <span id="display-address-masked"></span></p>
+        </div>
+        <button onclick="abrirEdicao()" class="btn-edit">Editar Perfil <ion-icon name="create-outline"></ion-icon></button>
+    </div>
+</div>
 
     <div id="modal-editar" class="modal">
         <div class="modal-content">
@@ -149,7 +217,7 @@
             </div>
             <div class="footer-col">
                 <h3>Contato</h3>
-                <a href="#">Instagram</a>
+                <a href="https://www.instagram.com/bellesucreoficial/">Instagram</a>
                 <a href="#">WhatsApp</a>
                 <a href="#">Email</a>
             </div>
@@ -159,111 +227,149 @@
             Criado por Vinicius Ribeiro.
         </div>
     </footer>
+<script>
 
-    <script>
-        // Lógica de Script Original mantida para garantir funcionalidade do Backend
-        let zoom = 1, posX = 0, posY = 0, isDragging = false, startX, startY, tipoAjusteAtivo = '';
-        const imgAjuste = document.getElementById('img-ajuste'), 
-              windowAjuste = document.getElementById('window-ajuste'), 
-              zoomRange = document.getElementById('zoom-range');
+function abrirEdicao(){
+    document.getElementById("modal-editar").style.display = "flex";
+}
 
-        function toggleMenu() {
-            const menu = document.getElementById('dropdown-menu');
-            menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
-        }
+function fecharEdicao(){
+    document.getElementById("modal-editar").style.display = "none";
+}
 
-        // Script de carregamento dinâmico mantido para sincronizar com seu servidor
-        document.addEventListener("DOMContentLoaded", () => {
-            fetch("/usuario-logado")
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success && data.usuario) {
-                        const usuario = data.usuario;
-                        document.getElementById("display-name").innerText = usuario.nome;
-                        document.getElementById("user-name-nav").innerText = `Olá, ${usuario.nome.split(' ')[0]}!`;
-                        document.getElementById("display-email").innerText = usuario.email;
-                        document.getElementById("display-address").innerText = usuario.endereco || "Não cadastrado";
+function maskAddress(address){
+    if(!address || address === "Não cadastrado"){
+        return "Não cadastrado";
+    }
 
-                        if (usuario.foto) {
-                            const fotoUrl = `/uploads/${usuario.foto}`;
-                            document.getElementById("profile-img").src = fotoUrl;
-                            const navPhoto = document.getElementById("user-photo");
-                            if (navPhoto) {
-                                navPhoto.style.backgroundImage = `url('${fotoUrl}')`;
-                            }
-                        }
-                    }
-                });
-        });
+    if(address.length > 5){
+        return address.substring(0,5) + "********";
+    }
 
-        function abrirEdicao() {
-            document.getElementById('modal-editar').style.display = 'block';
-            document.getElementById('edit-nome').value = document.getElementById('display-name').innerText;
-            const end = document.getElementById('display-address').innerText;
-            document.getElementById('edit-endereco').value = (end === "Não cadastrado") ? "" : end;
-        }
+    return address;
+}
 
-        function fecharEdicao() { document.getElementById('modal-editar').style.display = 'none'; }
+document.getElementById('form-editar-perfil').addEventListener('submit', function(e){
 
-        function iniciarAjuste(input, tipo) {
-            if (input.files && input.files[0]) {
-                tipoAjusteAtivo = tipo;
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    imgAjuste.src = e.target.result;
-                    document.getElementById('modal-ajuste').style.display = 'block';
-                    windowAjuste.style.borderRadius = (tipo === 'perfil') ? '50%' : '10px';
-                    windowAjuste.style.width = (tipo === 'perfil') ? '450px' : '100%';
-                    posX = 0; posY = 0; zoom = 1; zoomRange.value = 1;
-                    atualizarTransform();
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+    e.preventDefault();
 
-        windowAjuste.addEventListener('mousedown', (e) => { isDragging = true; startX = e.clientX - posX; startY = e.clientY - posY; windowAjuste.style.cursor = 'grabbing'; });
-        window.addEventListener('mousemove', (e) => { if (!isDragging) return; posX = e.clientX - startX; posY = e.clientY - startY; atualizarTransform(); });
-        window.addEventListener('mouseup', () => { isDragging = false; windowAjuste.style.cursor = 'move'; });
-        zoomRange.addEventListener('input', () => { zoom = zoomRange.value; atualizarTransform(); });
-        function atualizarTransform() { imgAjuste.style.transform = `translate(${posX}px, ${posY}px) scale(${zoom})`; }
+    const btn = document.getElementById("btn-final-salvar");
+    btn.innerText = "Salvando...";
 
-        function confirmarAjuste() {
-            const tempUrl = imgAjuste.src;
-            if (tipoAjusteAtivo === 'perfil') {
-                document.getElementById('profile-img').src = tempUrl;
-                document.getElementById('user-photo').style.backgroundImage = `url('${tempUrl}')`;
-            } else {
-                document.getElementById('display-banner').style.backgroundImage = `url('${tempUrl}')`;
-            }
-            document.getElementById('modal-ajuste').style.display = 'none';
-        }
+    const formData = new FormData(this);
 
-        document.getElementById('form-editar-perfil').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('btn-final-salvar');
-            btn.innerText = "Salvando...";
-            const formData = new FormData(this);
+    fetch("/api/atualizar-perfil",{
+        method:"POST",
+        body:formData
+    })
 
-            fetch("/atualizar-perfil", { 
-                method: "POST", 
-                body: formData 
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById("display-name").innerText = data.usuario.nome;
-                    document.getElementById("user-name-nav").innerText = `Olá, ${data.usuario.nome.split(' ')[0]}!`;
-                    document.getElementById("display-address").innerText = data.usuario.endereco || "Não cadastrado";
-                    fecharEdicao();
-                } else {
-                    alert("Erro: " + data.message);
+    .then(res => res.json())
+    .then(data => {
+
+        if(data.success){
+
+            const user = data.usuario;
+
+            document.getElementById("display-name").innerText = user.nome;
+            document.getElementById("display-email").innerText = user.email;
+            document.getElementById("display-address-masked").innerText = maskAddress(user.endereco);
+
+            const t = new Date().getTime();
+
+            if(user.foto){
+
+                const fotoUrl = `/uploads/${user.foto}?v=${t}`;
+
+                document.getElementById("profile-img").src = fotoUrl;
+
+                const navPhoto = document.getElementById("user-photo");
+
+                if(navPhoto){
+                    navPhoto.style.backgroundImage = `url('${fotoUrl}')`;
+                    navPhoto.style.backgroundSize = "cover";
                 }
-            })
-            .finally(() => btn.innerText = "Salvar Alterações");
-        });
+            }
 
-        window.onclick = (e) => { if (e.target.classList.contains('modal')) fecharEdicao(); }
-    </script>
+            if(user.banner){
+                document.getElementById("display-banner").style.backgroundImage =
+                `url('/uploads/${user.banner}?v=${t}')`;
+            }
+
+            fecharEdicao();
+
+            alert("Perfil atualizado com sucesso!");
+
+        }else{
+            alert("Erro: " + data.message);
+        }
+
+    })
+
+    .catch(err=>{
+        console.error(err);
+        alert("Erro ao conectar com o servidor");
+    })
+
+    .finally(()=>{
+        btn.innerText = "Salvar Alterações";
+    });
+
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    fetch("/api/usuario-logado")
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        if(data.success && data.usuario){
+
+            const usuario = data.usuario;
+
+            document.getElementById("display-name").innerText = usuario.nome;
+
+            document.getElementById("user-name").innerText =
+            `Olá, ${usuario.nome.split(" ")[0]}!`;
+
+            document.getElementById("display-email").innerText = usuario.email;
+
+            document.getElementById("display-address-masked").innerText =
+            maskAddress(usuario.endereco);
+
+            if(usuario.foto){
+
+                const fotoUrl = `/uploads/${usuario.foto}`;
+
+                document.getElementById("profile-img").src = fotoUrl;
+
+                const navPhoto = document.getElementById("user-photo");
+
+                if(navPhoto){
+                    navPhoto.style.backgroundImage = `url('${fotoUrl}')`;
+                    navPhoto.style.backgroundSize = "cover";
+                }
+
+            }
+
+            if(usuario.banner){
+                document.getElementById("display-banner").style.backgroundImage =
+                `url('/uploads/${usuario.banner}')`;
+            }
+
+        }
+
+    })
+
+    .catch(err=>{
+        console.error("Erro ao carregar usuário:", err);
+    });
+
+});
+
+</script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
