@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Belle Sucré</title>
-    <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="./Images/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./Images/logo.jpeg" type="image/x-icon">
+
     <style>
         :root {
             --sidebar-color: #4b2c15;
@@ -179,14 +181,11 @@
 
     <div class="sidebar">
         <h2>Admin Dashboard</h2>
-        <div class="nav-item" onclick="showSection('pedidos', this)">
+        <div class="nav-item">
             <ion-icon name="cafe-outline"></ion-icon> Belle Sucré Café
         </div>
         <div class="nav-item active" onclick="showSection('pedidos', this)">
             <ion-icon name="receipt-outline"></ion-icon> Pedidos
-        </div>
-        <div class="nav-item" onclick="showSection('cadastro', this)">
-            <ion-icon name="add-circle-outline"></ion-icon> Novo Produto
         </div>
         
         <div class="nav-item logout-item" id="btn-logout" style="margin-top: auto; color: #ffab91; border-top: 1px solid rgba(255,255,255,0.1);">
