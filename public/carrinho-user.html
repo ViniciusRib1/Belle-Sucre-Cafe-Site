@@ -59,17 +59,17 @@
             <span class="close" onclick="fecharModal()">&times;</span>
             <h2>Pagamento</h2>
             <p>Valor total: <span id="valor-total-modal">R$ 0,00</span></p>
-            <form id="form-pagamento">
+            <form id="form-pagamento" style="display: flex; flex-direction: column; gap: 15px;">
                 <label for="numero-cartao">Número do Cartão:</label>
-                <input type="text" id="numero-cartao" placeholder="1234 5678 9012 3456" required>
+                <input type="text" id="numero-cartao" placeholder="1234 5678 9012 3456" required style="width: 100%; height: 40px;">
 
                 <label for="validade">Validade:</label>
-                <input type="text" id="validade" placeholder="MM/AA" required>
+                <input type="text" id="validade" placeholder="MM/AA" required style="width: 100%; height: 40px;">
 
                 <label for="cvv">CVV:</label>
-                <input type="text" id="cvv" placeholder="123" required>
+                <input type="text" id="cvv" placeholder="123" required style="width: 100%; height: 40px;">
 
-                <button type="submit">Pagar</button>
+                <button type="submit" style="background-color: #5a3e2b; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 100px;">Pagar</button>
             </form>
         </div>
     </div>
